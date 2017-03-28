@@ -5,14 +5,14 @@
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("d3-hierarchy"), require("@angular/core"), require("@angular/platform-browser"), require("d3-array"), require("d3-brush"), require("d3-force"), require("d3-format"), require("@angular/common"), require("d3-interpolate"), require("d3-scale"), require("d3-selection"), require("d3-shape"), require("d3-time-format"), require("rxjs/Observable"), require("rxjs/add/observable/fromEvent"), require("rxjs/add/operator/debounceTime"));
+		module.exports = factory(require("d3-interpolate"), require("@angular/core"), require("@angular/platform-browser"), require("d3-array"), require("d3-brush"), require("d3-format"), require("@angular/common"), require("d3-scale"), require("d3-selection"), require("d3-shape"), require("d3-time-format"), require("rxjs/Observable"), require("rxjs/add/observable/fromEvent"), require("rxjs/add/operator/debounceTime"));
 	else if(typeof define === 'function' && define.amd)
-		define("ngx-charts", ["d3-hierarchy", "@angular/core", "@angular/platform-browser", "d3-array", "d3-brush", "d3-force", "d3-format", "@angular/common", "d3-interpolate", "d3-scale", "d3-selection", "d3-shape", "d3-time-format", "rxjs/Observable", "rxjs/add/observable/fromEvent", "rxjs/add/operator/debounceTime"], factory);
+		define("ngx-charts", ["d3-interpolate", "@angular/core", "@angular/platform-browser", "d3-array", "d3-brush", "d3-format", "@angular/common", "d3-scale", "d3-selection", "d3-shape", "d3-time-format", "rxjs/Observable", "rxjs/add/observable/fromEvent", "rxjs/add/operator/debounceTime"], factory);
 	else if(typeof exports === 'object')
-		exports["ngx-charts"] = factory(require("d3-hierarchy"), require("@angular/core"), require("@angular/platform-browser"), require("d3-array"), require("d3-brush"), require("d3-force"), require("d3-format"), require("@angular/common"), require("d3-interpolate"), require("d3-scale"), require("d3-selection"), require("d3-shape"), require("d3-time-format"), require("rxjs/Observable"), require("rxjs/add/observable/fromEvent"), require("rxjs/add/operator/debounceTime"));
+		exports["ngx-charts"] = factory(require("d3-interpolate"), require("@angular/core"), require("@angular/platform-browser"), require("d3-array"), require("d3-brush"), require("d3-format"), require("@angular/common"), require("d3-scale"), require("d3-selection"), require("d3-shape"), require("d3-time-format"), require("rxjs/Observable"), require("rxjs/add/observable/fromEvent"), require("rxjs/add/operator/debounceTime"));
 	else
-		root["ngx-charts"] = factory(root["d3-hierarchy"], root["@angular/core"], root["@angular/platform-browser"], root["d3-array"], root["d3-brush"], root["d3-force"], root["d3-format"], root["@angular/common"], root["d3-interpolate"], root["d3-scale"], root["d3-selection"], root["d3-shape"], root["d3-time-format"], root["rxjs/Observable"], root["rxjs/add/observable/fromEvent"], root["rxjs/add/operator/debounceTime"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_10__, __WEBPACK_EXTERNAL_MODULE_0__, __WEBPACK_EXTERNAL_MODULE_6__, __WEBPACK_EXTERNAL_MODULE_5__, __WEBPACK_EXTERNAL_MODULE_7__, __WEBPACK_EXTERNAL_MODULE_8__, __WEBPACK_EXTERNAL_MODULE_9__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_11__, __WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_12__, __WEBPACK_EXTERNAL_MODULE_13__, __WEBPACK_EXTERNAL_MODULE_14__, __WEBPACK_EXTERNAL_MODULE_15__) {
+		root["ngx-charts"] = factory(root["d3-interpolate"], root["@angular/core"], root["@angular/platform-browser"], root["d3-array"], root["d3-brush"], root["d3-format"], root["@angular/common"], root["d3-scale"], root["d3-selection"], root["d3-shape"], root["d3-time-format"], root["rxjs/Observable"], root["rxjs/add/observable/fromEvent"], root["rxjs/add/operator/debounceTime"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE_9__, __WEBPACK_EXTERNAL_MODULE_0__, __WEBPACK_EXTERNAL_MODULE_6__, __WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_7__, __WEBPACK_EXTERNAL_MODULE_8__, __WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_5__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_10__, __WEBPACK_EXTERNAL_MODULE_11__, __WEBPACK_EXTERNAL_MODULE_12__, __WEBPACK_EXTERNAL_MODULE_13__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -83,10 +83,1942 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ({
 
-/***/ "./node_modules/css-loader/index.js!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/index.js?sourceMap!./src/common/base-chart.component.scss":
+/***/ "./node_modules/base64-js/index.js":
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")();
+"use strict";
+
+
+exports.byteLength = byteLength
+exports.toByteArray = toByteArray
+exports.fromByteArray = fromByteArray
+
+var lookup = []
+var revLookup = []
+var Arr = typeof Uint8Array !== 'undefined' ? Uint8Array : Array
+
+var code = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+for (var i = 0, len = code.length; i < len; ++i) {
+  lookup[i] = code[i]
+  revLookup[code.charCodeAt(i)] = i
+}
+
+revLookup['-'.charCodeAt(0)] = 62
+revLookup['_'.charCodeAt(0)] = 63
+
+function placeHoldersCount (b64) {
+  var len = b64.length
+  if (len % 4 > 0) {
+    throw new Error('Invalid string. Length must be a multiple of 4')
+  }
+
+  // the number of equal signs (place holders)
+  // if there are two placeholders, than the two characters before it
+  // represent one byte
+  // if there is only one, then the three characters before it represent 2 bytes
+  // this is just a cheap hack to not do indexOf twice
+  return b64[len - 2] === '=' ? 2 : b64[len - 1] === '=' ? 1 : 0
+}
+
+function byteLength (b64) {
+  // base64 is 4/3 + up to two characters of the original data
+  return b64.length * 3 / 4 - placeHoldersCount(b64)
+}
+
+function toByteArray (b64) {
+  var i, j, l, tmp, placeHolders, arr
+  var len = b64.length
+  placeHolders = placeHoldersCount(b64)
+
+  arr = new Arr(len * 3 / 4 - placeHolders)
+
+  // if there are placeholders, only get up to the last complete 4 chars
+  l = placeHolders > 0 ? len - 4 : len
+
+  var L = 0
+
+  for (i = 0, j = 0; i < l; i += 4, j += 3) {
+    tmp = (revLookup[b64.charCodeAt(i)] << 18) | (revLookup[b64.charCodeAt(i + 1)] << 12) | (revLookup[b64.charCodeAt(i + 2)] << 6) | revLookup[b64.charCodeAt(i + 3)]
+    arr[L++] = (tmp >> 16) & 0xFF
+    arr[L++] = (tmp >> 8) & 0xFF
+    arr[L++] = tmp & 0xFF
+  }
+
+  if (placeHolders === 2) {
+    tmp = (revLookup[b64.charCodeAt(i)] << 2) | (revLookup[b64.charCodeAt(i + 1)] >> 4)
+    arr[L++] = tmp & 0xFF
+  } else if (placeHolders === 1) {
+    tmp = (revLookup[b64.charCodeAt(i)] << 10) | (revLookup[b64.charCodeAt(i + 1)] << 4) | (revLookup[b64.charCodeAt(i + 2)] >> 2)
+    arr[L++] = (tmp >> 8) & 0xFF
+    arr[L++] = tmp & 0xFF
+  }
+
+  return arr
+}
+
+function tripletToBase64 (num) {
+  return lookup[num >> 18 & 0x3F] + lookup[num >> 12 & 0x3F] + lookup[num >> 6 & 0x3F] + lookup[num & 0x3F]
+}
+
+function encodeChunk (uint8, start, end) {
+  var tmp
+  var output = []
+  for (var i = start; i < end; i += 3) {
+    tmp = (uint8[i] << 16) + (uint8[i + 1] << 8) + (uint8[i + 2])
+    output.push(tripletToBase64(tmp))
+  }
+  return output.join('')
+}
+
+function fromByteArray (uint8) {
+  var tmp
+  var len = uint8.length
+  var extraBytes = len % 3 // if we have 1 byte left, pad 2 bytes
+  var output = ''
+  var parts = []
+  var maxChunkLength = 16383 // must be multiple of 3
+
+  // go through the array every three bytes, we'll deal with trailing stuff later
+  for (var i = 0, len2 = len - extraBytes; i < len2; i += maxChunkLength) {
+    parts.push(encodeChunk(uint8, i, (i + maxChunkLength) > len2 ? len2 : (i + maxChunkLength)))
+  }
+
+  // pad the end with zeros, but make sure to not forget the extra bytes
+  if (extraBytes === 1) {
+    tmp = uint8[len - 1]
+    output += lookup[tmp >> 2]
+    output += lookup[(tmp << 4) & 0x3F]
+    output += '=='
+  } else if (extraBytes === 2) {
+    tmp = (uint8[len - 2] << 8) + (uint8[len - 1])
+    output += lookup[tmp >> 10]
+    output += lookup[(tmp >> 4) & 0x3F]
+    output += lookup[(tmp << 2) & 0x3F]
+    output += '='
+  }
+
+  parts.push(output)
+
+  return parts.join('')
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/buffer/index.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(global) {/*!
+ * The buffer module from node.js, for the browser.
+ *
+ * @author   Feross Aboukhadijeh <feross@feross.org> <http://feross.org>
+ * @license  MIT
+ */
+/* eslint-disable no-proto */
+
+
+
+var base64 = __webpack_require__("./node_modules/base64-js/index.js")
+var ieee754 = __webpack_require__("./node_modules/ieee754/index.js")
+var isArray = __webpack_require__("./node_modules/buffer/node_modules/isarray/index.js")
+
+exports.Buffer = Buffer
+exports.SlowBuffer = SlowBuffer
+exports.INSPECT_MAX_BYTES = 50
+
+/**
+ * If `Buffer.TYPED_ARRAY_SUPPORT`:
+ *   === true    Use Uint8Array implementation (fastest)
+ *   === false   Use Object implementation (most compatible, even IE6)
+ *
+ * Browsers that support typed arrays are IE 10+, Firefox 4+, Chrome 7+, Safari 5.1+,
+ * Opera 11.6+, iOS 4.2+.
+ *
+ * Due to various browser bugs, sometimes the Object implementation will be used even
+ * when the browser supports typed arrays.
+ *
+ * Note:
+ *
+ *   - Firefox 4-29 lacks support for adding new properties to `Uint8Array` instances,
+ *     See: https://bugzilla.mozilla.org/show_bug.cgi?id=695438.
+ *
+ *   - Chrome 9-10 is missing the `TypedArray.prototype.subarray` function.
+ *
+ *   - IE10 has a broken `TypedArray.prototype.subarray` function which returns arrays of
+ *     incorrect length in some situations.
+
+ * We detect these buggy browsers and set `Buffer.TYPED_ARRAY_SUPPORT` to `false` so they
+ * get the Object implementation, which is slower but behaves correctly.
+ */
+Buffer.TYPED_ARRAY_SUPPORT = global.TYPED_ARRAY_SUPPORT !== undefined
+  ? global.TYPED_ARRAY_SUPPORT
+  : typedArraySupport()
+
+/*
+ * Export kMaxLength after typed array support is determined.
+ */
+exports.kMaxLength = kMaxLength()
+
+function typedArraySupport () {
+  try {
+    var arr = new Uint8Array(1)
+    arr.__proto__ = {__proto__: Uint8Array.prototype, foo: function () { return 42 }}
+    return arr.foo() === 42 && // typed array instances can be augmented
+        typeof arr.subarray === 'function' && // chrome 9-10 lack `subarray`
+        arr.subarray(1, 1).byteLength === 0 // ie10 has broken `subarray`
+  } catch (e) {
+    return false
+  }
+}
+
+function kMaxLength () {
+  return Buffer.TYPED_ARRAY_SUPPORT
+    ? 0x7fffffff
+    : 0x3fffffff
+}
+
+function createBuffer (that, length) {
+  if (kMaxLength() < length) {
+    throw new RangeError('Invalid typed array length')
+  }
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    // Return an augmented `Uint8Array` instance, for best performance
+    that = new Uint8Array(length)
+    that.__proto__ = Buffer.prototype
+  } else {
+    // Fallback: Return an object instance of the Buffer class
+    if (that === null) {
+      that = new Buffer(length)
+    }
+    that.length = length
+  }
+
+  return that
+}
+
+/**
+ * The Buffer constructor returns instances of `Uint8Array` that have their
+ * prototype changed to `Buffer.prototype`. Furthermore, `Buffer` is a subclass of
+ * `Uint8Array`, so the returned instances will have all the node `Buffer` methods
+ * and the `Uint8Array` methods. Square bracket notation works as expected -- it
+ * returns a single octet.
+ *
+ * The `Uint8Array` prototype remains unmodified.
+ */
+
+function Buffer (arg, encodingOrOffset, length) {
+  if (!Buffer.TYPED_ARRAY_SUPPORT && !(this instanceof Buffer)) {
+    return new Buffer(arg, encodingOrOffset, length)
+  }
+
+  // Common case.
+  if (typeof arg === 'number') {
+    if (typeof encodingOrOffset === 'string') {
+      throw new Error(
+        'If encoding is specified then the first argument must be a string'
+      )
+    }
+    return allocUnsafe(this, arg)
+  }
+  return from(this, arg, encodingOrOffset, length)
+}
+
+Buffer.poolSize = 8192 // not used by this implementation
+
+// TODO: Legacy, not needed anymore. Remove in next major version.
+Buffer._augment = function (arr) {
+  arr.__proto__ = Buffer.prototype
+  return arr
+}
+
+function from (that, value, encodingOrOffset, length) {
+  if (typeof value === 'number') {
+    throw new TypeError('"value" argument must not be a number')
+  }
+
+  if (typeof ArrayBuffer !== 'undefined' && value instanceof ArrayBuffer) {
+    return fromArrayBuffer(that, value, encodingOrOffset, length)
+  }
+
+  if (typeof value === 'string') {
+    return fromString(that, value, encodingOrOffset)
+  }
+
+  return fromObject(that, value)
+}
+
+/**
+ * Functionally equivalent to Buffer(arg, encoding) but throws a TypeError
+ * if value is a number.
+ * Buffer.from(str[, encoding])
+ * Buffer.from(array)
+ * Buffer.from(buffer)
+ * Buffer.from(arrayBuffer[, byteOffset[, length]])
+ **/
+Buffer.from = function (value, encodingOrOffset, length) {
+  return from(null, value, encodingOrOffset, length)
+}
+
+if (Buffer.TYPED_ARRAY_SUPPORT) {
+  Buffer.prototype.__proto__ = Uint8Array.prototype
+  Buffer.__proto__ = Uint8Array
+  if (typeof Symbol !== 'undefined' && Symbol.species &&
+      Buffer[Symbol.species] === Buffer) {
+    // Fix subarray() in ES2016. See: https://github.com/feross/buffer/pull/97
+    Object.defineProperty(Buffer, Symbol.species, {
+      value: null,
+      configurable: true
+    })
+  }
+}
+
+function assertSize (size) {
+  if (typeof size !== 'number') {
+    throw new TypeError('"size" argument must be a number')
+  } else if (size < 0) {
+    throw new RangeError('"size" argument must not be negative')
+  }
+}
+
+function alloc (that, size, fill, encoding) {
+  assertSize(size)
+  if (size <= 0) {
+    return createBuffer(that, size)
+  }
+  if (fill !== undefined) {
+    // Only pay attention to encoding if it's a string. This
+    // prevents accidentally sending in a number that would
+    // be interpretted as a start offset.
+    return typeof encoding === 'string'
+      ? createBuffer(that, size).fill(fill, encoding)
+      : createBuffer(that, size).fill(fill)
+  }
+  return createBuffer(that, size)
+}
+
+/**
+ * Creates a new filled Buffer instance.
+ * alloc(size[, fill[, encoding]])
+ **/
+Buffer.alloc = function (size, fill, encoding) {
+  return alloc(null, size, fill, encoding)
+}
+
+function allocUnsafe (that, size) {
+  assertSize(size)
+  that = createBuffer(that, size < 0 ? 0 : checked(size) | 0)
+  if (!Buffer.TYPED_ARRAY_SUPPORT) {
+    for (var i = 0; i < size; ++i) {
+      that[i] = 0
+    }
+  }
+  return that
+}
+
+/**
+ * Equivalent to Buffer(num), by default creates a non-zero-filled Buffer instance.
+ * */
+Buffer.allocUnsafe = function (size) {
+  return allocUnsafe(null, size)
+}
+/**
+ * Equivalent to SlowBuffer(num), by default creates a non-zero-filled Buffer instance.
+ */
+Buffer.allocUnsafeSlow = function (size) {
+  return allocUnsafe(null, size)
+}
+
+function fromString (that, string, encoding) {
+  if (typeof encoding !== 'string' || encoding === '') {
+    encoding = 'utf8'
+  }
+
+  if (!Buffer.isEncoding(encoding)) {
+    throw new TypeError('"encoding" must be a valid string encoding')
+  }
+
+  var length = byteLength(string, encoding) | 0
+  that = createBuffer(that, length)
+
+  var actual = that.write(string, encoding)
+
+  if (actual !== length) {
+    // Writing a hex string, for example, that contains invalid characters will
+    // cause everything after the first invalid character to be ignored. (e.g.
+    // 'abxxcd' will be treated as 'ab')
+    that = that.slice(0, actual)
+  }
+
+  return that
+}
+
+function fromArrayLike (that, array) {
+  var length = array.length < 0 ? 0 : checked(array.length) | 0
+  that = createBuffer(that, length)
+  for (var i = 0; i < length; i += 1) {
+    that[i] = array[i] & 255
+  }
+  return that
+}
+
+function fromArrayBuffer (that, array, byteOffset, length) {
+  array.byteLength // this throws if `array` is not a valid ArrayBuffer
+
+  if (byteOffset < 0 || array.byteLength < byteOffset) {
+    throw new RangeError('\'offset\' is out of bounds')
+  }
+
+  if (array.byteLength < byteOffset + (length || 0)) {
+    throw new RangeError('\'length\' is out of bounds')
+  }
+
+  if (byteOffset === undefined && length === undefined) {
+    array = new Uint8Array(array)
+  } else if (length === undefined) {
+    array = new Uint8Array(array, byteOffset)
+  } else {
+    array = new Uint8Array(array, byteOffset, length)
+  }
+
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    // Return an augmented `Uint8Array` instance, for best performance
+    that = array
+    that.__proto__ = Buffer.prototype
+  } else {
+    // Fallback: Return an object instance of the Buffer class
+    that = fromArrayLike(that, array)
+  }
+  return that
+}
+
+function fromObject (that, obj) {
+  if (Buffer.isBuffer(obj)) {
+    var len = checked(obj.length) | 0
+    that = createBuffer(that, len)
+
+    if (that.length === 0) {
+      return that
+    }
+
+    obj.copy(that, 0, 0, len)
+    return that
+  }
+
+  if (obj) {
+    if ((typeof ArrayBuffer !== 'undefined' &&
+        obj.buffer instanceof ArrayBuffer) || 'length' in obj) {
+      if (typeof obj.length !== 'number' || isnan(obj.length)) {
+        return createBuffer(that, 0)
+      }
+      return fromArrayLike(that, obj)
+    }
+
+    if (obj.type === 'Buffer' && isArray(obj.data)) {
+      return fromArrayLike(that, obj.data)
+    }
+  }
+
+  throw new TypeError('First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object.')
+}
+
+function checked (length) {
+  // Note: cannot use `length < kMaxLength()` here because that fails when
+  // length is NaN (which is otherwise coerced to zero.)
+  if (length >= kMaxLength()) {
+    throw new RangeError('Attempt to allocate Buffer larger than maximum ' +
+                         'size: 0x' + kMaxLength().toString(16) + ' bytes')
+  }
+  return length | 0
+}
+
+function SlowBuffer (length) {
+  if (+length != length) { // eslint-disable-line eqeqeq
+    length = 0
+  }
+  return Buffer.alloc(+length)
+}
+
+Buffer.isBuffer = function isBuffer (b) {
+  return !!(b != null && b._isBuffer)
+}
+
+Buffer.compare = function compare (a, b) {
+  if (!Buffer.isBuffer(a) || !Buffer.isBuffer(b)) {
+    throw new TypeError('Arguments must be Buffers')
+  }
+
+  if (a === b) return 0
+
+  var x = a.length
+  var y = b.length
+
+  for (var i = 0, len = Math.min(x, y); i < len; ++i) {
+    if (a[i] !== b[i]) {
+      x = a[i]
+      y = b[i]
+      break
+    }
+  }
+
+  if (x < y) return -1
+  if (y < x) return 1
+  return 0
+}
+
+Buffer.isEncoding = function isEncoding (encoding) {
+  switch (String(encoding).toLowerCase()) {
+    case 'hex':
+    case 'utf8':
+    case 'utf-8':
+    case 'ascii':
+    case 'latin1':
+    case 'binary':
+    case 'base64':
+    case 'ucs2':
+    case 'ucs-2':
+    case 'utf16le':
+    case 'utf-16le':
+      return true
+    default:
+      return false
+  }
+}
+
+Buffer.concat = function concat (list, length) {
+  if (!isArray(list)) {
+    throw new TypeError('"list" argument must be an Array of Buffers')
+  }
+
+  if (list.length === 0) {
+    return Buffer.alloc(0)
+  }
+
+  var i
+  if (length === undefined) {
+    length = 0
+    for (i = 0; i < list.length; ++i) {
+      length += list[i].length
+    }
+  }
+
+  var buffer = Buffer.allocUnsafe(length)
+  var pos = 0
+  for (i = 0; i < list.length; ++i) {
+    var buf = list[i]
+    if (!Buffer.isBuffer(buf)) {
+      throw new TypeError('"list" argument must be an Array of Buffers')
+    }
+    buf.copy(buffer, pos)
+    pos += buf.length
+  }
+  return buffer
+}
+
+function byteLength (string, encoding) {
+  if (Buffer.isBuffer(string)) {
+    return string.length
+  }
+  if (typeof ArrayBuffer !== 'undefined' && typeof ArrayBuffer.isView === 'function' &&
+      (ArrayBuffer.isView(string) || string instanceof ArrayBuffer)) {
+    return string.byteLength
+  }
+  if (typeof string !== 'string') {
+    string = '' + string
+  }
+
+  var len = string.length
+  if (len === 0) return 0
+
+  // Use a for loop to avoid recursion
+  var loweredCase = false
+  for (;;) {
+    switch (encoding) {
+      case 'ascii':
+      case 'latin1':
+      case 'binary':
+        return len
+      case 'utf8':
+      case 'utf-8':
+      case undefined:
+        return utf8ToBytes(string).length
+      case 'ucs2':
+      case 'ucs-2':
+      case 'utf16le':
+      case 'utf-16le':
+        return len * 2
+      case 'hex':
+        return len >>> 1
+      case 'base64':
+        return base64ToBytes(string).length
+      default:
+        if (loweredCase) return utf8ToBytes(string).length // assume utf8
+        encoding = ('' + encoding).toLowerCase()
+        loweredCase = true
+    }
+  }
+}
+Buffer.byteLength = byteLength
+
+function slowToString (encoding, start, end) {
+  var loweredCase = false
+
+  // No need to verify that "this.length <= MAX_UINT32" since it's a read-only
+  // property of a typed array.
+
+  // This behaves neither like String nor Uint8Array in that we set start/end
+  // to their upper/lower bounds if the value passed is out of range.
+  // undefined is handled specially as per ECMA-262 6th Edition,
+  // Section 13.3.3.7 Runtime Semantics: KeyedBindingInitialization.
+  if (start === undefined || start < 0) {
+    start = 0
+  }
+  // Return early if start > this.length. Done here to prevent potential uint32
+  // coercion fail below.
+  if (start > this.length) {
+    return ''
+  }
+
+  if (end === undefined || end > this.length) {
+    end = this.length
+  }
+
+  if (end <= 0) {
+    return ''
+  }
+
+  // Force coersion to uint32. This will also coerce falsey/NaN values to 0.
+  end >>>= 0
+  start >>>= 0
+
+  if (end <= start) {
+    return ''
+  }
+
+  if (!encoding) encoding = 'utf8'
+
+  while (true) {
+    switch (encoding) {
+      case 'hex':
+        return hexSlice(this, start, end)
+
+      case 'utf8':
+      case 'utf-8':
+        return utf8Slice(this, start, end)
+
+      case 'ascii':
+        return asciiSlice(this, start, end)
+
+      case 'latin1':
+      case 'binary':
+        return latin1Slice(this, start, end)
+
+      case 'base64':
+        return base64Slice(this, start, end)
+
+      case 'ucs2':
+      case 'ucs-2':
+      case 'utf16le':
+      case 'utf-16le':
+        return utf16leSlice(this, start, end)
+
+      default:
+        if (loweredCase) throw new TypeError('Unknown encoding: ' + encoding)
+        encoding = (encoding + '').toLowerCase()
+        loweredCase = true
+    }
+  }
+}
+
+// The property is used by `Buffer.isBuffer` and `is-buffer` (in Safari 5-7) to detect
+// Buffer instances.
+Buffer.prototype._isBuffer = true
+
+function swap (b, n, m) {
+  var i = b[n]
+  b[n] = b[m]
+  b[m] = i
+}
+
+Buffer.prototype.swap16 = function swap16 () {
+  var len = this.length
+  if (len % 2 !== 0) {
+    throw new RangeError('Buffer size must be a multiple of 16-bits')
+  }
+  for (var i = 0; i < len; i += 2) {
+    swap(this, i, i + 1)
+  }
+  return this
+}
+
+Buffer.prototype.swap32 = function swap32 () {
+  var len = this.length
+  if (len % 4 !== 0) {
+    throw new RangeError('Buffer size must be a multiple of 32-bits')
+  }
+  for (var i = 0; i < len; i += 4) {
+    swap(this, i, i + 3)
+    swap(this, i + 1, i + 2)
+  }
+  return this
+}
+
+Buffer.prototype.swap64 = function swap64 () {
+  var len = this.length
+  if (len % 8 !== 0) {
+    throw new RangeError('Buffer size must be a multiple of 64-bits')
+  }
+  for (var i = 0; i < len; i += 8) {
+    swap(this, i, i + 7)
+    swap(this, i + 1, i + 6)
+    swap(this, i + 2, i + 5)
+    swap(this, i + 3, i + 4)
+  }
+  return this
+}
+
+Buffer.prototype.toString = function toString () {
+  var length = this.length | 0
+  if (length === 0) return ''
+  if (arguments.length === 0) return utf8Slice(this, 0, length)
+  return slowToString.apply(this, arguments)
+}
+
+Buffer.prototype.equals = function equals (b) {
+  if (!Buffer.isBuffer(b)) throw new TypeError('Argument must be a Buffer')
+  if (this === b) return true
+  return Buffer.compare(this, b) === 0
+}
+
+Buffer.prototype.inspect = function inspect () {
+  var str = ''
+  var max = exports.INSPECT_MAX_BYTES
+  if (this.length > 0) {
+    str = this.toString('hex', 0, max).match(/.{2}/g).join(' ')
+    if (this.length > max) str += ' ... '
+  }
+  return '<Buffer ' + str + '>'
+}
+
+Buffer.prototype.compare = function compare (target, start, end, thisStart, thisEnd) {
+  if (!Buffer.isBuffer(target)) {
+    throw new TypeError('Argument must be a Buffer')
+  }
+
+  if (start === undefined) {
+    start = 0
+  }
+  if (end === undefined) {
+    end = target ? target.length : 0
+  }
+  if (thisStart === undefined) {
+    thisStart = 0
+  }
+  if (thisEnd === undefined) {
+    thisEnd = this.length
+  }
+
+  if (start < 0 || end > target.length || thisStart < 0 || thisEnd > this.length) {
+    throw new RangeError('out of range index')
+  }
+
+  if (thisStart >= thisEnd && start >= end) {
+    return 0
+  }
+  if (thisStart >= thisEnd) {
+    return -1
+  }
+  if (start >= end) {
+    return 1
+  }
+
+  start >>>= 0
+  end >>>= 0
+  thisStart >>>= 0
+  thisEnd >>>= 0
+
+  if (this === target) return 0
+
+  var x = thisEnd - thisStart
+  var y = end - start
+  var len = Math.min(x, y)
+
+  var thisCopy = this.slice(thisStart, thisEnd)
+  var targetCopy = target.slice(start, end)
+
+  for (var i = 0; i < len; ++i) {
+    if (thisCopy[i] !== targetCopy[i]) {
+      x = thisCopy[i]
+      y = targetCopy[i]
+      break
+    }
+  }
+
+  if (x < y) return -1
+  if (y < x) return 1
+  return 0
+}
+
+// Finds either the first index of `val` in `buffer` at offset >= `byteOffset`,
+// OR the last index of `val` in `buffer` at offset <= `byteOffset`.
+//
+// Arguments:
+// - buffer - a Buffer to search
+// - val - a string, Buffer, or number
+// - byteOffset - an index into `buffer`; will be clamped to an int32
+// - encoding - an optional encoding, relevant is val is a string
+// - dir - true for indexOf, false for lastIndexOf
+function bidirectionalIndexOf (buffer, val, byteOffset, encoding, dir) {
+  // Empty buffer means no match
+  if (buffer.length === 0) return -1
+
+  // Normalize byteOffset
+  if (typeof byteOffset === 'string') {
+    encoding = byteOffset
+    byteOffset = 0
+  } else if (byteOffset > 0x7fffffff) {
+    byteOffset = 0x7fffffff
+  } else if (byteOffset < -0x80000000) {
+    byteOffset = -0x80000000
+  }
+  byteOffset = +byteOffset  // Coerce to Number.
+  if (isNaN(byteOffset)) {
+    // byteOffset: it it's undefined, null, NaN, "foo", etc, search whole buffer
+    byteOffset = dir ? 0 : (buffer.length - 1)
+  }
+
+  // Normalize byteOffset: negative offsets start from the end of the buffer
+  if (byteOffset < 0) byteOffset = buffer.length + byteOffset
+  if (byteOffset >= buffer.length) {
+    if (dir) return -1
+    else byteOffset = buffer.length - 1
+  } else if (byteOffset < 0) {
+    if (dir) byteOffset = 0
+    else return -1
+  }
+
+  // Normalize val
+  if (typeof val === 'string') {
+    val = Buffer.from(val, encoding)
+  }
+
+  // Finally, search either indexOf (if dir is true) or lastIndexOf
+  if (Buffer.isBuffer(val)) {
+    // Special case: looking for empty string/buffer always fails
+    if (val.length === 0) {
+      return -1
+    }
+    return arrayIndexOf(buffer, val, byteOffset, encoding, dir)
+  } else if (typeof val === 'number') {
+    val = val & 0xFF // Search for a byte value [0-255]
+    if (Buffer.TYPED_ARRAY_SUPPORT &&
+        typeof Uint8Array.prototype.indexOf === 'function') {
+      if (dir) {
+        return Uint8Array.prototype.indexOf.call(buffer, val, byteOffset)
+      } else {
+        return Uint8Array.prototype.lastIndexOf.call(buffer, val, byteOffset)
+      }
+    }
+    return arrayIndexOf(buffer, [ val ], byteOffset, encoding, dir)
+  }
+
+  throw new TypeError('val must be string, number or Buffer')
+}
+
+function arrayIndexOf (arr, val, byteOffset, encoding, dir) {
+  var indexSize = 1
+  var arrLength = arr.length
+  var valLength = val.length
+
+  if (encoding !== undefined) {
+    encoding = String(encoding).toLowerCase()
+    if (encoding === 'ucs2' || encoding === 'ucs-2' ||
+        encoding === 'utf16le' || encoding === 'utf-16le') {
+      if (arr.length < 2 || val.length < 2) {
+        return -1
+      }
+      indexSize = 2
+      arrLength /= 2
+      valLength /= 2
+      byteOffset /= 2
+    }
+  }
+
+  function read (buf, i) {
+    if (indexSize === 1) {
+      return buf[i]
+    } else {
+      return buf.readUInt16BE(i * indexSize)
+    }
+  }
+
+  var i
+  if (dir) {
+    var foundIndex = -1
+    for (i = byteOffset; i < arrLength; i++) {
+      if (read(arr, i) === read(val, foundIndex === -1 ? 0 : i - foundIndex)) {
+        if (foundIndex === -1) foundIndex = i
+        if (i - foundIndex + 1 === valLength) return foundIndex * indexSize
+      } else {
+        if (foundIndex !== -1) i -= i - foundIndex
+        foundIndex = -1
+      }
+    }
+  } else {
+    if (byteOffset + valLength > arrLength) byteOffset = arrLength - valLength
+    for (i = byteOffset; i >= 0; i--) {
+      var found = true
+      for (var j = 0; j < valLength; j++) {
+        if (read(arr, i + j) !== read(val, j)) {
+          found = false
+          break
+        }
+      }
+      if (found) return i
+    }
+  }
+
+  return -1
+}
+
+Buffer.prototype.includes = function includes (val, byteOffset, encoding) {
+  return this.indexOf(val, byteOffset, encoding) !== -1
+}
+
+Buffer.prototype.indexOf = function indexOf (val, byteOffset, encoding) {
+  return bidirectionalIndexOf(this, val, byteOffset, encoding, true)
+}
+
+Buffer.prototype.lastIndexOf = function lastIndexOf (val, byteOffset, encoding) {
+  return bidirectionalIndexOf(this, val, byteOffset, encoding, false)
+}
+
+function hexWrite (buf, string, offset, length) {
+  offset = Number(offset) || 0
+  var remaining = buf.length - offset
+  if (!length) {
+    length = remaining
+  } else {
+    length = Number(length)
+    if (length > remaining) {
+      length = remaining
+    }
+  }
+
+  // must be an even number of digits
+  var strLen = string.length
+  if (strLen % 2 !== 0) throw new TypeError('Invalid hex string')
+
+  if (length > strLen / 2) {
+    length = strLen / 2
+  }
+  for (var i = 0; i < length; ++i) {
+    var parsed = parseInt(string.substr(i * 2, 2), 16)
+    if (isNaN(parsed)) return i
+    buf[offset + i] = parsed
+  }
+  return i
+}
+
+function utf8Write (buf, string, offset, length) {
+  return blitBuffer(utf8ToBytes(string, buf.length - offset), buf, offset, length)
+}
+
+function asciiWrite (buf, string, offset, length) {
+  return blitBuffer(asciiToBytes(string), buf, offset, length)
+}
+
+function latin1Write (buf, string, offset, length) {
+  return asciiWrite(buf, string, offset, length)
+}
+
+function base64Write (buf, string, offset, length) {
+  return blitBuffer(base64ToBytes(string), buf, offset, length)
+}
+
+function ucs2Write (buf, string, offset, length) {
+  return blitBuffer(utf16leToBytes(string, buf.length - offset), buf, offset, length)
+}
+
+Buffer.prototype.write = function write (string, offset, length, encoding) {
+  // Buffer#write(string)
+  if (offset === undefined) {
+    encoding = 'utf8'
+    length = this.length
+    offset = 0
+  // Buffer#write(string, encoding)
+  } else if (length === undefined && typeof offset === 'string') {
+    encoding = offset
+    length = this.length
+    offset = 0
+  // Buffer#write(string, offset[, length][, encoding])
+  } else if (isFinite(offset)) {
+    offset = offset | 0
+    if (isFinite(length)) {
+      length = length | 0
+      if (encoding === undefined) encoding = 'utf8'
+    } else {
+      encoding = length
+      length = undefined
+    }
+  // legacy write(string, encoding, offset, length) - remove in v0.13
+  } else {
+    throw new Error(
+      'Buffer.write(string, encoding, offset[, length]) is no longer supported'
+    )
+  }
+
+  var remaining = this.length - offset
+  if (length === undefined || length > remaining) length = remaining
+
+  if ((string.length > 0 && (length < 0 || offset < 0)) || offset > this.length) {
+    throw new RangeError('Attempt to write outside buffer bounds')
+  }
+
+  if (!encoding) encoding = 'utf8'
+
+  var loweredCase = false
+  for (;;) {
+    switch (encoding) {
+      case 'hex':
+        return hexWrite(this, string, offset, length)
+
+      case 'utf8':
+      case 'utf-8':
+        return utf8Write(this, string, offset, length)
+
+      case 'ascii':
+        return asciiWrite(this, string, offset, length)
+
+      case 'latin1':
+      case 'binary':
+        return latin1Write(this, string, offset, length)
+
+      case 'base64':
+        // Warning: maxLength not taken into account in base64Write
+        return base64Write(this, string, offset, length)
+
+      case 'ucs2':
+      case 'ucs-2':
+      case 'utf16le':
+      case 'utf-16le':
+        return ucs2Write(this, string, offset, length)
+
+      default:
+        if (loweredCase) throw new TypeError('Unknown encoding: ' + encoding)
+        encoding = ('' + encoding).toLowerCase()
+        loweredCase = true
+    }
+  }
+}
+
+Buffer.prototype.toJSON = function toJSON () {
+  return {
+    type: 'Buffer',
+    data: Array.prototype.slice.call(this._arr || this, 0)
+  }
+}
+
+function base64Slice (buf, start, end) {
+  if (start === 0 && end === buf.length) {
+    return base64.fromByteArray(buf)
+  } else {
+    return base64.fromByteArray(buf.slice(start, end))
+  }
+}
+
+function utf8Slice (buf, start, end) {
+  end = Math.min(buf.length, end)
+  var res = []
+
+  var i = start
+  while (i < end) {
+    var firstByte = buf[i]
+    var codePoint = null
+    var bytesPerSequence = (firstByte > 0xEF) ? 4
+      : (firstByte > 0xDF) ? 3
+      : (firstByte > 0xBF) ? 2
+      : 1
+
+    if (i + bytesPerSequence <= end) {
+      var secondByte, thirdByte, fourthByte, tempCodePoint
+
+      switch (bytesPerSequence) {
+        case 1:
+          if (firstByte < 0x80) {
+            codePoint = firstByte
+          }
+          break
+        case 2:
+          secondByte = buf[i + 1]
+          if ((secondByte & 0xC0) === 0x80) {
+            tempCodePoint = (firstByte & 0x1F) << 0x6 | (secondByte & 0x3F)
+            if (tempCodePoint > 0x7F) {
+              codePoint = tempCodePoint
+            }
+          }
+          break
+        case 3:
+          secondByte = buf[i + 1]
+          thirdByte = buf[i + 2]
+          if ((secondByte & 0xC0) === 0x80 && (thirdByte & 0xC0) === 0x80) {
+            tempCodePoint = (firstByte & 0xF) << 0xC | (secondByte & 0x3F) << 0x6 | (thirdByte & 0x3F)
+            if (tempCodePoint > 0x7FF && (tempCodePoint < 0xD800 || tempCodePoint > 0xDFFF)) {
+              codePoint = tempCodePoint
+            }
+          }
+          break
+        case 4:
+          secondByte = buf[i + 1]
+          thirdByte = buf[i + 2]
+          fourthByte = buf[i + 3]
+          if ((secondByte & 0xC0) === 0x80 && (thirdByte & 0xC0) === 0x80 && (fourthByte & 0xC0) === 0x80) {
+            tempCodePoint = (firstByte & 0xF) << 0x12 | (secondByte & 0x3F) << 0xC | (thirdByte & 0x3F) << 0x6 | (fourthByte & 0x3F)
+            if (tempCodePoint > 0xFFFF && tempCodePoint < 0x110000) {
+              codePoint = tempCodePoint
+            }
+          }
+      }
+    }
+
+    if (codePoint === null) {
+      // we did not generate a valid codePoint so insert a
+      // replacement char (U+FFFD) and advance only 1 byte
+      codePoint = 0xFFFD
+      bytesPerSequence = 1
+    } else if (codePoint > 0xFFFF) {
+      // encode to utf16 (surrogate pair dance)
+      codePoint -= 0x10000
+      res.push(codePoint >>> 10 & 0x3FF | 0xD800)
+      codePoint = 0xDC00 | codePoint & 0x3FF
+    }
+
+    res.push(codePoint)
+    i += bytesPerSequence
+  }
+
+  return decodeCodePointsArray(res)
+}
+
+// Based on http://stackoverflow.com/a/22747272/680742, the browser with
+// the lowest limit is Chrome, with 0x10000 args.
+// We go 1 magnitude less, for safety
+var MAX_ARGUMENTS_LENGTH = 0x1000
+
+function decodeCodePointsArray (codePoints) {
+  var len = codePoints.length
+  if (len <= MAX_ARGUMENTS_LENGTH) {
+    return String.fromCharCode.apply(String, codePoints) // avoid extra slice()
+  }
+
+  // Decode in chunks to avoid "call stack size exceeded".
+  var res = ''
+  var i = 0
+  while (i < len) {
+    res += String.fromCharCode.apply(
+      String,
+      codePoints.slice(i, i += MAX_ARGUMENTS_LENGTH)
+    )
+  }
+  return res
+}
+
+function asciiSlice (buf, start, end) {
+  var ret = ''
+  end = Math.min(buf.length, end)
+
+  for (var i = start; i < end; ++i) {
+    ret += String.fromCharCode(buf[i] & 0x7F)
+  }
+  return ret
+}
+
+function latin1Slice (buf, start, end) {
+  var ret = ''
+  end = Math.min(buf.length, end)
+
+  for (var i = start; i < end; ++i) {
+    ret += String.fromCharCode(buf[i])
+  }
+  return ret
+}
+
+function hexSlice (buf, start, end) {
+  var len = buf.length
+
+  if (!start || start < 0) start = 0
+  if (!end || end < 0 || end > len) end = len
+
+  var out = ''
+  for (var i = start; i < end; ++i) {
+    out += toHex(buf[i])
+  }
+  return out
+}
+
+function utf16leSlice (buf, start, end) {
+  var bytes = buf.slice(start, end)
+  var res = ''
+  for (var i = 0; i < bytes.length; i += 2) {
+    res += String.fromCharCode(bytes[i] + bytes[i + 1] * 256)
+  }
+  return res
+}
+
+Buffer.prototype.slice = function slice (start, end) {
+  var len = this.length
+  start = ~~start
+  end = end === undefined ? len : ~~end
+
+  if (start < 0) {
+    start += len
+    if (start < 0) start = 0
+  } else if (start > len) {
+    start = len
+  }
+
+  if (end < 0) {
+    end += len
+    if (end < 0) end = 0
+  } else if (end > len) {
+    end = len
+  }
+
+  if (end < start) end = start
+
+  var newBuf
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    newBuf = this.subarray(start, end)
+    newBuf.__proto__ = Buffer.prototype
+  } else {
+    var sliceLen = end - start
+    newBuf = new Buffer(sliceLen, undefined)
+    for (var i = 0; i < sliceLen; ++i) {
+      newBuf[i] = this[i + start]
+    }
+  }
+
+  return newBuf
+}
+
+/*
+ * Need to make sure that buffer isn't trying to write out of bounds.
+ */
+function checkOffset (offset, ext, length) {
+  if ((offset % 1) !== 0 || offset < 0) throw new RangeError('offset is not uint')
+  if (offset + ext > length) throw new RangeError('Trying to access beyond buffer length')
+}
+
+Buffer.prototype.readUIntLE = function readUIntLE (offset, byteLength, noAssert) {
+  offset = offset | 0
+  byteLength = byteLength | 0
+  if (!noAssert) checkOffset(offset, byteLength, this.length)
+
+  var val = this[offset]
+  var mul = 1
+  var i = 0
+  while (++i < byteLength && (mul *= 0x100)) {
+    val += this[offset + i] * mul
+  }
+
+  return val
+}
+
+Buffer.prototype.readUIntBE = function readUIntBE (offset, byteLength, noAssert) {
+  offset = offset | 0
+  byteLength = byteLength | 0
+  if (!noAssert) {
+    checkOffset(offset, byteLength, this.length)
+  }
+
+  var val = this[offset + --byteLength]
+  var mul = 1
+  while (byteLength > 0 && (mul *= 0x100)) {
+    val += this[offset + --byteLength] * mul
+  }
+
+  return val
+}
+
+Buffer.prototype.readUInt8 = function readUInt8 (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 1, this.length)
+  return this[offset]
+}
+
+Buffer.prototype.readUInt16LE = function readUInt16LE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 2, this.length)
+  return this[offset] | (this[offset + 1] << 8)
+}
+
+Buffer.prototype.readUInt16BE = function readUInt16BE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 2, this.length)
+  return (this[offset] << 8) | this[offset + 1]
+}
+
+Buffer.prototype.readUInt32LE = function readUInt32LE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 4, this.length)
+
+  return ((this[offset]) |
+      (this[offset + 1] << 8) |
+      (this[offset + 2] << 16)) +
+      (this[offset + 3] * 0x1000000)
+}
+
+Buffer.prototype.readUInt32BE = function readUInt32BE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 4, this.length)
+
+  return (this[offset] * 0x1000000) +
+    ((this[offset + 1] << 16) |
+    (this[offset + 2] << 8) |
+    this[offset + 3])
+}
+
+Buffer.prototype.readIntLE = function readIntLE (offset, byteLength, noAssert) {
+  offset = offset | 0
+  byteLength = byteLength | 0
+  if (!noAssert) checkOffset(offset, byteLength, this.length)
+
+  var val = this[offset]
+  var mul = 1
+  var i = 0
+  while (++i < byteLength && (mul *= 0x100)) {
+    val += this[offset + i] * mul
+  }
+  mul *= 0x80
+
+  if (val >= mul) val -= Math.pow(2, 8 * byteLength)
+
+  return val
+}
+
+Buffer.prototype.readIntBE = function readIntBE (offset, byteLength, noAssert) {
+  offset = offset | 0
+  byteLength = byteLength | 0
+  if (!noAssert) checkOffset(offset, byteLength, this.length)
+
+  var i = byteLength
+  var mul = 1
+  var val = this[offset + --i]
+  while (i > 0 && (mul *= 0x100)) {
+    val += this[offset + --i] * mul
+  }
+  mul *= 0x80
+
+  if (val >= mul) val -= Math.pow(2, 8 * byteLength)
+
+  return val
+}
+
+Buffer.prototype.readInt8 = function readInt8 (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 1, this.length)
+  if (!(this[offset] & 0x80)) return (this[offset])
+  return ((0xff - this[offset] + 1) * -1)
+}
+
+Buffer.prototype.readInt16LE = function readInt16LE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 2, this.length)
+  var val = this[offset] | (this[offset + 1] << 8)
+  return (val & 0x8000) ? val | 0xFFFF0000 : val
+}
+
+Buffer.prototype.readInt16BE = function readInt16BE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 2, this.length)
+  var val = this[offset + 1] | (this[offset] << 8)
+  return (val & 0x8000) ? val | 0xFFFF0000 : val
+}
+
+Buffer.prototype.readInt32LE = function readInt32LE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 4, this.length)
+
+  return (this[offset]) |
+    (this[offset + 1] << 8) |
+    (this[offset + 2] << 16) |
+    (this[offset + 3] << 24)
+}
+
+Buffer.prototype.readInt32BE = function readInt32BE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 4, this.length)
+
+  return (this[offset] << 24) |
+    (this[offset + 1] << 16) |
+    (this[offset + 2] << 8) |
+    (this[offset + 3])
+}
+
+Buffer.prototype.readFloatLE = function readFloatLE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 4, this.length)
+  return ieee754.read(this, offset, true, 23, 4)
+}
+
+Buffer.prototype.readFloatBE = function readFloatBE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 4, this.length)
+  return ieee754.read(this, offset, false, 23, 4)
+}
+
+Buffer.prototype.readDoubleLE = function readDoubleLE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 8, this.length)
+  return ieee754.read(this, offset, true, 52, 8)
+}
+
+Buffer.prototype.readDoubleBE = function readDoubleBE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 8, this.length)
+  return ieee754.read(this, offset, false, 52, 8)
+}
+
+function checkInt (buf, value, offset, ext, max, min) {
+  if (!Buffer.isBuffer(buf)) throw new TypeError('"buffer" argument must be a Buffer instance')
+  if (value > max || value < min) throw new RangeError('"value" argument is out of bounds')
+  if (offset + ext > buf.length) throw new RangeError('Index out of range')
+}
+
+Buffer.prototype.writeUIntLE = function writeUIntLE (value, offset, byteLength, noAssert) {
+  value = +value
+  offset = offset | 0
+  byteLength = byteLength | 0
+  if (!noAssert) {
+    var maxBytes = Math.pow(2, 8 * byteLength) - 1
+    checkInt(this, value, offset, byteLength, maxBytes, 0)
+  }
+
+  var mul = 1
+  var i = 0
+  this[offset] = value & 0xFF
+  while (++i < byteLength && (mul *= 0x100)) {
+    this[offset + i] = (value / mul) & 0xFF
+  }
+
+  return offset + byteLength
+}
+
+Buffer.prototype.writeUIntBE = function writeUIntBE (value, offset, byteLength, noAssert) {
+  value = +value
+  offset = offset | 0
+  byteLength = byteLength | 0
+  if (!noAssert) {
+    var maxBytes = Math.pow(2, 8 * byteLength) - 1
+    checkInt(this, value, offset, byteLength, maxBytes, 0)
+  }
+
+  var i = byteLength - 1
+  var mul = 1
+  this[offset + i] = value & 0xFF
+  while (--i >= 0 && (mul *= 0x100)) {
+    this[offset + i] = (value / mul) & 0xFF
+  }
+
+  return offset + byteLength
+}
+
+Buffer.prototype.writeUInt8 = function writeUInt8 (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 1, 0xff, 0)
+  if (!Buffer.TYPED_ARRAY_SUPPORT) value = Math.floor(value)
+  this[offset] = (value & 0xff)
+  return offset + 1
+}
+
+function objectWriteUInt16 (buf, value, offset, littleEndian) {
+  if (value < 0) value = 0xffff + value + 1
+  for (var i = 0, j = Math.min(buf.length - offset, 2); i < j; ++i) {
+    buf[offset + i] = (value & (0xff << (8 * (littleEndian ? i : 1 - i)))) >>>
+      (littleEndian ? i : 1 - i) * 8
+  }
+}
+
+Buffer.prototype.writeUInt16LE = function writeUInt16LE (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 2, 0xffff, 0)
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    this[offset] = (value & 0xff)
+    this[offset + 1] = (value >>> 8)
+  } else {
+    objectWriteUInt16(this, value, offset, true)
+  }
+  return offset + 2
+}
+
+Buffer.prototype.writeUInt16BE = function writeUInt16BE (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 2, 0xffff, 0)
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    this[offset] = (value >>> 8)
+    this[offset + 1] = (value & 0xff)
+  } else {
+    objectWriteUInt16(this, value, offset, false)
+  }
+  return offset + 2
+}
+
+function objectWriteUInt32 (buf, value, offset, littleEndian) {
+  if (value < 0) value = 0xffffffff + value + 1
+  for (var i = 0, j = Math.min(buf.length - offset, 4); i < j; ++i) {
+    buf[offset + i] = (value >>> (littleEndian ? i : 3 - i) * 8) & 0xff
+  }
+}
+
+Buffer.prototype.writeUInt32LE = function writeUInt32LE (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 4, 0xffffffff, 0)
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    this[offset + 3] = (value >>> 24)
+    this[offset + 2] = (value >>> 16)
+    this[offset + 1] = (value >>> 8)
+    this[offset] = (value & 0xff)
+  } else {
+    objectWriteUInt32(this, value, offset, true)
+  }
+  return offset + 4
+}
+
+Buffer.prototype.writeUInt32BE = function writeUInt32BE (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 4, 0xffffffff, 0)
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    this[offset] = (value >>> 24)
+    this[offset + 1] = (value >>> 16)
+    this[offset + 2] = (value >>> 8)
+    this[offset + 3] = (value & 0xff)
+  } else {
+    objectWriteUInt32(this, value, offset, false)
+  }
+  return offset + 4
+}
+
+Buffer.prototype.writeIntLE = function writeIntLE (value, offset, byteLength, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) {
+    var limit = Math.pow(2, 8 * byteLength - 1)
+
+    checkInt(this, value, offset, byteLength, limit - 1, -limit)
+  }
+
+  var i = 0
+  var mul = 1
+  var sub = 0
+  this[offset] = value & 0xFF
+  while (++i < byteLength && (mul *= 0x100)) {
+    if (value < 0 && sub === 0 && this[offset + i - 1] !== 0) {
+      sub = 1
+    }
+    this[offset + i] = ((value / mul) >> 0) - sub & 0xFF
+  }
+
+  return offset + byteLength
+}
+
+Buffer.prototype.writeIntBE = function writeIntBE (value, offset, byteLength, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) {
+    var limit = Math.pow(2, 8 * byteLength - 1)
+
+    checkInt(this, value, offset, byteLength, limit - 1, -limit)
+  }
+
+  var i = byteLength - 1
+  var mul = 1
+  var sub = 0
+  this[offset + i] = value & 0xFF
+  while (--i >= 0 && (mul *= 0x100)) {
+    if (value < 0 && sub === 0 && this[offset + i + 1] !== 0) {
+      sub = 1
+    }
+    this[offset + i] = ((value / mul) >> 0) - sub & 0xFF
+  }
+
+  return offset + byteLength
+}
+
+Buffer.prototype.writeInt8 = function writeInt8 (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 1, 0x7f, -0x80)
+  if (!Buffer.TYPED_ARRAY_SUPPORT) value = Math.floor(value)
+  if (value < 0) value = 0xff + value + 1
+  this[offset] = (value & 0xff)
+  return offset + 1
+}
+
+Buffer.prototype.writeInt16LE = function writeInt16LE (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 2, 0x7fff, -0x8000)
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    this[offset] = (value & 0xff)
+    this[offset + 1] = (value >>> 8)
+  } else {
+    objectWriteUInt16(this, value, offset, true)
+  }
+  return offset + 2
+}
+
+Buffer.prototype.writeInt16BE = function writeInt16BE (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 2, 0x7fff, -0x8000)
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    this[offset] = (value >>> 8)
+    this[offset + 1] = (value & 0xff)
+  } else {
+    objectWriteUInt16(this, value, offset, false)
+  }
+  return offset + 2
+}
+
+Buffer.prototype.writeInt32LE = function writeInt32LE (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 4, 0x7fffffff, -0x80000000)
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    this[offset] = (value & 0xff)
+    this[offset + 1] = (value >>> 8)
+    this[offset + 2] = (value >>> 16)
+    this[offset + 3] = (value >>> 24)
+  } else {
+    objectWriteUInt32(this, value, offset, true)
+  }
+  return offset + 4
+}
+
+Buffer.prototype.writeInt32BE = function writeInt32BE (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 4, 0x7fffffff, -0x80000000)
+  if (value < 0) value = 0xffffffff + value + 1
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    this[offset] = (value >>> 24)
+    this[offset + 1] = (value >>> 16)
+    this[offset + 2] = (value >>> 8)
+    this[offset + 3] = (value & 0xff)
+  } else {
+    objectWriteUInt32(this, value, offset, false)
+  }
+  return offset + 4
+}
+
+function checkIEEE754 (buf, value, offset, ext, max, min) {
+  if (offset + ext > buf.length) throw new RangeError('Index out of range')
+  if (offset < 0) throw new RangeError('Index out of range')
+}
+
+function writeFloat (buf, value, offset, littleEndian, noAssert) {
+  if (!noAssert) {
+    checkIEEE754(buf, value, offset, 4, 3.4028234663852886e+38, -3.4028234663852886e+38)
+  }
+  ieee754.write(buf, value, offset, littleEndian, 23, 4)
+  return offset + 4
+}
+
+Buffer.prototype.writeFloatLE = function writeFloatLE (value, offset, noAssert) {
+  return writeFloat(this, value, offset, true, noAssert)
+}
+
+Buffer.prototype.writeFloatBE = function writeFloatBE (value, offset, noAssert) {
+  return writeFloat(this, value, offset, false, noAssert)
+}
+
+function writeDouble (buf, value, offset, littleEndian, noAssert) {
+  if (!noAssert) {
+    checkIEEE754(buf, value, offset, 8, 1.7976931348623157E+308, -1.7976931348623157E+308)
+  }
+  ieee754.write(buf, value, offset, littleEndian, 52, 8)
+  return offset + 8
+}
+
+Buffer.prototype.writeDoubleLE = function writeDoubleLE (value, offset, noAssert) {
+  return writeDouble(this, value, offset, true, noAssert)
+}
+
+Buffer.prototype.writeDoubleBE = function writeDoubleBE (value, offset, noAssert) {
+  return writeDouble(this, value, offset, false, noAssert)
+}
+
+// copy(targetBuffer, targetStart=0, sourceStart=0, sourceEnd=buffer.length)
+Buffer.prototype.copy = function copy (target, targetStart, start, end) {
+  if (!start) start = 0
+  if (!end && end !== 0) end = this.length
+  if (targetStart >= target.length) targetStart = target.length
+  if (!targetStart) targetStart = 0
+  if (end > 0 && end < start) end = start
+
+  // Copy 0 bytes; we're done
+  if (end === start) return 0
+  if (target.length === 0 || this.length === 0) return 0
+
+  // Fatal error conditions
+  if (targetStart < 0) {
+    throw new RangeError('targetStart out of bounds')
+  }
+  if (start < 0 || start >= this.length) throw new RangeError('sourceStart out of bounds')
+  if (end < 0) throw new RangeError('sourceEnd out of bounds')
+
+  // Are we oob?
+  if (end > this.length) end = this.length
+  if (target.length - targetStart < end - start) {
+    end = target.length - targetStart + start
+  }
+
+  var len = end - start
+  var i
+
+  if (this === target && start < targetStart && targetStart < end) {
+    // descending copy from end
+    for (i = len - 1; i >= 0; --i) {
+      target[i + targetStart] = this[i + start]
+    }
+  } else if (len < 1000 || !Buffer.TYPED_ARRAY_SUPPORT) {
+    // ascending copy from start
+    for (i = 0; i < len; ++i) {
+      target[i + targetStart] = this[i + start]
+    }
+  } else {
+    Uint8Array.prototype.set.call(
+      target,
+      this.subarray(start, start + len),
+      targetStart
+    )
+  }
+
+  return len
+}
+
+// Usage:
+//    buffer.fill(number[, offset[, end]])
+//    buffer.fill(buffer[, offset[, end]])
+//    buffer.fill(string[, offset[, end]][, encoding])
+Buffer.prototype.fill = function fill (val, start, end, encoding) {
+  // Handle string cases:
+  if (typeof val === 'string') {
+    if (typeof start === 'string') {
+      encoding = start
+      start = 0
+      end = this.length
+    } else if (typeof end === 'string') {
+      encoding = end
+      end = this.length
+    }
+    if (val.length === 1) {
+      var code = val.charCodeAt(0)
+      if (code < 256) {
+        val = code
+      }
+    }
+    if (encoding !== undefined && typeof encoding !== 'string') {
+      throw new TypeError('encoding must be a string')
+    }
+    if (typeof encoding === 'string' && !Buffer.isEncoding(encoding)) {
+      throw new TypeError('Unknown encoding: ' + encoding)
+    }
+  } else if (typeof val === 'number') {
+    val = val & 255
+  }
+
+  // Invalid ranges are not set to a default, so can range check early.
+  if (start < 0 || this.length < start || this.length < end) {
+    throw new RangeError('Out of range index')
+  }
+
+  if (end <= start) {
+    return this
+  }
+
+  start = start >>> 0
+  end = end === undefined ? this.length : end >>> 0
+
+  if (!val) val = 0
+
+  var i
+  if (typeof val === 'number') {
+    for (i = start; i < end; ++i) {
+      this[i] = val
+    }
+  } else {
+    var bytes = Buffer.isBuffer(val)
+      ? val
+      : utf8ToBytes(new Buffer(val, encoding).toString())
+    var len = bytes.length
+    for (i = 0; i < end - start; ++i) {
+      this[i + start] = bytes[i % len]
+    }
+  }
+
+  return this
+}
+
+// HELPER FUNCTIONS
+// ================
+
+var INVALID_BASE64_RE = /[^+\/0-9A-Za-z-_]/g
+
+function base64clean (str) {
+  // Node strips out invalid characters like \n and \t from the string, base64-js does not
+  str = stringtrim(str).replace(INVALID_BASE64_RE, '')
+  // Node converts strings with length < 2 to ''
+  if (str.length < 2) return ''
+  // Node allows for non-padded base64 strings (missing trailing ===), base64-js does not
+  while (str.length % 4 !== 0) {
+    str = str + '='
+  }
+  return str
+}
+
+function stringtrim (str) {
+  if (str.trim) return str.trim()
+  return str.replace(/^\s+|\s+$/g, '')
+}
+
+function toHex (n) {
+  if (n < 16) return '0' + n.toString(16)
+  return n.toString(16)
+}
+
+function utf8ToBytes (string, units) {
+  units = units || Infinity
+  var codePoint
+  var length = string.length
+  var leadSurrogate = null
+  var bytes = []
+
+  for (var i = 0; i < length; ++i) {
+    codePoint = string.charCodeAt(i)
+
+    // is surrogate component
+    if (codePoint > 0xD7FF && codePoint < 0xE000) {
+      // last char was a lead
+      if (!leadSurrogate) {
+        // no lead yet
+        if (codePoint > 0xDBFF) {
+          // unexpected trail
+          if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
+          continue
+        } else if (i + 1 === length) {
+          // unpaired lead
+          if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
+          continue
+        }
+
+        // valid lead
+        leadSurrogate = codePoint
+
+        continue
+      }
+
+      // 2 leads in a row
+      if (codePoint < 0xDC00) {
+        if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
+        leadSurrogate = codePoint
+        continue
+      }
+
+      // valid surrogate pair
+      codePoint = (leadSurrogate - 0xD800 << 10 | codePoint - 0xDC00) + 0x10000
+    } else if (leadSurrogate) {
+      // valid bmp char, but last char was a lead
+      if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
+    }
+
+    leadSurrogate = null
+
+    // encode utf8
+    if (codePoint < 0x80) {
+      if ((units -= 1) < 0) break
+      bytes.push(codePoint)
+    } else if (codePoint < 0x800) {
+      if ((units -= 2) < 0) break
+      bytes.push(
+        codePoint >> 0x6 | 0xC0,
+        codePoint & 0x3F | 0x80
+      )
+    } else if (codePoint < 0x10000) {
+      if ((units -= 3) < 0) break
+      bytes.push(
+        codePoint >> 0xC | 0xE0,
+        codePoint >> 0x6 & 0x3F | 0x80,
+        codePoint & 0x3F | 0x80
+      )
+    } else if (codePoint < 0x110000) {
+      if ((units -= 4) < 0) break
+      bytes.push(
+        codePoint >> 0x12 | 0xF0,
+        codePoint >> 0xC & 0x3F | 0x80,
+        codePoint >> 0x6 & 0x3F | 0x80,
+        codePoint & 0x3F | 0x80
+      )
+    } else {
+      throw new Error('Invalid code point')
+    }
+  }
+
+  return bytes
+}
+
+function asciiToBytes (str) {
+  var byteArray = []
+  for (var i = 0; i < str.length; ++i) {
+    // Node's code seems to be doing this and not & 0x7F..
+    byteArray.push(str.charCodeAt(i) & 0xFF)
+  }
+  return byteArray
+}
+
+function utf16leToBytes (str, units) {
+  var c, hi, lo
+  var byteArray = []
+  for (var i = 0; i < str.length; ++i) {
+    if ((units -= 2) < 0) break
+
+    c = str.charCodeAt(i)
+    hi = c >> 8
+    lo = c % 256
+    byteArray.push(lo)
+    byteArray.push(hi)
+  }
+
+  return byteArray
+}
+
+function base64ToBytes (str) {
+  return base64.toByteArray(base64clean(str))
+}
+
+function blitBuffer (src, dst, offset, length) {
+  for (var i = 0; i < length; ++i) {
+    if ((i + offset >= dst.length) || (i >= src.length)) break
+    dst[i + offset] = src[i]
+  }
+  return i
+}
+
+function isnan (val) {
+  return val !== val // eslint-disable-line no-self-compare
+}
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("./node_modules/webpack/buildin/global.js")))
+
+/***/ }),
+
+/***/ "./node_modules/buffer/node_modules/isarray/index.js":
+/***/ (function(module, exports) {
+
+var toString = {}.toString;
+
+module.exports = Array.isArray || function (arr) {
+  return toString.call(arr) == '[object Array]';
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/lib/loader.js?sourceMap!./src/common/base-chart.component.scss":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(undefined);
 // imports
 
 
@@ -98,10 +2030,10 @@ exports.push([module.i, ".ngx-charts {\n  float: left; }\n  .ngx-charts .circle,
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/index.js?sourceMap!./src/common/legend/advanced-legend.component.scss":
+/***/ "./node_modules/css-loader/index.js!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/lib/loader.js?sourceMap!./src/common/legend/advanced-legend.component.scss":
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")();
+exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(undefined);
 // imports
 
 
@@ -113,10 +2045,10 @@ exports.push([module.i, ".advanced-pie-legend {\n  float: left;\n  position: rel
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/index.js?sourceMap!./src/common/legend/legend.component.scss":
+/***/ "./node_modules/css-loader/index.js!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/lib/loader.js?sourceMap!./src/common/legend/legend.component.scss":
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")();
+exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(undefined);
 // imports
 
 
@@ -128,10 +2060,10 @@ exports.push([module.i, ".chart-legend {\n  display: inline-block;\n  padding: 0
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/index.js?sourceMap!./src/common/legend/scale-legend.component.scss":
+/***/ "./node_modules/css-loader/index.js!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/lib/loader.js?sourceMap!./src/common/legend/scale-legend.component.scss":
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")();
+exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(undefined);
 // imports
 
 
@@ -143,10 +2075,10 @@ exports.push([module.i, ".chart-legend {\n  display: inline-block;\n  padding: 0
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/index.js?sourceMap!./src/common/timeline/timeline.component.scss":
+/***/ "./node_modules/css-loader/index.js!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/lib/loader.js?sourceMap!./src/common/timeline/timeline.component.scss":
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")();
+exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(undefined);
 // imports
 
 
@@ -158,10 +2090,10 @@ exports.push([module.i, ".timeline .brush-background {\n  fill: rgba(0, 0, 0, 0.
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/index.js?sourceMap!./src/common/tooltip/tooltip.component.scss":
+/***/ "./node_modules/css-loader/index.js!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/lib/loader.js?sourceMap!./src/common/tooltip/tooltip.component.scss":
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")();
+exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(undefined);
 // imports
 
 
@@ -173,70 +2105,10 @@ exports.push([module.i, ".ngx-tooltip-content {\n  position: fixed;\n  border-ra
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/index.js?sourceMap!./src/force-directed-graph/force-directed-graph.component.scss":
+/***/ "./node_modules/css-loader/index.js!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/lib/loader.js?sourceMap!./src/pie-chart/advanced-pie-chart.component.scss":
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")();
-// imports
-
-
-// module
-exports.push([module.i, ".force-directed-graph .edge {\n  stroke: #333; }\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/index.js!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/index.js?sourceMap!./src/gauge/gauge.component.scss":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")();
-// imports
-
-
-// module
-exports.push([module.i, ".gauge .background-arc path {\n  fill: rgba(0, 0, 0, 0.05); }\n\n.gauge .gauge-tick path {\n  stroke: #666; }\n\n.gauge .gauge-tick text {\n  font-size: 12px;\n  fill: #666;\n  font-weight: bold; }\n\n.gauge .gauge-tick-large path {\n  stroke-width: 2px; }\n\n.gauge .gauge-tick-small path {\n  stroke-width: 1px; }\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/index.js!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/index.js?sourceMap!./src/gauge/linear-gauge.component.scss":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")();
-// imports
-
-
-// module
-exports.push([module.i, ".linear-gauge {\n  cursor: pointer; }\n  .linear-gauge .background-bar path {\n    fill: rgba(0, 0, 0, 0.05); }\n  .linear-gauge .units {\n    fill: #666; }\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/index.js!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/index.js?sourceMap!./src/number-card/card.component.scss":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")();
-// imports
-
-
-// module
-exports.push([module.i, "ngx-charts-number-card .cell .card, ngx-charts-number-card .cell .cardBand {\n  cursor: pointer; }\n\nngx-charts-number-card .cell .trimmed-label {\n  font-size: 12px;\n  pointer-events: none;\n  text-transform: uppercase;\n  overflow: hidden;\n  text-align: left;\n  line-height: 1em; }\n  ngx-charts-number-card .cell .trimmed-label p {\n    overflow: hidden;\n    white-space: nowrap;\n    text-overflow: ellipsis;\n    width: 100%;\n    padding: 0;\n    margin: 0; }\n\nngx-charts-number-card .cell .value-text {\n  pointer-events: none; }\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/index.js!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/index.js?sourceMap!./src/pie-chart/advanced-pie-chart.component.scss":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")();
+exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(undefined);
 // imports
 
 
@@ -248,25 +2120,25 @@ exports.push([module.i, ".advanced-pie {\n  display: inline-block;\n  float: lef
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/index.js?sourceMap!./src/pie-chart/pie-chart.component.scss":
+/***/ "./node_modules/css-loader/index.js!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/lib/loader.js?sourceMap!./src/pie-chart/pie-chart.component.scss":
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")();
+exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(undefined);
 // imports
 
 
 // module
-exports.push([module.i, ".pie-label {\n  font-size: 11px; }\n", ""]);
+exports.push([module.i, ".pie-label {\n  font-size: 11px;\n  -webkit-animation: 750ms ease-in fadeIn;\n          animation: 750ms ease-in fadeIn; }\n\n@-webkit-keyframes fadeIn {\n  from {\n    opacity: 0; }\n  to {\n    opacity: 1; } }\n\n@keyframes fadeIn {\n  from {\n    opacity: 0; }\n  to {\n    opacity: 1; } }\n\n.pie-label-line {\n  -webkit-animation: 3s linear drawOut;\n          animation: 3s linear drawOut;\n  stroke-dasharray: 100%;\n  -webkit-transition: d 750ms;\n  transition: d 750ms; }\n\n@-webkit-keyframes drawOut {\n  from {\n    stroke-dashoffset: 100%; }\n  to {\n    stroke-dashoffset: 0; } }\n\n@keyframes drawOut {\n  from {\n    stroke-dashoffset: 100%; }\n  to {\n    stroke-dashoffset: 0; } }\n", ""]);
 
 // exports
 
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/index.js?sourceMap!./src/pie-chart/pie-grid.component.scss":
+/***/ "./node_modules/css-loader/index.js!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/lib/loader.js?sourceMap!./src/pie-chart/pie-grid.component.scss":
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")();
+exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(undefined);
 // imports
 
 
@@ -278,44 +2150,27 @@ exports.push([module.i, ".pie-grid .arc1 {\n  opacity: 0.4; }\n\n.pie-grid .perc
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/index.js?sourceMap!./src/tree-map/tree-map.component.scss":
+/***/ "./node_modules/css-loader/lib/css-base.js":
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")();
-// imports
-
-
-// module
-exports.push([module.i, ".tree-map .treemap-val {\n  font-size: 1.3em;\n  padding-top: 5px;\n  display: inline-block; }\n\n.tree-map .label p {\n  display: table-cell;\n  text-align: center;\n  line-height: 1.2em;\n  vertical-align: middle; }\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/lib/css-base.js":
-/***/ (function(module, exports) {
-
-/*
+/* WEBPACK VAR INJECTION */(function(Buffer) {/*
 	MIT License http://www.opensource.org/licenses/mit-license.php
 	Author Tobias Koppers @sokra
 */
 // css base code, injected by the css-loader
-module.exports = function() {
+module.exports = function(useSourceMap) {
 	var list = [];
 
 	// return the list of modules as css string
 	list.toString = function toString() {
-		var result = [];
-		for(var i = 0; i < this.length; i++) {
-			var item = this[i];
+		return this.map(function (item) {
+			var content = cssWithMappingToString(item, useSourceMap);
 			if(item[2]) {
-				result.push("@media " + item[2] + "{" + item[1] + "}");
+				return "@media " + item[2] + "{" + content + "}";
 			} else {
-				result.push(item[1]);
+				return content;
 			}
-		}
-		return result.join("");
+		}).join("");
 	};
 
 	// import a list of modules into the list
@@ -347,5315 +2202,152 @@ module.exports = function() {
 	return list;
 };
 
-
-/***/ }),
-
-/***/ "./src/area-chart/area-chart-normalized.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_scale__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_scale___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_d3_scale__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_d3_shape__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_d3_shape___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_d3_shape__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__angular_common__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_view_dimensions_helper__ = __webpack_require__("./src/common/view-dimensions.helper.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_color_helper__ = __webpack_require__("./src/common/color.helper.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__common_base_chart_component__ = __webpack_require__("./src/common/base-chart.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__utils_id__ = __webpack_require__("./src/utils/id.ts");
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AreaChartNormalizedComponent; });
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-
-
-
-var AreaChartNormalizedComponent = (function (_super) {
-    __extends(AreaChartNormalizedComponent, _super);
-    function AreaChartNormalizedComponent() {
-        _super.apply(this, arguments);
-        this.legend = false;
-        this.showGridLines = true;
-        this.curve = __WEBPACK_IMPORTED_MODULE_2_d3_shape__["curveLinear"];
-        this.activeEntries = [];
-        this.roundDomains = false;
-        this.tooltipDisabled = false;
-        this.activate = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-        this.deactivate = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-        this.margin = [10, 20, 10, 20];
-        this.xAxisHeight = 0;
-        this.yAxisWidth = 0;
-        this.timelineHeight = 50;
-        this.timelinePadding = 10;
-    }
-    AreaChartNormalizedComponent.prototype.update = function () {
-        var _this = this;
-        _super.prototype.update.call(this);
-        this.zone.run(function () {
-            _this.dims = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__common_view_dimensions_helper__["a" /* calculateViewDimensions */])({
-                width: _this.width,
-                height: _this.height,
-                margins: _this.margin,
-                showXAxis: _this.xAxis,
-                showYAxis: _this.yAxis,
-                xAxisHeight: _this.xAxisHeight,
-                yAxisWidth: _this.yAxisWidth,
-                showXLabel: _this.showXAxisLabel,
-                showYLabel: _this.showYAxisLabel,
-                showLegend: _this.legend,
-                legendType: _this.schemeType
-            });
-            if (_this.timeline) {
-                _this.dims.height -= (_this.timelineHeight + _this.margin[2] + _this.timelinePadding);
-            }
-            _this.xDomain = _this.getXDomain();
-            if (_this.filteredDomain) {
-                _this.xDomain = _this.filteredDomain;
-            }
-            _this.yDomain = _this.getYDomain();
-            _this.seriesDomain = _this.getSeriesDomain();
-            _this.xScale = _this.getXScale(_this.xDomain, _this.dims.width);
-            _this.yScale = _this.getYScale(_this.yDomain, _this.dims.height);
-            var _loop_1 = function(i) {
-                var val = _this.xSet[i];
-                var d0 = 0;
-                var total = 0;
-                for (var _i = 0, _a = _this.results; _i < _a.length; _i++) {
-                    var group = _a[_i];
-                    var d = group.series.find(function (item) {
-                        var a = item.name;
-                        var b = val;
-                        if (_this.scaleType === 'time') {
-                            a = a.valueOf();
-                            b = b.valueOf();
-                        }
-                        return a === b;
-                    });
-                    if (d) {
-                        total += d.value;
-                    }
-                }
-                for (var _b = 0, _c = _this.results; _b < _c.length; _b++) {
-                    var group = _c[_b];
-                    var d = group.series.find(function (item) {
-                        var a = item.name;
-                        var b = val;
-                        if (_this.scaleType === 'time') {
-                            a = a.valueOf();
-                            b = b.valueOf();
-                        }
-                        return a === b;
-                    });
-                    if (d) {
-                        d.d0 = d0;
-                        d.d1 = d0 + d.value;
-                        d0 += d.value;
-                    }
-                    else {
-                        d = {
-                            name: val,
-                            value: 0,
-                            d0: d0,
-                            d1: d0
-                        };
-                        group.series.push(d);
-                    }
-                    if (total > 0) {
-                        d.d0 = (d.d0 * 100) / total;
-                        d.d1 = (d.d1 * 100) / total;
-                    }
-                    else {
-                        d.d0 = 0;
-                        d.d1 = 0;
-                    }
-                }
-            };
-            for (var i = 0; i < _this.xSet.length; i++) {
-                _loop_1(i);
-            }
-            _this.updateTimeline();
-            _this.setColors();
-            _this.legendOptions = _this.getLegendOptions();
-            _this.transform = "translate(" + _this.dims.xOffset + " , " + _this.margin[0] + ")";
-            var pageUrl = _this.location instanceof __WEBPACK_IMPORTED_MODULE_3__angular_common__["PathLocationStrategy"]
-                ? _this.location.path()
-                : '';
-            _this.clipPathId = 'clip' + __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_7__utils_id__["a" /* id */])().toString();
-            _this.clipPath = "url(" + pageUrl + "#" + _this.clipPathId + ")";
-        });
-    };
-    AreaChartNormalizedComponent.prototype.updateTimeline = function () {
-        if (this.timeline) {
-            this.timelineWidth = this.width;
-            if (this.legend) {
-                this.timelineWidth = this.dims.width;
-            }
-            this.timelineXDomain = this.getXDomain();
-            this.timelineXScale = this.getXScale(this.timelineXDomain, this.timelineWidth);
-            this.timelineYScale = this.getYScale(this.yDomain, this.timelineHeight);
-            this.timelineTransform = "translate(" + this.dims.xOffset + ", " + -this.margin[2] + ")";
-        }
-    };
-    AreaChartNormalizedComponent.prototype.getXDomain = function () {
-        var values = [];
-        for (var _i = 0, _a = this.results; _i < _a.length; _i++) {
-            var results = _a[_i];
-            for (var _b = 0, _c = results.series; _b < _c.length; _b++) {
-                var d = _c[_b];
-                if (!values.includes(d.name)) {
-                    values.push(d.name);
-                }
-            }
-        }
-        this.scaleType = this.getScaleType(values);
-        var domain = [];
-        if (this.scaleType === 'time') {
-            var min = Math.min.apply(Math, values);
-            var max = Math.max.apply(Math, values);
-            domain = [new Date(min), new Date(max)];
-        }
-        else if (this.scaleType === 'linear') {
-            values = values.map(function (v) { return Number(v); });
-            var min = Math.min.apply(Math, values);
-            var max = Math.max.apply(Math, values);
-            domain = [min, max];
-        }
-        else {
-            domain = values;
-        }
-        this.xSet = values;
-        return domain;
-    };
-    AreaChartNormalizedComponent.prototype.getYDomain = function () {
-        return [0, 100];
-    };
-    AreaChartNormalizedComponent.prototype.getSeriesDomain = function () {
-        return this.results.map(function (d) { return d.name; });
-    };
-    AreaChartNormalizedComponent.prototype.getXScale = function (domain, width) {
-        var scale;
-        if (this.scaleType === 'time') {
-            scale = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_d3_scale__["scaleTime"])();
-        }
-        else if (this.scaleType === 'linear') {
-            scale = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_d3_scale__["scaleLinear"])();
-        }
-        else if (this.scaleType === 'ordinal') {
-            scale = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_d3_scale__["scalePoint"])()
-                .padding(0.1);
-        }
-        scale
-            .range([0, width])
-            .domain(domain);
-        return this.roundDomains ? scale.nice() : scale;
-    };
-    AreaChartNormalizedComponent.prototype.getYScale = function (domain, height) {
-        var scale = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_d3_scale__["scaleLinear"])()
-            .range([height, 0])
-            .domain(domain);
-        return this.roundDomains ? scale.nice() : scale;
-    };
-    AreaChartNormalizedComponent.prototype.getScaleType = function (values) {
-        var date = true;
-        var num = true;
-        for (var _i = 0, values_1 = values; _i < values_1.length; _i++) {
-            var value = values_1[_i];
-            if (!this.isDate(value)) {
-                date = false;
-            }
-            if (typeof value !== 'number') {
-                num = false;
-            }
-        }
-        if (date) {
-            return 'time';
-        }
-        if (num) {
-            return 'linear';
-        }
-        return 'ordinal';
-    };
-    AreaChartNormalizedComponent.prototype.isDate = function (value) {
-        if (value instanceof Date) {
-            return true;
-        }
-        return false;
-    };
-    AreaChartNormalizedComponent.prototype.updateDomain = function (domain) {
-        this.filteredDomain = domain;
-        this.xDomain = this.filteredDomain;
-        this.xScale = this.getXScale(this.xDomain, this.dims.width);
-    };
-    AreaChartNormalizedComponent.prototype.updateHoveredVertical = function (item) {
-        this.hoveredVertical = item.value;
-        this.deactivateAll();
-    };
-    AreaChartNormalizedComponent.prototype.hideCircles = function () {
-        this.hoveredVertical = null;
-        this.deactivateAll();
-    };
-    AreaChartNormalizedComponent.prototype.onClick = function (data, series) {
-        if (series) {
-            data.series = series.name;
-        }
-        this.select.emit(data);
-    };
-    AreaChartNormalizedComponent.prototype.trackBy = function (index, item) {
-        return item.name;
-    };
-    AreaChartNormalizedComponent.prototype.setColors = function () {
-        var domain;
-        if (this.schemeType === 'ordinal') {
-            domain = this.seriesDomain;
-        }
-        else {
-            domain = this.yDomain;
-        }
-        this.colors = new __WEBPACK_IMPORTED_MODULE_5__common_color_helper__["a" /* ColorHelper */](this.scheme, this.schemeType, domain, this.customColors);
-    };
-    AreaChartNormalizedComponent.prototype.getLegendOptions = function () {
-        var opts = {
-            scaleType: this.schemeType,
-            colors: undefined,
-            domain: []
-        };
-        if (opts.scaleType === 'ordinal') {
-            opts.domain = this.seriesDomain;
-            opts.colors = this.colors;
-        }
-        else {
-            opts.domain = this.yDomain;
-            opts.colors = this.colors.scale;
-        }
-        return opts;
-    };
-    AreaChartNormalizedComponent.prototype.updateYAxisWidth = function (_a) {
-        var width = _a.width;
-        this.yAxisWidth = width;
-        this.update();
-    };
-    AreaChartNormalizedComponent.prototype.updateXAxisHeight = function (_a) {
-        var height = _a.height;
-        this.xAxisHeight = height;
-        this.update();
-    };
-    AreaChartNormalizedComponent.prototype.onActivate = function (item) {
-        var idx = this.activeEntries.findIndex(function (d) {
-            return d.name === item.name && d.value === item.value;
-        });
-        if (idx > -1) {
-            return;
-        }
-        this.activeEntries = [item].concat(this.activeEntries);
-        this.activate.emit({ value: item, entries: this.activeEntries });
-    };
-    AreaChartNormalizedComponent.prototype.onDeactivate = function (item) {
-        var idx = this.activeEntries.findIndex(function (d) {
-            return d.name === item.name && d.value === item.value;
-        });
-        this.activeEntries.splice(idx, 1);
-        this.activeEntries = this.activeEntries.slice();
-        this.deactivate.emit({ value: item, entries: this.activeEntries });
-    };
-    AreaChartNormalizedComponent.prototype.deactivateAll = function () {
-        this.activeEntries = this.activeEntries.slice();
-        for (var _i = 0, _a = this.activeEntries; _i < _a.length; _i++) {
-            var entry = _a[_i];
-            this.deactivate.emit({ value: entry, entries: [] });
-        }
-        this.activeEntries = [];
-    };
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], AreaChartNormalizedComponent.prototype, "legend", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], AreaChartNormalizedComponent.prototype, "xAxis", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], AreaChartNormalizedComponent.prototype, "yAxis", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], AreaChartNormalizedComponent.prototype, "showXAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], AreaChartNormalizedComponent.prototype, "showYAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], AreaChartNormalizedComponent.prototype, "xAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], AreaChartNormalizedComponent.prototype, "yAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], AreaChartNormalizedComponent.prototype, "timeline", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], AreaChartNormalizedComponent.prototype, "gradient", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], AreaChartNormalizedComponent.prototype, "showGridLines", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], AreaChartNormalizedComponent.prototype, "curve", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Array)
-    ], AreaChartNormalizedComponent.prototype, "activeEntries", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', String)
-    ], AreaChartNormalizedComponent.prototype, "schemeType", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], AreaChartNormalizedComponent.prototype, "xAxisTickFormatting", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], AreaChartNormalizedComponent.prototype, "yAxisTickFormatting", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], AreaChartNormalizedComponent.prototype, "roundDomains", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], AreaChartNormalizedComponent.prototype, "tooltipDisabled", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
-        __metadata('design:type', __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"])
-    ], AreaChartNormalizedComponent.prototype, "activate", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
-        __metadata('design:type', __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"])
-    ], AreaChartNormalizedComponent.prototype, "deactivate", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["HostListener"])('mouseleave'), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', []), 
-        __metadata('design:returntype', void 0)
-    ], AreaChartNormalizedComponent.prototype, "hideCircles", null);
-    AreaChartNormalizedComponent = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'ngx-charts-area-chart-normalized',
-            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n      <svg:g [attr.transform]=\"transform\" class=\"area-chart chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g [attr.clip-path]=\"clipPath\">\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g ngx-charts-area-series\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [colors]=\"colors\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [activeEntries]=\"activeEntries\"\n              [gradient]=\"gradient\"\n              normalized=\"true\"\n              [curve]=\"curve\"\n            />\n          </svg:g>\n          <svg:g ngx-charts-area-tooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            [showPercentage]=\"true\"\n            [tooltipDisabled]=\"tooltipDisabled\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g ngx-charts-circle-series\n              type=\"stacked\"\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [colors]=\"colors\"\n              [activeEntries]=\"activeEntries\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              [tooltipDisabled]=\"tooltipDisabled\"\n              (select)=\"onClick($event, series)\"\n              (activate)=\"onActivate($event)\"\n              (deactivate)=\"onDeactivate($event)\"\n            />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n      <svg:g ngx-charts-timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [attr.transform]=\"timelineTransform\"\n        [results]=\"results\"\n        [view]=\"[timelineWidth, height]\"\n        [height]=\"timelineHeight\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\"\n        [scaleType]=\"scaleType\"\n        (onDomainChange)=\"updateDomain($event)\">\n        <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n          <svg:g ngx-charts-area-series\n            [xScale]=\"timelineXScale\"\n            [yScale]=\"timelineYScale\"\n            [colors]=\"colors\"\n            [data]=\"series\"\n            [scaleType]=\"scaleType\"\n            [gradient]=\"gradient\"\n            normalized=\"true\"\n            [curve]=\"curve\"\n          />\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
-            changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectionStrategy"].OnPush,
-            styles: [__webpack_require__("./src/common/base-chart.component.scss")],
-            encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewEncapsulation"].None
-        }), 
-        __metadata('design:paramtypes', [])
-    ], AreaChartNormalizedComponent);
-    return AreaChartNormalizedComponent;
-}(__WEBPACK_IMPORTED_MODULE_6__common_base_chart_component__["a" /* BaseChartComponent */]));
-
-
-/***/ }),
-
-/***/ "./src/area-chart/area-chart-stacked.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__angular_common__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_d3_scale__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_d3_scale___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_d3_scale__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_d3_shape__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_d3_shape___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_d3_shape__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_view_dimensions_helper__ = __webpack_require__("./src/common/view-dimensions.helper.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_color_helper__ = __webpack_require__("./src/common/color.helper.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__common_base_chart_component__ = __webpack_require__("./src/common/base-chart.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__utils_id__ = __webpack_require__("./src/utils/id.ts");
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AreaChartStackedComponent; });
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-
-
-
-var AreaChartStackedComponent = (function (_super) {
-    __extends(AreaChartStackedComponent, _super);
-    function AreaChartStackedComponent() {
-        _super.apply(this, arguments);
-        this.legend = false;
-        this.showGridLines = true;
-        this.curve = __WEBPACK_IMPORTED_MODULE_3_d3_shape__["curveLinear"];
-        this.activeEntries = [];
-        this.roundDomains = false;
-        this.tooltipDisabled = false;
-        this.activate = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-        this.deactivate = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-        this.margin = [10, 20, 10, 20];
-        this.xAxisHeight = 0;
-        this.yAxisWidth = 0;
-        this.timelineHeight = 50;
-        this.timelinePadding = 10;
-    }
-    AreaChartStackedComponent.prototype.update = function () {
-        var _this = this;
-        _super.prototype.update.call(this);
-        this.zone.run(function () {
-            _this.dims = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__common_view_dimensions_helper__["a" /* calculateViewDimensions */])({
-                width: _this.width,
-                height: _this.height,
-                margins: _this.margin,
-                showXAxis: _this.xAxis,
-                showYAxis: _this.yAxis,
-                xAxisHeight: _this.xAxisHeight,
-                yAxisWidth: _this.yAxisWidth,
-                showXLabel: _this.showXAxisLabel,
-                showYLabel: _this.showYAxisLabel,
-                showLegend: _this.legend,
-                legendType: _this.schemeType
-            });
-            if (_this.timeline) {
-                _this.dims.height -= (_this.timelineHeight + _this.margin[2] + _this.timelinePadding);
-            }
-            _this.xDomain = _this.getXDomain();
-            if (_this.filteredDomain) {
-                _this.xDomain = _this.filteredDomain;
-            }
-            _this.yDomain = _this.getYDomain();
-            _this.seriesDomain = _this.getSeriesDomain();
-            _this.xScale = _this.getXScale(_this.xDomain, _this.dims.width);
-            _this.yScale = _this.getYScale(_this.yDomain, _this.dims.height);
-            var _loop_1 = function(i) {
-                var val = _this.xSet[i];
-                var d0 = 0;
-                for (var _i = 0, _a = _this.results; _i < _a.length; _i++) {
-                    var group = _a[_i];
-                    var d = group.series.find(function (item) {
-                        var a = item.name;
-                        var b = val;
-                        if (_this.scaleType === 'time') {
-                            a = a.valueOf();
-                            b = b.valueOf();
-                        }
-                        return a === b;
-                    });
-                    if (d) {
-                        d.d0 = d0;
-                        d.d1 = d0 + d.value;
-                        d0 += d.value;
-                    }
-                    else {
-                        d = {
-                            name: val,
-                            value: 0,
-                            d0: d0,
-                            d1: d0
-                        };
-                        group.series.push(d);
-                    }
-                }
-            };
-            for (var i = 0; i < _this.xSet.length; i++) {
-                _loop_1(i);
-            }
-            _this.updateTimeline();
-            _this.setColors();
-            _this.legendOptions = _this.getLegendOptions();
-            _this.transform = "translate(" + _this.dims.xOffset + " , " + _this.margin[0] + ")";
-            var pageUrl = _this.location instanceof __WEBPACK_IMPORTED_MODULE_1__angular_common__["PathLocationStrategy"]
-                ? _this.location.path()
-                : '';
-            _this.clipPathId = 'clip' + __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_7__utils_id__["a" /* id */])().toString();
-            _this.clipPath = "url(" + pageUrl + "#" + _this.clipPathId + ")";
-        });
-    };
-    AreaChartStackedComponent.prototype.updateTimeline = function () {
-        if (this.timeline) {
-            this.timelineWidth = this.width;
-            if (this.legend) {
-                this.timelineWidth = this.dims.width;
-            }
-            this.timelineXDomain = this.getXDomain();
-            this.timelineXScale = this.getXScale(this.timelineXDomain, this.timelineWidth);
-            this.timelineYScale = this.getYScale(this.yDomain, this.timelineHeight);
-            this.timelineTransform = "translate(" + this.dims.xOffset + ", " + -this.margin[2] + ")";
-        }
-    };
-    AreaChartStackedComponent.prototype.getXDomain = function () {
-        var values = [];
-        for (var _i = 0, _a = this.results; _i < _a.length; _i++) {
-            var results = _a[_i];
-            for (var _b = 0, _c = results.series; _b < _c.length; _b++) {
-                var d = _c[_b];
-                if (!values.includes(d.name)) {
-                    values.push(d.name);
-                }
-            }
-        }
-        this.scaleType = this.getScaleType(values);
-        var domain = [];
-        if (this.scaleType === 'time') {
-            var min = Math.min.apply(Math, values);
-            var max = Math.max.apply(Math, values);
-            domain = [new Date(min), new Date(max)];
-        }
-        else if (this.scaleType === 'linear') {
-            values = values.map(function (v) { return Number(v); });
-            var min = Math.min.apply(Math, values);
-            var max = Math.max.apply(Math, values);
-            domain = [min, max];
-        }
-        else {
-            domain = values;
-        }
-        this.xSet = values;
-        return domain;
-    };
-    AreaChartStackedComponent.prototype.getYDomain = function () {
-        var _this = this;
-        var domain = [];
-        var _loop_2 = function(i) {
-            var val = this_1.xSet[i];
-            var sum = 0;
-            for (var _i = 0, _a = this_1.results; _i < _a.length; _i++) {
-                var group = _a[_i];
-                var d = group.series.find(function (item) {
-                    var a = item.name;
-                    var b = val;
-                    if (_this.scaleType === 'time') {
-                        a = a.valueOf();
-                        b = b.valueOf();
-                    }
-                    return a === b;
-                });
-                if (d) {
-                    sum += d.value;
-                }
-            }
-            domain.push(sum);
-        };
-        var this_1 = this;
-        for (var i = 0; i < this.xSet.length; i++) {
-            _loop_2(i);
-        }
-        var min = Math.min.apply(Math, [0].concat(domain));
-        var max = Math.max.apply(Math, domain);
-        return [min, max];
-    };
-    AreaChartStackedComponent.prototype.getSeriesDomain = function () {
-        return this.results.map(function (d) { return d.name; });
-    };
-    AreaChartStackedComponent.prototype.getXScale = function (domain, width) {
-        var scale;
-        if (this.scaleType === 'time') {
-            scale = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_d3_scale__["scaleTime"])();
-        }
-        else if (this.scaleType === 'linear') {
-            scale = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_d3_scale__["scaleLinear"])();
-        }
-        else if (this.scaleType === 'ordinal') {
-            scale = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_d3_scale__["scalePoint"])()
-                .padding(0.1);
-        }
-        scale
-            .range([0, width])
-            .domain(domain);
-        return this.roundDomains ? scale.nice() : scale;
-    };
-    AreaChartStackedComponent.prototype.getYScale = function (domain, height) {
-        var scale = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_d3_scale__["scaleLinear"])()
-            .range([height, 0])
-            .domain(domain);
-        return this.roundDomains ? scale.nice() : scale;
-    };
-    AreaChartStackedComponent.prototype.getScaleType = function (values) {
-        var date = true;
-        var num = true;
-        for (var _i = 0, values_1 = values; _i < values_1.length; _i++) {
-            var value = values_1[_i];
-            if (!this.isDate(value)) {
-                date = false;
-            }
-            if (typeof value !== 'number') {
-                num = false;
-            }
-        }
-        if (date) {
-            return 'time';
-        }
-        if (num) {
-            return 'linear';
-        }
-        return 'ordinal';
-    };
-    AreaChartStackedComponent.prototype.isDate = function (value) {
-        if (value instanceof Date) {
-            return true;
-        }
-        return false;
-    };
-    AreaChartStackedComponent.prototype.updateDomain = function (domain) {
-        this.filteredDomain = domain;
-        this.xDomain = this.filteredDomain;
-        this.xScale = this.getXScale(this.xDomain, this.dims.width);
-    };
-    AreaChartStackedComponent.prototype.updateHoveredVertical = function (item) {
-        this.hoveredVertical = item.value;
-        this.deactivateAll();
-    };
-    AreaChartStackedComponent.prototype.hideCircles = function () {
-        this.hoveredVertical = null;
-        this.deactivateAll();
-    };
-    AreaChartStackedComponent.prototype.onClick = function (data, series) {
-        if (series) {
-            data.series = series.name;
-        }
-        this.select.emit(data);
-    };
-    AreaChartStackedComponent.prototype.trackBy = function (index, item) {
-        return item.name;
-    };
-    AreaChartStackedComponent.prototype.setColors = function () {
-        var domain;
-        if (this.schemeType === 'ordinal') {
-            domain = this.seriesDomain;
-        }
-        else {
-            domain = this.yDomain;
-        }
-        this.colors = new __WEBPACK_IMPORTED_MODULE_5__common_color_helper__["a" /* ColorHelper */](this.scheme, this.schemeType, domain, this.customColors);
-    };
-    AreaChartStackedComponent.prototype.getLegendOptions = function () {
-        var opts = {
-            scaleType: this.schemeType,
-            colors: undefined,
-            domain: []
-        };
-        if (opts.scaleType === 'ordinal') {
-            opts.domain = this.seriesDomain;
-            opts.colors = this.colors;
-        }
-        else {
-            opts.domain = this.yDomain;
-            opts.colors = this.colors.scale;
-        }
-        return opts;
-    };
-    AreaChartStackedComponent.prototype.updateYAxisWidth = function (_a) {
-        var width = _a.width;
-        this.yAxisWidth = width;
-        this.update();
-    };
-    AreaChartStackedComponent.prototype.updateXAxisHeight = function (_a) {
-        var height = _a.height;
-        this.xAxisHeight = height;
-        this.update();
-    };
-    AreaChartStackedComponent.prototype.onActivate = function (item) {
-        var idx = this.activeEntries.findIndex(function (d) {
-            return d.name === item.name && d.value === item.value;
-        });
-        if (idx > -1) {
-            return;
-        }
-        this.activeEntries = [item].concat(this.activeEntries);
-        this.activate.emit({ value: item, entries: this.activeEntries });
-    };
-    AreaChartStackedComponent.prototype.onDeactivate = function (item) {
-        var idx = this.activeEntries.findIndex(function (d) {
-            return d.name === item.name && d.value === item.value;
-        });
-        this.activeEntries.splice(idx, 1);
-        this.activeEntries = this.activeEntries.slice();
-        this.deactivate.emit({ value: item, entries: this.activeEntries });
-    };
-    AreaChartStackedComponent.prototype.deactivateAll = function () {
-        this.activeEntries = this.activeEntries.slice();
-        for (var _i = 0, _a = this.activeEntries; _i < _a.length; _i++) {
-            var entry = _a[_i];
-            this.deactivate.emit({ value: entry, entries: [] });
-        }
-        this.activeEntries = [];
-    };
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], AreaChartStackedComponent.prototype, "legend", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], AreaChartStackedComponent.prototype, "xAxis", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], AreaChartStackedComponent.prototype, "yAxis", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], AreaChartStackedComponent.prototype, "showXAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], AreaChartStackedComponent.prototype, "showYAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], AreaChartStackedComponent.prototype, "xAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], AreaChartStackedComponent.prototype, "yAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], AreaChartStackedComponent.prototype, "timeline", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], AreaChartStackedComponent.prototype, "gradient", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], AreaChartStackedComponent.prototype, "showGridLines", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], AreaChartStackedComponent.prototype, "curve", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Array)
-    ], AreaChartStackedComponent.prototype, "activeEntries", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', String)
-    ], AreaChartStackedComponent.prototype, "schemeType", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], AreaChartStackedComponent.prototype, "xAxisTickFormatting", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], AreaChartStackedComponent.prototype, "yAxisTickFormatting", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], AreaChartStackedComponent.prototype, "roundDomains", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], AreaChartStackedComponent.prototype, "tooltipDisabled", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
-        __metadata('design:type', __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"])
-    ], AreaChartStackedComponent.prototype, "activate", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
-        __metadata('design:type', __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"])
-    ], AreaChartStackedComponent.prototype, "deactivate", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["HostListener"])('mouseleave'), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', []), 
-        __metadata('design:returntype', void 0)
-    ], AreaChartStackedComponent.prototype, "hideCircles", null);
-    AreaChartStackedComponent = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'ngx-charts-area-chart-stacked',
-            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n      <svg:g [attr.transform]=\"transform\" class=\"area-chart chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g [attr.clip-path]=\"clipPath\">\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g ngx-charts-area-series\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [colors]=\"colors\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [gradient]=\"gradient\"\n              [activeEntries]=\"activeEntries\"\n              stacked=\"true\"\n              [curve]=\"curve\"\n            />\n          </svg:g>\n          <svg:g ngx-charts-area-tooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            [tooltipDisabled]=\"tooltipDisabled\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g ngx-charts-circle-series\n              type=\"stacked\"\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [colors]=\"colors\"\n              [activeEntries]=\"activeEntries\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              [tooltipDisabled]=\"tooltipDisabled\"\n              (select)=\"onClick($event, series)\"\n              (activate)=\"onActivate($event)\"\n              (deactivate)=\"onDeactivate($event)\"\n            />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n      <svg:g ngx-charts-timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [attr.transform]=\"timelineTransform\"\n        [results]=\"results\"\n        [view]=\"[timelineWidth, height]\"\n        [height]=\"timelineHeight\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\"\n        [scaleType]=\"scaleType\"\n        (onDomainChange)=\"updateDomain($event)\">\n        <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n          <svg:g ngx-charts-area-series\n            [xScale]=\"timelineXScale\"\n            [yScale]=\"timelineYScale\"\n            [colors]=\"colors\"\n            [data]=\"series\"\n            [scaleType]=\"scaleType\"\n            [gradient]=\"gradient\"\n            stacked=\"true\"\n            [curve]=\"curve\"\n          />\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
-            changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectionStrategy"].OnPush,
-            styles: [__webpack_require__("./src/common/base-chart.component.scss")],
-            encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewEncapsulation"].None
-        }), 
-        __metadata('design:paramtypes', [])
-    ], AreaChartStackedComponent);
-    return AreaChartStackedComponent;
-}(__WEBPACK_IMPORTED_MODULE_6__common_base_chart_component__["a" /* BaseChartComponent */]));
-
-
-/***/ }),
-
-/***/ "./src/area-chart/area-chart.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__angular_common__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_d3_scale__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_d3_scale___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_d3_scale__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_d3_shape__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_d3_shape___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_d3_shape__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_view_dimensions_helper__ = __webpack_require__("./src/common/view-dimensions.helper.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_color_helper__ = __webpack_require__("./src/common/color.helper.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__common_base_chart_component__ = __webpack_require__("./src/common/base-chart.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__utils_id__ = __webpack_require__("./src/utils/id.ts");
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AreaChartComponent; });
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-
-
-
-var AreaChartComponent = (function (_super) {
-    __extends(AreaChartComponent, _super);
-    function AreaChartComponent() {
-        _super.apply(this, arguments);
-        this.showGridLines = true;
-        this.curve = __WEBPACK_IMPORTED_MODULE_3_d3_shape__["curveLinear"];
-        this.activeEntries = [];
-        this.roundDomains = false;
-        this.tooltipDisabled = false;
-        this.activate = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-        this.deactivate = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-        this.margin = [10, 20, 10, 20];
-        this.xAxisHeight = 0;
-        this.yAxisWidth = 0;
-        this.timelineHeight = 50;
-        this.timelinePadding = 10;
-    }
-    AreaChartComponent.prototype.update = function () {
-        var _this = this;
-        _super.prototype.update.call(this);
-        this.zone.run(function () {
-            _this.dims = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__common_view_dimensions_helper__["a" /* calculateViewDimensions */])({
-                width: _this.width,
-                height: _this.height,
-                margins: _this.margin,
-                showXAxis: _this.xAxis,
-                showYAxis: _this.yAxis,
-                xAxisHeight: _this.xAxisHeight,
-                yAxisWidth: _this.yAxisWidth,
-                showXLabel: _this.showXAxisLabel,
-                showYLabel: _this.showYAxisLabel,
-                showLegend: _this.legend,
-                legendType: _this.schemeType
-            });
-            if (_this.timeline) {
-                _this.dims.height -= (_this.timelineHeight + _this.margin[2] + _this.timelinePadding);
-            }
-            _this.xDomain = _this.getXDomain();
-            if (_this.filteredDomain) {
-                _this.xDomain = _this.filteredDomain;
-            }
-            _this.yDomain = _this.getYDomain();
-            _this.seriesDomain = _this.getSeriesDomain();
-            _this.xScale = _this.getXScale(_this.xDomain, _this.dims.width);
-            _this.yScale = _this.getYScale(_this.yDomain, _this.dims.height);
-            _this.updateTimeline();
-            _this.setColors();
-            _this.legendOptions = _this.getLegendOptions();
-            _this.transform = "translate(" + _this.dims.xOffset + ", " + _this.margin[0] + ")";
-            var pageUrl = _this.location instanceof __WEBPACK_IMPORTED_MODULE_1__angular_common__["PathLocationStrategy"]
-                ? _this.location.path()
-                : '';
-            _this.clipPathId = 'clip' + __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_7__utils_id__["a" /* id */])().toString();
-            _this.clipPath = "url(" + pageUrl + "#" + _this.clipPathId + ")";
-        });
-    };
-    AreaChartComponent.prototype.updateTimeline = function () {
-        if (this.timeline) {
-            this.timelineWidth = this.width;
-            if (this.legend) {
-                this.timelineWidth = this.dims.width;
-            }
-            this.timelineXDomain = this.getXDomain();
-            this.timelineXScale = this.getXScale(this.timelineXDomain, this.timelineWidth);
-            this.timelineYScale = this.getYScale(this.yDomain, this.timelineHeight);
-            this.timelineTransform = "translate(" + this.dims.xOffset + ", " + -this.margin[2] + ")";
-        }
-    };
-    AreaChartComponent.prototype.getXDomain = function () {
-        var values = [];
-        for (var _i = 0, _a = this.results; _i < _a.length; _i++) {
-            var results = _a[_i];
-            for (var _b = 0, _c = results.series; _b < _c.length; _b++) {
-                var d = _c[_b];
-                if (!values.includes(d.name)) {
-                    values.push(d.name);
-                }
-            }
-        }
-        this.scaleType = this.getScaleType(values);
-        var domain = [];
-        if (this.scaleType === 'time') {
-            var min = Math.min.apply(Math, values);
-            var max = Math.max.apply(Math, values);
-            domain = [min, max];
-        }
-        else if (this.scaleType === 'linear') {
-            values = values.map(function (v) { return Number(v); });
-            var min = Math.min.apply(Math, values);
-            var max = Math.max.apply(Math, values);
-            domain = [min, max];
-        }
-        else {
-            domain = values;
-        }
-        this.xSet = values;
-        return domain;
-    };
-    AreaChartComponent.prototype.getYDomain = function () {
-        var domain = [];
-        for (var _i = 0, _a = this.results; _i < _a.length; _i++) {
-            var results = _a[_i];
-            for (var _b = 0, _c = results.series; _b < _c.length; _b++) {
-                var d = _c[_b];
-                if (!domain.includes(d.value)) {
-                    domain.push(d.value);
-                }
-            }
-        }
-        var min = Math.min.apply(Math, domain);
-        var max = Math.max.apply(Math, domain);
-        if (!this.autoScale) {
-            min = Math.min(0, min);
-        }
-        return [min, max];
-    };
-    AreaChartComponent.prototype.getSeriesDomain = function () {
-        return this.results.map(function (d) { return d.name; });
-    };
-    AreaChartComponent.prototype.getXScale = function (domain, width) {
-        var scale;
-        if (this.scaleType === 'time') {
-            scale = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_d3_scale__["scaleTime"])();
-        }
-        else if (this.scaleType === 'linear') {
-            scale = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_d3_scale__["scaleLinear"])();
-        }
-        else if (this.scaleType === 'ordinal') {
-            scale = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_d3_scale__["scalePoint"])()
-                .padding(0.1);
-        }
-        scale.range([0, width])
-            .domain(domain);
-        return this.roundDomains ? scale.nice() : scale;
-    };
-    AreaChartComponent.prototype.getYScale = function (domain, height) {
-        var scale = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_d3_scale__["scaleLinear"])()
-            .range([height, 0])
-            .domain(domain);
-        return this.roundDomains ? scale.nice() : scale;
-    };
-    AreaChartComponent.prototype.getScaleType = function (values) {
-        var date = true;
-        var num = true;
-        for (var _i = 0, values_1 = values; _i < values_1.length; _i++) {
-            var value = values_1[_i];
-            if (!this.isDate(value)) {
-                date = false;
-            }
-            if (typeof value !== 'number') {
-                num = false;
-            }
-        }
-        if (date) {
-            return 'time';
-        }
-        if (num) {
-            return 'linear';
-        }
-        return 'ordinal';
-    };
-    AreaChartComponent.prototype.isDate = function (value) {
-        if (value instanceof Date) {
-            return true;
-        }
-        return false;
-    };
-    AreaChartComponent.prototype.updateDomain = function (domain) {
-        this.filteredDomain = domain;
-        this.xDomain = this.filteredDomain;
-        this.xScale = this.getXScale(this.xDomain, this.dims.width);
-    };
-    AreaChartComponent.prototype.updateHoveredVertical = function (item) {
-        this.hoveredVertical = item.value;
-        this.deactivateAll();
-    };
-    AreaChartComponent.prototype.hideCircles = function () {
-        this.hoveredVertical = null;
-        this.deactivateAll();
-    };
-    AreaChartComponent.prototype.onClick = function (data, series) {
-        if (series) {
-            data.series = series.name;
-        }
-        this.select.emit(data);
-    };
-    AreaChartComponent.prototype.trackBy = function (index, item) {
-        return item.name;
-    };
-    AreaChartComponent.prototype.setColors = function () {
-        var domain;
-        if (this.schemeType === 'ordinal') {
-            domain = this.seriesDomain;
-        }
-        else {
-            domain = this.yDomain;
-        }
-        this.colors = new __WEBPACK_IMPORTED_MODULE_5__common_color_helper__["a" /* ColorHelper */](this.scheme, this.schemeType, domain, this.customColors);
-    };
-    AreaChartComponent.prototype.getLegendOptions = function () {
-        var opts = {
-            scaleType: this.schemeType,
-            colors: undefined,
-            domain: []
-        };
-        if (opts.scaleType === 'ordinal') {
-            opts.domain = this.seriesDomain;
-            opts.colors = this.colors;
-        }
-        else {
-            opts.domain = this.yDomain;
-            opts.colors = this.colors.scale;
-        }
-        return opts;
-    };
-    AreaChartComponent.prototype.updateYAxisWidth = function (_a) {
-        var width = _a.width;
-        this.yAxisWidth = width;
-        this.update();
-    };
-    AreaChartComponent.prototype.updateXAxisHeight = function (_a) {
-        var height = _a.height;
-        this.xAxisHeight = height;
-        this.update();
-    };
-    AreaChartComponent.prototype.onActivate = function (item) {
-        var idx = this.activeEntries.findIndex(function (d) {
-            return d.name === item.name && d.value === item.value;
-        });
-        if (idx > -1) {
-            return;
-        }
-        this.activeEntries = [item].concat(this.activeEntries);
-        this.activate.emit({ value: item, entries: this.activeEntries });
-    };
-    AreaChartComponent.prototype.onDeactivate = function (item) {
-        var idx = this.activeEntries.findIndex(function (d) {
-            return d.name === item.name && d.value === item.value;
-        });
-        this.activeEntries.splice(idx, 1);
-        this.activeEntries = this.activeEntries.slice();
-        this.deactivate.emit({ value: item, entries: this.activeEntries });
-    };
-    AreaChartComponent.prototype.deactivateAll = function () {
-        this.activeEntries = this.activeEntries.slice();
-        for (var _i = 0, _a = this.activeEntries; _i < _a.length; _i++) {
-            var entry = _a[_i];
-            this.deactivate.emit({ value: entry, entries: [] });
-        }
-        this.activeEntries = [];
-    };
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], AreaChartComponent.prototype, "legend", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], AreaChartComponent.prototype, "state", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], AreaChartComponent.prototype, "xAxis", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], AreaChartComponent.prototype, "yAxis", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], AreaChartComponent.prototype, "autoScale", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], AreaChartComponent.prototype, "showXAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], AreaChartComponent.prototype, "showYAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], AreaChartComponent.prototype, "xAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], AreaChartComponent.prototype, "yAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], AreaChartComponent.prototype, "timeline", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], AreaChartComponent.prototype, "gradient", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], AreaChartComponent.prototype, "showGridLines", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], AreaChartComponent.prototype, "curve", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Array)
-    ], AreaChartComponent.prototype, "activeEntries", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', String)
-    ], AreaChartComponent.prototype, "schemeType", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], AreaChartComponent.prototype, "xAxisTickFormatting", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], AreaChartComponent.prototype, "yAxisTickFormatting", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], AreaChartComponent.prototype, "roundDomains", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], AreaChartComponent.prototype, "tooltipDisabled", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
-        __metadata('design:type', __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"])
-    ], AreaChartComponent.prototype, "activate", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
-        __metadata('design:type', __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"])
-    ], AreaChartComponent.prototype, "deactivate", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["HostListener"])('mouseleave'), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', []), 
-        __metadata('design:returntype', void 0)
-    ], AreaChartComponent.prototype, "hideCircles", null);
-    AreaChartComponent = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'ngx-charts-area-chart',
-            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n      <svg:g [attr.transform]=\"transform\" class=\"area-chart chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g [attr.clip-path]=\"clipPath\">\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g ngx-charts-area-series\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [colors]=\"colors\"\n              [data]=\"series\"\n              [activeEntries]=\"activeEntries\"\n              [scaleType]=\"scaleType\"\n              [gradient]=\"gradient\"\n              [curve]=\"curve\"\n            />\n          </svg:g>\n          <svg:g ngx-charts-area-tooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            [tooltipDisabled]=\"tooltipDisabled\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g ngx-charts-circle-series\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [colors]=\"colors\"\n              [activeEntries]=\"activeEntries\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              [tooltipDisabled]=\"tooltipDisabled\"\n              (select)=\"onClick($event, series)\"\n              (activate)=\"onActivate($event)\"\n              (deactivate)=\"onDeactivate($event)\"\n            />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n      <svg:g ngx-charts-timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [attr.transform]=\"timelineTransform\"\n        [results]=\"results\"\n        [view]=\"[timelineWidth, height]\"\n        [height]=\"timelineHeight\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\"\n        [scaleType]=\"scaleType\"\n        (onDomainChange)=\"updateDomain($event)\">\n        <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n          <svg:g ngx-charts-area-series\n            [xScale]=\"timelineXScale\"\n            [yScale]=\"timelineYScale\"\n            [colors]=\"colors\"\n            [data]=\"series\"\n            [scaleType]=\"scaleType\"\n            [gradient]=\"gradient\"\n            [curve]=\"curve\"\n          />\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
-            changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectionStrategy"].OnPush,
-            styles: [__webpack_require__("./src/common/base-chart.component.scss")],
-            encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewEncapsulation"].None
-        }), 
-        __metadata('design:paramtypes', [])
-    ], AreaChartComponent);
-    return AreaChartComponent;
-}(__WEBPACK_IMPORTED_MODULE_6__common_base_chart_component__["a" /* BaseChartComponent */]));
-
-
-/***/ }),
-
-/***/ "./src/area-chart/area-chart.module.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__area_chart_component__ = __webpack_require__("./src/area-chart/area-chart.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__area_chart_normalized_component__ = __webpack_require__("./src/area-chart/area-chart-normalized.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__area_chart_stacked_component__ = __webpack_require__("./src/area-chart/area-chart-stacked.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__area_series_component__ = __webpack_require__("./src/area-chart/area-series.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_chart_common_module__ = __webpack_require__("./src/common/chart-common.module.ts");
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_1__area_chart_component__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_2__area_chart_normalized_component__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_3__area_chart_stacked_component__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_4__area_series_component__["a"]; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return AreaChartModule; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-
-
-var AreaChartModule = (function () {
-    function AreaChartModule() {
-    }
-    AreaChartModule = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
-            imports: [__WEBPACK_IMPORTED_MODULE_5__common_chart_common_module__["a" /* ChartCommonModule */]],
-            declarations: [
-                __WEBPACK_IMPORTED_MODULE_1__area_chart_component__["a" /* AreaChartComponent */],
-                __WEBPACK_IMPORTED_MODULE_2__area_chart_normalized_component__["a" /* AreaChartNormalizedComponent */],
-                __WEBPACK_IMPORTED_MODULE_3__area_chart_stacked_component__["a" /* AreaChartStackedComponent */],
-                __WEBPACK_IMPORTED_MODULE_4__area_series_component__["a" /* AreaSeriesComponent */]
-            ],
-            exports: [
-                __WEBPACK_IMPORTED_MODULE_1__area_chart_component__["a" /* AreaChartComponent */],
-                __WEBPACK_IMPORTED_MODULE_2__area_chart_normalized_component__["a" /* AreaChartNormalizedComponent */],
-                __WEBPACK_IMPORTED_MODULE_3__area_chart_stacked_component__["a" /* AreaChartStackedComponent */],
-                __WEBPACK_IMPORTED_MODULE_4__area_series_component__["a" /* AreaSeriesComponent */]
-            ]
-        }), 
-        __metadata('design:paramtypes', [])
-    ], AreaChartModule);
-    return AreaChartModule;
-}());
-
-
-/***/ }),
-
-/***/ "./src/area-chart/area-series.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_shape__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_shape___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_d3_shape__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_sort__ = __webpack_require__("./src/utils/sort.ts");
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AreaSeriesComponent; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-var AreaSeriesComponent = (function () {
-    function AreaSeriesComponent() {
-        this.stacked = false;
-        this.normalized = false;
-        this.select = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-    }
-    AreaSeriesComponent.prototype.ngOnChanges = function (changes) {
-        this.update();
-    };
-    AreaSeriesComponent.prototype.update = function () {
-        var _this = this;
-        this.updateGradient();
-        var currentArea;
-        var startingArea;
-        var xProperty = function (d) {
-            var label = d.name;
-            return _this.xScale(label);
-        };
-        if (this.stacked || this.normalized) {
-            currentArea = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_d3_shape__["area"])()
-                .x(xProperty)
-                .y0(function (d, i) { return _this.yScale(d.d0); })
-                .y1(function (d, i) { return _this.yScale(d.d1); });
-            startingArea = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_d3_shape__["area"])()
-                .x(xProperty)
-                .y0(function (d) { return _this.yScale.range()[0]; })
-                .y1(function (d) { return _this.yScale.range()[0]; });
-        }
-        else {
-            currentArea = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_d3_shape__["area"])()
-                .x(xProperty)
-                .y0(function () { return _this.yScale.range()[0]; })
-                .y1(function (d) { return _this.yScale(d.value); });
-            startingArea = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_d3_shape__["area"])()
-                .x(xProperty)
-                .y0(function (d) { return _this.yScale.range()[0]; })
-                .y1(function (d) { return _this.yScale.range()[0]; });
-        }
-        currentArea.curve(this.curve);
-        startingArea.curve(this.curve);
-        this.opacity = .8;
-        var data = this.data.series;
-        if (this.scaleType === 'linear') {
-            data = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__utils_sort__["a" /* sortLinear */])(data, 'name');
-        }
-        else if (this.scaleType === 'time') {
-            data = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__utils_sort__["b" /* sortByTime */])(data, 'name');
-        }
-        else {
-            data = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__utils_sort__["c" /* sortByDomain */])(data, 'name', 'asc', this.xScale.domain());
-        }
-        this.path = currentArea(data);
-        this.startingPath = startingArea(data);
-    };
-    AreaSeriesComponent.prototype.updateGradient = function () {
-        if (this.colors.scaleType === 'linear') {
-            this.hasGradient = true;
-            if (this.stacked || this.normalized) {
-                var d0values = this.data.series.map(function (d) { return d.d0; });
-                var d1values = this.data.series.map(function (d) { return d.d1; });
-                var max = Math.max.apply(Math, d1values);
-                var min = Math.min.apply(Math, d0values);
-                this.gradientStops = this.colors.getLinearGradientStops(max, min);
-            }
-            else {
-                var values = this.data.series.map(function (d) { return d.value; });
-                var max = Math.max.apply(Math, values);
-                this.gradientStops = this.colors.getLinearGradientStops(max);
-            }
-        }
-        else {
-            this.hasGradient = false;
-            this.gradientStops = undefined;
-        }
-    };
-    AreaSeriesComponent.prototype.isActive = function (entry) {
-        if (!this.activeEntries)
-            return false;
-        var item = this.activeEntries.find(function (d) {
-            return entry.name === d.name;
-        });
-        return item !== undefined;
-    };
-    AreaSeriesComponent.prototype.isInactive = function (entry) {
-        if (!this.activeEntries || this.activeEntries.length === 0)
-            return false;
-        var item = this.activeEntries.find(function (d) {
-            return entry.name === d.name;
-        });
-        return item === undefined;
-    };
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], AreaSeriesComponent.prototype, "data", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], AreaSeriesComponent.prototype, "xScale", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], AreaSeriesComponent.prototype, "yScale", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], AreaSeriesComponent.prototype, "colors", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], AreaSeriesComponent.prototype, "scaleType", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], AreaSeriesComponent.prototype, "stacked", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], AreaSeriesComponent.prototype, "normalized", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], AreaSeriesComponent.prototype, "gradient", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], AreaSeriesComponent.prototype, "curve", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Array)
-    ], AreaSeriesComponent.prototype, "activeEntries", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
-        __metadata('design:type', Object)
-    ], AreaSeriesComponent.prototype, "select", void 0);
-    AreaSeriesComponent = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'g[ngx-charts-area-series]',
-            template: "\n    <svg:g ngx-charts-area\n      class=\"area-series\"\n      [data]=\"data\"\n      [path]=\"path\"\n      [fill]=\"colors.getColor(data.name)\"\n      [stops]=\"gradientStops\"\n      [startingPath]=\"startingPath\"\n      [opacity]=\"opacity\"\n      [gradient]=\"gradient || hasGradient\"\n      [class.active]=\"isActive(data)\"\n      [class.inactive]=\"isInactive(data)\"\n    />\n  ",
-            changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectionStrategy"].OnPush
-        }), 
-        __metadata('design:paramtypes', [])
-    ], AreaSeriesComponent);
-    return AreaSeriesComponent;
-}());
-
-
-/***/ }),
-
-/***/ "./src/area-chart/index.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__area_chart_module__ = __webpack_require__("./src/area-chart/area-chart.module.ts");
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__area_chart_module__["a"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_0__area_chart_module__["b"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_0__area_chart_module__["c"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_0__area_chart_module__["d"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_0__area_chart_module__["e"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__area_chart_component__ = __webpack_require__("./src/area-chart/area-chart.component.ts");
-/* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__area_chart_normalized_component__ = __webpack_require__("./src/area-chart/area-chart-normalized.component.ts");
-/* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__area_chart_stacked_component__ = __webpack_require__("./src/area-chart/area-chart-stacked.component.ts");
-/* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__area_series_component__ = __webpack_require__("./src/area-chart/area-series.component.ts");
-/* unused harmony namespace reexport */
-
-
-
-
-
-
-
-/***/ }),
-
-/***/ "./src/bar-chart/bar-chart.module.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__common_chart_common_module__ = __webpack_require__("./src/common/chart-common.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__bar_component__ = __webpack_require__("./src/bar-chart/bar.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__bar_horizontal_component__ = __webpack_require__("./src/bar-chart/bar-horizontal.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__bar_horizontal_2d_component__ = __webpack_require__("./src/bar-chart/bar-horizontal-2d.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__bar_horizontal_normalized_component__ = __webpack_require__("./src/bar-chart/bar-horizontal-normalized.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__bar_horizontal_stacked_component__ = __webpack_require__("./src/bar-chart/bar-horizontal-stacked.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__bar_vertical_component__ = __webpack_require__("./src/bar-chart/bar-vertical.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__bar_vertical_2d_component__ = __webpack_require__("./src/bar-chart/bar-vertical-2d.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__bar_vertical_normalized_component__ = __webpack_require__("./src/bar-chart/bar-vertical-normalized.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__bar_vertical_stacked_component__ = __webpack_require__("./src/bar-chart/bar-vertical-stacked.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__series_horizontal_component__ = __webpack_require__("./src/bar-chart/series-horizontal.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__series_vertical_component__ = __webpack_require__("./src/bar-chart/series-vertical.component.ts");
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_2__bar_component__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_3__bar_horizontal_component__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_4__bar_horizontal_2d_component__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_5__bar_horizontal_normalized_component__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return __WEBPACK_IMPORTED_MODULE_6__bar_horizontal_stacked_component__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return __WEBPACK_IMPORTED_MODULE_7__bar_vertical_component__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return __WEBPACK_IMPORTED_MODULE_8__bar_vertical_2d_component__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return __WEBPACK_IMPORTED_MODULE_9__bar_vertical_normalized_component__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return __WEBPACK_IMPORTED_MODULE_10__bar_vertical_stacked_component__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return __WEBPACK_IMPORTED_MODULE_11__series_horizontal_component__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return __WEBPACK_IMPORTED_MODULE_12__series_vertical_component__["a"]; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BarChartModule; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var BarChartModule = (function () {
-    function BarChartModule() {
-    }
-    BarChartModule = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
-            imports: [__WEBPACK_IMPORTED_MODULE_1__common_chart_common_module__["a" /* ChartCommonModule */]],
-            declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__bar_component__["a" /* BarComponent */],
-                __WEBPACK_IMPORTED_MODULE_3__bar_horizontal_component__["a" /* BarHorizontalComponent */],
-                __WEBPACK_IMPORTED_MODULE_4__bar_horizontal_2d_component__["a" /* BarHorizontal2DComponent */],
-                __WEBPACK_IMPORTED_MODULE_5__bar_horizontal_normalized_component__["a" /* BarHorizontalNormalizedComponent */],
-                __WEBPACK_IMPORTED_MODULE_6__bar_horizontal_stacked_component__["a" /* BarHorizontalStackedComponent */],
-                __WEBPACK_IMPORTED_MODULE_7__bar_vertical_component__["a" /* BarVerticalComponent */],
-                __WEBPACK_IMPORTED_MODULE_8__bar_vertical_2d_component__["a" /* BarVertical2DComponent */],
-                __WEBPACK_IMPORTED_MODULE_9__bar_vertical_normalized_component__["a" /* BarVerticalNormalizedComponent */],
-                __WEBPACK_IMPORTED_MODULE_10__bar_vertical_stacked_component__["a" /* BarVerticalStackedComponent */],
-                __WEBPACK_IMPORTED_MODULE_11__series_horizontal_component__["a" /* SeriesHorizontal */],
-                __WEBPACK_IMPORTED_MODULE_12__series_vertical_component__["a" /* SeriesVerticalComponent */]
-            ],
-            exports: [
-                __WEBPACK_IMPORTED_MODULE_2__bar_component__["a" /* BarComponent */],
-                __WEBPACK_IMPORTED_MODULE_3__bar_horizontal_component__["a" /* BarHorizontalComponent */],
-                __WEBPACK_IMPORTED_MODULE_4__bar_horizontal_2d_component__["a" /* BarHorizontal2DComponent */],
-                __WEBPACK_IMPORTED_MODULE_5__bar_horizontal_normalized_component__["a" /* BarHorizontalNormalizedComponent */],
-                __WEBPACK_IMPORTED_MODULE_6__bar_horizontal_stacked_component__["a" /* BarHorizontalStackedComponent */],
-                __WEBPACK_IMPORTED_MODULE_7__bar_vertical_component__["a" /* BarVerticalComponent */],
-                __WEBPACK_IMPORTED_MODULE_8__bar_vertical_2d_component__["a" /* BarVertical2DComponent */],
-                __WEBPACK_IMPORTED_MODULE_9__bar_vertical_normalized_component__["a" /* BarVerticalNormalizedComponent */],
-                __WEBPACK_IMPORTED_MODULE_10__bar_vertical_stacked_component__["a" /* BarVerticalStackedComponent */],
-                __WEBPACK_IMPORTED_MODULE_11__series_horizontal_component__["a" /* SeriesHorizontal */],
-                __WEBPACK_IMPORTED_MODULE_12__series_vertical_component__["a" /* SeriesVerticalComponent */]
-            ]
-        }), 
-        __metadata('design:paramtypes', [])
-    ], BarChartModule);
-    return BarChartModule;
-}());
-
-
-/***/ }),
-
-/***/ "./src/bar-chart/bar-horizontal-2d.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_scale__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_scale___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_d3_scale__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_view_dimensions_helper__ = __webpack_require__("./src/common/view-dimensions.helper.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_color_helper__ = __webpack_require__("./src/common/color.helper.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_base_chart_component__ = __webpack_require__("./src/common/base-chart.component.ts");
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BarHorizontal2DComponent; });
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-var BarHorizontal2DComponent = (function (_super) {
-    __extends(BarHorizontal2DComponent, _super);
-    function BarHorizontal2DComponent() {
-        _super.apply(this, arguments);
-        this.legend = false;
-        this.tooltipDisabled = false;
-        this.showGridLines = true;
-        this.activeEntries = [];
-        this.groupPadding = 16;
-        this.barPadding = 8;
-        this.roundDomains = false;
-        this.activate = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-        this.deactivate = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-        this.margin = [10, 20, 10, 20];
-        this.xAxisHeight = 0;
-        this.yAxisWidth = 0;
-    }
-    BarHorizontal2DComponent.prototype.update = function () {
-        var _this = this;
-        _super.prototype.update.call(this);
-        this.zone.run(function () {
-            _this.dims = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__common_view_dimensions_helper__["a" /* calculateViewDimensions */])({
-                width: _this.width,
-                height: _this.height,
-                margins: _this.margin,
-                showXAxis: _this.xAxis,
-                showYAxis: _this.yAxis,
-                xAxisHeight: _this.xAxisHeight,
-                yAxisWidth: _this.yAxisWidth,
-                showXLabel: _this.showXAxisLabel,
-                showYLabel: _this.showYAxisLabel,
-                showLegend: _this.legend,
-                legendType: _this.schemeType
-            });
-            _this.formatDates();
-            _this.groupDomain = _this.getGroupDomain();
-            _this.innerDomain = _this.getInnerDomain();
-            _this.valuesDomain = _this.getValueDomain();
-            _this.groupScale = _this.getGroupScale();
-            _this.innerScale = _this.getInnerScale();
-            _this.valueScale = _this.getValueScale();
-            _this.setColors();
-            _this.legendOptions = _this.getLegendOptions();
-            _this.transform = "translate(" + _this.dims.xOffset + " , " + _this.margin[0] + ")";
-        });
-    };
-    BarHorizontal2DComponent.prototype.getGroupScale = function () {
-        var spacing = this.groupDomain.length / (this.dims.height / this.groupPadding + 1);
-        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_d3_scale__["scaleBand"])()
-            .rangeRound([this.dims.height, 0])
-            .paddingInner(spacing)
-            .paddingOuter(spacing / 2)
-            .domain(this.groupDomain);
-    };
-    BarHorizontal2DComponent.prototype.getInnerScale = function () {
-        var height = this.groupScale.bandwidth();
-        var spacing = this.innerDomain.length / (height / this.barPadding + 1);
-        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_d3_scale__["scaleBand"])()
-            .rangeRound([0, height])
-            .paddingInner(spacing)
-            .domain(this.innerDomain);
-    };
-    BarHorizontal2DComponent.prototype.getValueScale = function () {
-        var scale = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_d3_scale__["scaleLinear"])()
-            .range([0, this.dims.width])
-            .domain(this.valuesDomain);
-        return this.roundDomains ? scale.nice() : scale;
-    };
-    BarHorizontal2DComponent.prototype.getGroupDomain = function () {
-        var domain = [];
-        for (var _i = 0, _a = this.results; _i < _a.length; _i++) {
-            var group = _a[_i];
-            if (!domain.includes(group.name)) {
-                domain.push(group.name);
-            }
-        }
-        return domain;
-    };
-    BarHorizontal2DComponent.prototype.getInnerDomain = function () {
-        var domain = [];
-        for (var _i = 0, _a = this.results; _i < _a.length; _i++) {
-            var group = _a[_i];
-            for (var _b = 0, _c = group.series; _b < _c.length; _b++) {
-                var d = _c[_b];
-                if (!domain.includes(d.name)) {
-                    domain.push(d.name);
-                }
-            }
-        }
-        return domain;
-    };
-    BarHorizontal2DComponent.prototype.getValueDomain = function () {
-        var domain = [];
-        for (var _i = 0, _a = this.results; _i < _a.length; _i++) {
-            var group = _a[_i];
-            for (var _b = 0, _c = group.series; _b < _c.length; _b++) {
-                var d = _c[_b];
-                if (!domain.includes(d.value)) {
-                    domain.push(d.value);
-                }
-            }
-        }
-        var min = Math.min.apply(Math, [0].concat(domain));
-        var max = Math.max.apply(Math, domain);
-        return [min, max];
-    };
-    BarHorizontal2DComponent.prototype.groupTransform = function (group) {
-        return "translate(0, " + this.groupScale(group.name) + ")";
-    };
-    BarHorizontal2DComponent.prototype.onClick = function (data, group) {
-        if (group) {
-            data.series = group.name;
-        }
-        this.select.emit(data);
-    };
-    BarHorizontal2DComponent.prototype.trackBy = function (index, item) {
-        return item.name;
-    };
-    BarHorizontal2DComponent.prototype.setColors = function () {
-        var domain;
-        if (this.schemeType === 'ordinal') {
-            domain = this.innerDomain;
-        }
-        else {
-            domain = this.valuesDomain;
-        }
-        this.colors = new __WEBPACK_IMPORTED_MODULE_3__common_color_helper__["a" /* ColorHelper */](this.scheme, this.schemeType, domain, this.customColors);
-    };
-    BarHorizontal2DComponent.prototype.getLegendOptions = function () {
-        var opts = {
-            scaleType: this.schemeType,
-            colors: undefined,
-            domain: []
-        };
-        if (opts.scaleType === 'ordinal') {
-            opts.domain = this.innerDomain;
-            opts.colors = this.colors;
-        }
-        else {
-            opts.domain = this.valuesDomain;
-            opts.colors = this.colors.scale;
-        }
-        return opts;
-    };
-    BarHorizontal2DComponent.prototype.updateYAxisWidth = function (_a) {
-        var width = _a.width;
-        this.yAxisWidth = width;
-        this.update();
-    };
-    BarHorizontal2DComponent.prototype.updateXAxisHeight = function (_a) {
-        var height = _a.height;
-        this.xAxisHeight = height;
-        this.update();
-    };
-    BarHorizontal2DComponent.prototype.onActivate = function (event, group) {
-        var item = Object.assign({}, event);
-        if (group) {
-            item.series = group.name;
-        }
-        var idx = this.activeEntries.findIndex(function (d) {
-            return d.name === item.name && d.value === item.value && d.series === item.series;
-        });
-        if (idx > -1) {
-            return;
-        }
-        this.activeEntries = [item].concat(this.activeEntries);
-        this.activate.emit({ value: item, entries: this.activeEntries });
-    };
-    BarHorizontal2DComponent.prototype.onDeactivate = function (event, group) {
-        var item = Object.assign({}, event);
-        if (group) {
-            item.series = group.name;
-        }
-        var idx = this.activeEntries.findIndex(function (d) {
-            return d.name === item.name && d.value === item.value && d.series === item.series;
-        });
-        this.activeEntries.splice(idx, 1);
-        this.activeEntries = this.activeEntries.slice();
-        this.deactivate.emit({ value: item, entries: this.activeEntries });
-    };
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarHorizontal2DComponent.prototype, "legend", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarHorizontal2DComponent.prototype, "xAxis", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarHorizontal2DComponent.prototype, "yAxis", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarHorizontal2DComponent.prototype, "showXAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarHorizontal2DComponent.prototype, "showYAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarHorizontal2DComponent.prototype, "xAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarHorizontal2DComponent.prototype, "yAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], BarHorizontal2DComponent.prototype, "tooltipDisabled", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], BarHorizontal2DComponent.prototype, "gradient", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], BarHorizontal2DComponent.prototype, "showGridLines", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Array)
-    ], BarHorizontal2DComponent.prototype, "activeEntries", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', String)
-    ], BarHorizontal2DComponent.prototype, "schemeType", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarHorizontal2DComponent.prototype, "xAxisTickFormatting", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarHorizontal2DComponent.prototype, "yAxisTickFormatting", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarHorizontal2DComponent.prototype, "groupPadding", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarHorizontal2DComponent.prototype, "barPadding", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], BarHorizontal2DComponent.prototype, "roundDomains", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
-        __metadata('design:type', __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"])
-    ], BarHorizontal2DComponent.prototype, "activate", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
-        __metadata('design:type', __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"])
-    ], BarHorizontal2DComponent.prototype, "deactivate", void 0);
-    BarHorizontal2DComponent = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'ngx-charts-bar-horizontal-2d',
-            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      (legendLabelClick)=\"onClick($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g ngx-charts-grid-panel-series\n          [xScale]=\"valueScale\"\n          [yScale]=\"groupScale\"\n          [data]=\"results\"\n          [dims]=\"dims\"\n          orient=\"horizontal\">\n        </svg:g>\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"valueScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"groupScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g ngx-charts-series-horizontal\n            [xScale]=\"valueScale\"\n            [activeEntries]=\"activeEntries\"\n            [yScale]=\"innerScale\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            [tooltipDisabled]=\"tooltipDisabled\"\n            [seriesName]=\"group.name\"\n            (select)=\"onClick($event, group)\"\n            (activate)=\"onActivate($event, group)\"\n            (deactivate)=\"onDeactivate($event, group)\"\n          />\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
-            changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectionStrategy"].OnPush,
-            styles: [__webpack_require__("./src/common/base-chart.component.scss")],
-            encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewEncapsulation"].None,
-            animations: [
-                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["trigger"])('animationState', [
-                    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["transition"])('* => void', [
-                        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["style"])({
-                            opacity: 1,
-                            transform: '*',
-                        }),
-                        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["animate"])(500, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["style"])({ opacity: 0, transform: 'scale(0)' }))
-                    ])
-                ])
-            ]
-        }), 
-        __metadata('design:paramtypes', [])
-    ], BarHorizontal2DComponent);
-    return BarHorizontal2DComponent;
-}(__WEBPACK_IMPORTED_MODULE_4__common_base_chart_component__["a" /* BaseChartComponent */]));
-
-
-/***/ }),
-
-/***/ "./src/bar-chart/bar-horizontal-normalized.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_scale__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_scale___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_d3_scale__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_view_dimensions_helper__ = __webpack_require__("./src/common/view-dimensions.helper.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_color_helper__ = __webpack_require__("./src/common/color.helper.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_base_chart_component__ = __webpack_require__("./src/common/base-chart.component.ts");
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BarHorizontalNormalizedComponent; });
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-var BarHorizontalNormalizedComponent = (function (_super) {
-    __extends(BarHorizontalNormalizedComponent, _super);
-    function BarHorizontalNormalizedComponent() {
-        _super.apply(this, arguments);
-        this.legend = false;
-        this.tooltipDisabled = false;
-        this.showGridLines = true;
-        this.activeEntries = [];
-        this.barPadding = 8;
-        this.roundDomains = false;
-        this.activate = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-        this.deactivate = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-        this.margin = [10, 20, 10, 20];
-        this.xAxisHeight = 0;
-        this.yAxisWidth = 0;
-    }
-    BarHorizontalNormalizedComponent.prototype.update = function () {
-        var _this = this;
-        _super.prototype.update.call(this);
-        this.zone.run(function () {
-            _this.dims = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__common_view_dimensions_helper__["a" /* calculateViewDimensions */])({
-                width: _this.width,
-                height: _this.height,
-                margins: _this.margin,
-                showXAxis: _this.xAxis,
-                showYAxis: _this.yAxis,
-                xAxisHeight: _this.xAxisHeight,
-                yAxisWidth: _this.yAxisWidth,
-                showXLabel: _this.showXAxisLabel,
-                showYLabel: _this.showYAxisLabel,
-                showLegend: _this.legend,
-                legendType: _this.schemeType
-            });
-            _this.formatDates();
-            _this.groupDomain = _this.getGroupDomain();
-            _this.innerDomain = _this.getInnerDomain();
-            _this.valueDomain = _this.getValueDomain();
-            _this.xScale = _this.getXScale();
-            _this.yScale = _this.getYScale();
-            _this.setColors();
-            _this.legendOptions = _this.getLegendOptions();
-            _this.transform = "translate(" + _this.dims.xOffset + " , " + _this.margin[0] + ")";
-        });
-    };
-    BarHorizontalNormalizedComponent.prototype.getGroupDomain = function () {
-        var domain = [];
-        for (var _i = 0, _a = this.results; _i < _a.length; _i++) {
-            var group = _a[_i];
-            if (!domain.includes(group.name)) {
-                domain.push(group.name);
-            }
-        }
-        return domain;
-    };
-    BarHorizontalNormalizedComponent.prototype.getInnerDomain = function () {
-        var domain = [];
-        for (var _i = 0, _a = this.results; _i < _a.length; _i++) {
-            var group = _a[_i];
-            for (var _b = 0, _c = group.series; _b < _c.length; _b++) {
-                var d = _c[_b];
-                if (!domain.includes(d.name)) {
-                    domain.push(d.name);
-                }
-            }
-        }
-        return domain;
-    };
-    BarHorizontalNormalizedComponent.prototype.getValueDomain = function () {
-        return [0, 100];
-    };
-    BarHorizontalNormalizedComponent.prototype.getYScale = function () {
-        var spacing = this.groupDomain.length / (this.dims.height / this.barPadding + 1);
-        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_d3_scale__["scaleBand"])()
-            .rangeRound([this.dims.height, 0])
-            .paddingInner(spacing)
-            .domain(this.groupDomain);
-    };
-    BarHorizontalNormalizedComponent.prototype.getXScale = function () {
-        var scale = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_d3_scale__["scaleLinear"])()
-            .range([0, this.dims.width])
-            .domain(this.valueDomain);
-        return this.roundDomains ? scale.nice() : scale;
-    };
-    BarHorizontalNormalizedComponent.prototype.groupTransform = function (group) {
-        return "translate(0, " + this.yScale(group.name) + ")";
-    };
-    BarHorizontalNormalizedComponent.prototype.onClick = function (data, group) {
-        if (group) {
-            data.series = group.name;
-        }
-        this.select.emit(data);
-    };
-    BarHorizontalNormalizedComponent.prototype.trackBy = function (index, item) {
-        return item.name;
-    };
-    BarHorizontalNormalizedComponent.prototype.setColors = function () {
-        var domain;
-        if (this.schemeType === 'ordinal') {
-            domain = this.innerDomain;
-        }
-        else {
-            domain = this.valueDomain;
-        }
-        this.colors = new __WEBPACK_IMPORTED_MODULE_3__common_color_helper__["a" /* ColorHelper */](this.scheme, this.schemeType, domain, this.customColors);
-    };
-    BarHorizontalNormalizedComponent.prototype.getLegendOptions = function () {
-        var opts = {
-            scaleType: this.schemeType,
-            colors: undefined,
-            domain: []
-        };
-        if (opts.scaleType === 'ordinal') {
-            opts.domain = this.innerDomain;
-            opts.colors = this.colors;
-        }
-        else {
-            opts.domain = this.valueDomain;
-            opts.colors = this.colors.scale;
-        }
-        return opts;
-    };
-    BarHorizontalNormalizedComponent.prototype.updateYAxisWidth = function (_a) {
-        var width = _a.width;
-        this.yAxisWidth = width;
-        this.update();
-    };
-    BarHorizontalNormalizedComponent.prototype.updateXAxisHeight = function (_a) {
-        var height = _a.height;
-        this.xAxisHeight = height;
-        this.update();
-    };
-    BarHorizontalNormalizedComponent.prototype.onActivate = function (event, group) {
-        var item = Object.assign({}, event);
-        if (group) {
-            item.series = group.name;
-        }
-        var idx = this.activeEntries.findIndex(function (d) {
-            return d.name === item.name && d.value === item.value && d.series === item.series;
-        });
-        if (idx > -1) {
-            return;
-        }
-        this.activeEntries = [item].concat(this.activeEntries);
-        this.activate.emit({ value: item, entries: this.activeEntries });
-    };
-    BarHorizontalNormalizedComponent.prototype.onDeactivate = function (event, group) {
-        var item = Object.assign({}, event);
-        if (group) {
-            item.series = group.name;
-        }
-        var idx = this.activeEntries.findIndex(function (d) {
-            return d.name === item.name && d.value === item.value && d.series === item.series;
-        });
-        this.activeEntries.splice(idx, 1);
-        this.activeEntries = this.activeEntries.slice();
-        this.deactivate.emit({ value: item, entries: this.activeEntries });
-    };
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarHorizontalNormalizedComponent.prototype, "legend", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarHorizontalNormalizedComponent.prototype, "xAxis", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarHorizontalNormalizedComponent.prototype, "yAxis", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarHorizontalNormalizedComponent.prototype, "showXAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarHorizontalNormalizedComponent.prototype, "showYAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarHorizontalNormalizedComponent.prototype, "xAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarHorizontalNormalizedComponent.prototype, "yAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], BarHorizontalNormalizedComponent.prototype, "tooltipDisabled", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], BarHorizontalNormalizedComponent.prototype, "gradient", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], BarHorizontalNormalizedComponent.prototype, "showGridLines", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Array)
-    ], BarHorizontalNormalizedComponent.prototype, "activeEntries", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', String)
-    ], BarHorizontalNormalizedComponent.prototype, "schemeType", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarHorizontalNormalizedComponent.prototype, "xAxisTickFormatting", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarHorizontalNormalizedComponent.prototype, "yAxisTickFormatting", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarHorizontalNormalizedComponent.prototype, "barPadding", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], BarHorizontalNormalizedComponent.prototype, "roundDomains", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
-        __metadata('design:type', __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"])
-    ], BarHorizontalNormalizedComponent.prototype, "activate", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
-        __metadata('design:type', __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"])
-    ], BarHorizontalNormalizedComponent.prototype, "deactivate", void 0);
-    BarHorizontalNormalizedComponent = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'ngx-charts-bar-horizontal-normalized',
-            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      (legendLabelClick)=\"onClick($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g ngx-charts-series-horizontal\n            type=\"normalized\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [activeEntries]=\"activeEntries\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            [tooltipDisabled]=\"tooltipDisabled\"\n            [seriesName]=\"group.name\"\n            (select)=\"onClick($event, group)\"\n            (activate)=\"onActivate($event, group)\"\n            (deactivate)=\"onDeactivate($event, group)\"\n          />\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
-            changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectionStrategy"].OnPush,
-            styles: [__webpack_require__("./src/common/base-chart.component.scss")],
-            encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewEncapsulation"].None,
-            animations: [
-                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["trigger"])('animationState', [
-                    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["transition"])('* => void', [
-                        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["style"])({
-                            opacity: 1,
-                            transform: '*',
-                        }),
-                        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["animate"])(500, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["style"])({ opacity: 0, transform: 'scale(0)' }))
-                    ])
-                ])
-            ]
-        }), 
-        __metadata('design:paramtypes', [])
-    ], BarHorizontalNormalizedComponent);
-    return BarHorizontalNormalizedComponent;
-}(__WEBPACK_IMPORTED_MODULE_4__common_base_chart_component__["a" /* BaseChartComponent */]));
-
-
-/***/ }),
-
-/***/ "./src/bar-chart/bar-horizontal-stacked.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_scale__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_scale___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_d3_scale__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_view_dimensions_helper__ = __webpack_require__("./src/common/view-dimensions.helper.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_color_helper__ = __webpack_require__("./src/common/color.helper.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_base_chart_component__ = __webpack_require__("./src/common/base-chart.component.ts");
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BarHorizontalStackedComponent; });
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-var BarHorizontalStackedComponent = (function (_super) {
-    __extends(BarHorizontalStackedComponent, _super);
-    function BarHorizontalStackedComponent() {
-        _super.apply(this, arguments);
-        this.legend = false;
-        this.tooltipDisabled = false;
-        this.showGridLines = true;
-        this.activeEntries = [];
-        this.barPadding = 8;
-        this.roundDomains = false;
-        this.activate = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-        this.deactivate = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-        this.margin = [10, 20, 10, 20];
-        this.xAxisHeight = 0;
-        this.yAxisWidth = 0;
-    }
-    BarHorizontalStackedComponent.prototype.update = function () {
-        var _this = this;
-        _super.prototype.update.call(this);
-        this.zone.run(function () {
-            _this.dims = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__common_view_dimensions_helper__["a" /* calculateViewDimensions */])({
-                width: _this.width,
-                height: _this.height,
-                margins: _this.margin,
-                showXAxis: _this.xAxis,
-                showYAxis: _this.yAxis,
-                xAxisHeight: _this.xAxisHeight,
-                yAxisWidth: _this.yAxisWidth,
-                showXLabel: _this.showXAxisLabel,
-                showYLabel: _this.showYAxisLabel,
-                showLegend: _this.legend,
-                legendType: _this.schemeType
-            });
-            _this.formatDates();
-            _this.groupDomain = _this.getGroupDomain();
-            _this.innerDomain = _this.getInnerDomain();
-            _this.valueDomain = _this.getValueDomain();
-            _this.xScale = _this.getXScale();
-            _this.yScale = _this.getYScale();
-            _this.setColors();
-            _this.legendOptions = _this.getLegendOptions();
-            _this.transform = "translate(" + _this.dims.xOffset + " , " + _this.margin[0] + ")";
-        });
-    };
-    BarHorizontalStackedComponent.prototype.getGroupDomain = function () {
-        var domain = [];
-        for (var _i = 0, _a = this.results; _i < _a.length; _i++) {
-            var group = _a[_i];
-            if (!domain.includes(group.name)) {
-                domain.push(group.name);
-            }
-        }
-        return domain;
-    };
-    BarHorizontalStackedComponent.prototype.getInnerDomain = function () {
-        var domain = [];
-        for (var _i = 0, _a = this.results; _i < _a.length; _i++) {
-            var group = _a[_i];
-            for (var _b = 0, _c = group.series; _b < _c.length; _b++) {
-                var d = _c[_b];
-                if (!domain.includes(d.name)) {
-                    domain.push(d.name);
-                }
-            }
-        }
-        return domain;
-    };
-    BarHorizontalStackedComponent.prototype.getValueDomain = function () {
-        var domain = [];
-        for (var _i = 0, _a = this.results; _i < _a.length; _i++) {
-            var group = _a[_i];
-            var sum = 0;
-            for (var _b = 0, _c = group.series; _b < _c.length; _b++) {
-                var d = _c[_b];
-                sum += d.value;
-            }
-            domain.push(sum);
-        }
-        var min = Math.min.apply(Math, [0].concat(domain));
-        var max = Math.max.apply(Math, domain);
-        return [min, max];
-    };
-    BarHorizontalStackedComponent.prototype.getYScale = function () {
-        var spacing = this.groupDomain.length / (this.dims.height / this.barPadding + 1);
-        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_d3_scale__["scaleBand"])()
-            .rangeRound([this.dims.height, 0])
-            .paddingInner(spacing)
-            .domain(this.groupDomain);
-    };
-    BarHorizontalStackedComponent.prototype.getXScale = function () {
-        var scale = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_d3_scale__["scaleLinear"])()
-            .range([0, this.dims.width])
-            .domain(this.valueDomain);
-        return this.roundDomains ? scale.nice() : scale;
-    };
-    BarHorizontalStackedComponent.prototype.groupTransform = function (group) {
-        return "translate(0, " + this.yScale(group.name) + ")";
-    };
-    BarHorizontalStackedComponent.prototype.onClick = function (data, group) {
-        if (group) {
-            data.series = group.name;
-        }
-        this.select.emit(data);
-    };
-    BarHorizontalStackedComponent.prototype.trackBy = function (index, item) {
-        return item.name;
-    };
-    BarHorizontalStackedComponent.prototype.setColors = function () {
-        var domain;
-        if (this.schemeType === 'ordinal') {
-            domain = this.innerDomain;
-        }
-        else {
-            domain = this.valueDomain;
-        }
-        this.colors = new __WEBPACK_IMPORTED_MODULE_3__common_color_helper__["a" /* ColorHelper */](this.scheme, this.schemeType, domain, this.customColors);
-    };
-    BarHorizontalStackedComponent.prototype.getLegendOptions = function () {
-        var opts = {
-            scaleType: this.schemeType,
-            colors: undefined,
-            domain: []
-        };
-        if (opts.scaleType === 'ordinal') {
-            opts.domain = this.innerDomain;
-            opts.colors = this.colors;
-        }
-        else {
-            opts.domain = this.valueDomain;
-            opts.colors = this.colors.scale;
-        }
-        return opts;
-    };
-    BarHorizontalStackedComponent.prototype.updateYAxisWidth = function (_a) {
-        var width = _a.width;
-        this.yAxisWidth = width;
-        this.update();
-    };
-    BarHorizontalStackedComponent.prototype.updateXAxisHeight = function (_a) {
-        var height = _a.height;
-        this.xAxisHeight = height;
-        this.update();
-    };
-    BarHorizontalStackedComponent.prototype.onActivate = function (event, group) {
-        var item = Object.assign({}, event);
-        if (group) {
-            item.series = group.name;
-        }
-        var idx = this.activeEntries.findIndex(function (d) {
-            return d.name === item.name && d.value === item.value && d.series === item.series;
-        });
-        if (idx > -1) {
-            return;
-        }
-        this.activeEntries = [item].concat(this.activeEntries);
-        this.activate.emit({ value: item, entries: this.activeEntries });
-    };
-    BarHorizontalStackedComponent.prototype.onDeactivate = function (event, group) {
-        var item = Object.assign({}, event);
-        if (group) {
-            item.series = group.name;
-        }
-        var idx = this.activeEntries.findIndex(function (d) {
-            return d.name === item.name && d.value === item.value && d.series === item.series;
-        });
-        this.activeEntries.splice(idx, 1);
-        this.activeEntries = this.activeEntries.slice();
-        this.deactivate.emit({ value: item, entries: this.activeEntries });
-    };
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarHorizontalStackedComponent.prototype, "legend", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarHorizontalStackedComponent.prototype, "xAxis", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarHorizontalStackedComponent.prototype, "yAxis", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarHorizontalStackedComponent.prototype, "showXAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarHorizontalStackedComponent.prototype, "showYAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarHorizontalStackedComponent.prototype, "xAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarHorizontalStackedComponent.prototype, "yAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], BarHorizontalStackedComponent.prototype, "tooltipDisabled", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], BarHorizontalStackedComponent.prototype, "gradient", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], BarHorizontalStackedComponent.prototype, "showGridLines", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Array)
-    ], BarHorizontalStackedComponent.prototype, "activeEntries", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', String)
-    ], BarHorizontalStackedComponent.prototype, "schemeType", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarHorizontalStackedComponent.prototype, "xAxisTickFormatting", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarHorizontalStackedComponent.prototype, "yAxisTickFormatting", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarHorizontalStackedComponent.prototype, "barPadding", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], BarHorizontalStackedComponent.prototype, "roundDomains", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
-        __metadata('design:type', __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"])
-    ], BarHorizontalStackedComponent.prototype, "activate", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
-        __metadata('design:type', __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"])
-    ], BarHorizontalStackedComponent.prototype, "deactivate", void 0);
-    BarHorizontalStackedComponent = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'ngx-charts-bar-horizontal-stacked',
-            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      (legendLabelClick)=\"onClick($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g ngx-charts-series-horizontal\n            type=\"stacked\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [activeEntries]=\"activeEntries\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            [tooltipDisabled]=\"tooltipDisabled\"\n            [seriesName]=\"group.name\"\n            (select)=\"onClick($event, group)\"\n            (activate)=\"onActivate($event, group)\"\n            (deactivate)=\"onDeactivate($event, group)\"\n          />\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
-            changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectionStrategy"].OnPush,
-            styles: [__webpack_require__("./src/common/base-chart.component.scss")],
-            encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewEncapsulation"].None,
-            animations: [
-                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["trigger"])('animationState', [
-                    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["transition"])('* => void', [
-                        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["style"])({
-                            opacity: 1,
-                            transform: '*',
-                        }),
-                        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["animate"])(500, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["style"])({ opacity: 0, transform: 'scale(0)' }))
-                    ])
-                ])
-            ]
-        }), 
-        __metadata('design:paramtypes', [])
-    ], BarHorizontalStackedComponent);
-    return BarHorizontalStackedComponent;
-}(__WEBPACK_IMPORTED_MODULE_4__common_base_chart_component__["a" /* BaseChartComponent */]));
-
-
-/***/ }),
-
-/***/ "./src/bar-chart/bar-horizontal.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_scale__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_scale___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_d3_scale__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_view_dimensions_helper__ = __webpack_require__("./src/common/view-dimensions.helper.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_color_helper__ = __webpack_require__("./src/common/color.helper.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_base_chart_component__ = __webpack_require__("./src/common/base-chart.component.ts");
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BarHorizontalComponent; });
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-var BarHorizontalComponent = (function (_super) {
-    __extends(BarHorizontalComponent, _super);
-    function BarHorizontalComponent() {
-        _super.apply(this, arguments);
-        this.legend = false;
-        this.tooltipDisabled = false;
-        this.showGridLines = true;
-        this.activeEntries = [];
-        this.barPadding = 8;
-        this.roundDomains = false;
-        this.activate = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-        this.deactivate = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-        this.margin = [10, 20, 10, 20];
-        this.xAxisHeight = 0;
-        this.yAxisWidth = 0;
-    }
-    BarHorizontalComponent.prototype.update = function () {
-        var _this = this;
-        _super.prototype.update.call(this);
-        this.zone.run(function () {
-            _this.dims = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__common_view_dimensions_helper__["a" /* calculateViewDimensions */])({
-                width: _this.width,
-                height: _this.height,
-                margins: _this.margin,
-                showXAxis: _this.xAxis,
-                showYAxis: _this.yAxis,
-                xAxisHeight: _this.xAxisHeight,
-                yAxisWidth: _this.yAxisWidth,
-                showXLabel: _this.showXAxisLabel,
-                showYLabel: _this.showYAxisLabel,
-                showLegend: _this.legend,
-                legendType: _this.schemeType
-            });
-            _this.xScale = _this.getXScale();
-            _this.yScale = _this.getYScale();
-            _this.setColors();
-            _this.legendOptions = _this.getLegendOptions();
-            _this.transform = "translate(" + _this.dims.xOffset + " , " + _this.margin[0] + ")";
-        });
-    };
-    BarHorizontalComponent.prototype.getXScale = function () {
-        this.xDomain = this.getXDomain();
-        var scale = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_d3_scale__["scaleLinear"])()
-            .range([0, this.dims.width])
-            .domain(this.xDomain);
-        return this.roundDomains ? scale.nice() : scale;
-    };
-    BarHorizontalComponent.prototype.getYScale = function () {
-        this.yDomain = this.getYDomain();
-        var spacing = this.yDomain.length / (this.dims.height / this.barPadding + 1);
-        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_d3_scale__["scaleBand"])()
-            .rangeRound([this.dims.height, 0])
-            .paddingInner(spacing)
-            .domain(this.yDomain);
-    };
-    BarHorizontalComponent.prototype.getXDomain = function () {
-        var values = this.results.map(function (d) { return d.value; });
-        var min = Math.min.apply(Math, [0].concat(values));
-        var max = Math.max.apply(Math, values);
-        return [min, max];
-    };
-    BarHorizontalComponent.prototype.getYDomain = function () {
-        return this.results.map(function (d) { return d.name; });
-    };
-    BarHorizontalComponent.prototype.onClick = function (data) {
-        this.select.emit(data);
-    };
-    BarHorizontalComponent.prototype.setColors = function () {
-        var domain;
-        if (this.schemeType === 'ordinal') {
-            domain = this.yDomain;
-        }
-        else {
-            domain = this.xDomain;
-        }
-        this.colors = new __WEBPACK_IMPORTED_MODULE_3__common_color_helper__["a" /* ColorHelper */](this.scheme, this.schemeType, domain, this.customColors);
-    };
-    BarHorizontalComponent.prototype.getLegendOptions = function () {
-        var opts = {
-            scaleType: this.schemeType,
-            colors: undefined,
-            domain: []
-        };
-        if (opts.scaleType === 'ordinal') {
-            opts.domain = this.yDomain;
-            opts.colors = this.colors;
-        }
-        else {
-            opts.domain = this.xDomain;
-            opts.colors = this.colors.scale;
-        }
-        return opts;
-    };
-    BarHorizontalComponent.prototype.updateYAxisWidth = function (_a) {
-        var width = _a.width;
-        this.yAxisWidth = width;
-        this.update();
-    };
-    BarHorizontalComponent.prototype.updateXAxisHeight = function (_a) {
-        var height = _a.height;
-        this.xAxisHeight = height;
-        this.update();
-    };
-    BarHorizontalComponent.prototype.onActivate = function (item) {
-        var idx = this.activeEntries.findIndex(function (d) {
-            return d.name === item.name && d.value === item.value && d.series === item.series;
-        });
-        if (idx > -1) {
-            return;
-        }
-        this.activeEntries = [item].concat(this.activeEntries);
-        this.activate.emit({ value: item, entries: this.activeEntries });
-    };
-    BarHorizontalComponent.prototype.onDeactivate = function (item) {
-        var idx = this.activeEntries.findIndex(function (d) {
-            return d.name === item.name && d.value === item.value && d.series === item.series;
-        });
-        this.activeEntries.splice(idx, 1);
-        this.activeEntries = this.activeEntries.slice();
-        this.deactivate.emit({ value: item, entries: this.activeEntries });
-    };
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarHorizontalComponent.prototype, "legend", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarHorizontalComponent.prototype, "xAxis", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarHorizontalComponent.prototype, "yAxis", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarHorizontalComponent.prototype, "showXAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarHorizontalComponent.prototype, "showYAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarHorizontalComponent.prototype, "xAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarHorizontalComponent.prototype, "yAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], BarHorizontalComponent.prototype, "tooltipDisabled", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], BarHorizontalComponent.prototype, "gradient", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], BarHorizontalComponent.prototype, "showGridLines", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Array)
-    ], BarHorizontalComponent.prototype, "activeEntries", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', String)
-    ], BarHorizontalComponent.prototype, "schemeType", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarHorizontalComponent.prototype, "xAxisTickFormatting", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarHorizontalComponent.prototype, "yAxisTickFormatting", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarHorizontalComponent.prototype, "barPadding", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], BarHorizontalComponent.prototype, "roundDomains", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
-        __metadata('design:type', __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"])
-    ], BarHorizontalComponent.prototype, "activate", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
-        __metadata('design:type', __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"])
-    ], BarHorizontalComponent.prototype, "deactivate", void 0);
-    BarHorizontalComponent = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'ngx-charts-bar-horizontal',
-            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g ngx-charts-series-horizontal\n          [xScale]=\"xScale\"\n          [yScale]=\"yScale\"\n          [colors]=\"colors\"\n          [series]=\"results\"\n          [dims]=\"dims\"\n          [gradient]=\"gradient\"\n          [tooltipDisabled]=\"tooltipDisabled\"\n          [activeEntries]=\"activeEntries\"\n          (select)=\"onClick($event)\"\n          (activate)=\"onActivate($event)\"\n          (deactivate)=\"onDeactivate($event)\"\n        />\n      </svg:g>\n    </ngx-charts-chart>\n  ",
-            changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectionStrategy"].OnPush,
-            styles: [__webpack_require__("./src/common/base-chart.component.scss")],
-            encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewEncapsulation"].None
-        }), 
-        __metadata('design:paramtypes', [])
-    ], BarHorizontalComponent);
-    return BarHorizontalComponent;
-}(__WEBPACK_IMPORTED_MODULE_4__common_base_chart_component__["a" /* BaseChartComponent */]));
-
-
-/***/ }),
-
-/***/ "./src/bar-chart/bar-vertical-2d.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_scale__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_scale___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_d3_scale__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_view_dimensions_helper__ = __webpack_require__("./src/common/view-dimensions.helper.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_color_helper__ = __webpack_require__("./src/common/color.helper.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_base_chart_component__ = __webpack_require__("./src/common/base-chart.component.ts");
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BarVertical2DComponent; });
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-var BarVertical2DComponent = (function (_super) {
-    __extends(BarVertical2DComponent, _super);
-    function BarVertical2DComponent() {
-        _super.apply(this, arguments);
-        this.legend = false;
-        this.tooltipDisabled = false;
-        this.scaleType = 'ordinal';
-        this.showGridLines = true;
-        this.activeEntries = [];
-        this.groupPadding = 16;
-        this.barPadding = 8;
-        this.roundDomains = false;
-        this.activate = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-        this.deactivate = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-        this.margin = [10, 20, 10, 20];
-        this.xAxisHeight = 0;
-        this.yAxisWidth = 0;
-    }
-    BarVertical2DComponent.prototype.update = function () {
-        var _this = this;
-        _super.prototype.update.call(this);
-        this.zone.run(function () {
-            _this.dims = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__common_view_dimensions_helper__["a" /* calculateViewDimensions */])({
-                width: _this.width,
-                height: _this.height,
-                margins: _this.margin,
-                showXAxis: _this.xAxis,
-                showYAxis: _this.yAxis,
-                xAxisHeight: _this.xAxisHeight,
-                yAxisWidth: _this.yAxisWidth,
-                showXLabel: _this.showXAxisLabel,
-                showYLabel: _this.showYAxisLabel,
-                showLegend: _this.legend,
-                legendType: _this.schemeType
-            });
-            _this.formatDates();
-            _this.groupDomain = _this.getGroupDomain();
-            _this.innerDomain = _this.getInnerDomain();
-            _this.valuesDomain = _this.getValueDomain();
-            _this.groupScale = _this.getGroupScale();
-            _this.innerScale = _this.getInnerScale();
-            _this.valueScale = _this.getValueScale();
-            _this.setColors();
-            _this.legendOptions = _this.getLegendOptions();
-            _this.transform = "translate(" + _this.dims.xOffset + " , " + _this.margin[0] + ")";
-        });
-    };
-    BarVertical2DComponent.prototype.getGroupScale = function () {
-        var spacing = this.groupDomain.length / (this.dims.height / this.groupPadding + 1);
-        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_d3_scale__["scaleBand"])()
-            .rangeRound([0, this.dims.width])
-            .paddingInner(spacing)
-            .paddingOuter(spacing / 2)
-            .domain(this.groupDomain);
-    };
-    BarVertical2DComponent.prototype.getInnerScale = function () {
-        var width = this.groupScale.bandwidth();
-        var spacing = this.innerDomain.length / (width / this.barPadding + 1);
-        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_d3_scale__["scaleBand"])()
-            .rangeRound([0, width])
-            .paddingInner(spacing)
-            .domain(this.innerDomain);
-    };
-    BarVertical2DComponent.prototype.getValueScale = function () {
-        var scale = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_d3_scale__["scaleLinear"])()
-            .range([this.dims.height, 0])
-            .domain(this.valuesDomain);
-        return this.roundDomains ? scale.nice() : scale;
-    };
-    BarVertical2DComponent.prototype.getGroupDomain = function () {
-        var domain = [];
-        for (var _i = 0, _a = this.results; _i < _a.length; _i++) {
-            var group = _a[_i];
-            if (!domain.includes(group.name)) {
-                domain.push(group.name);
-            }
-        }
-        return domain;
-    };
-    BarVertical2DComponent.prototype.getInnerDomain = function () {
-        var domain = [];
-        for (var _i = 0, _a = this.results; _i < _a.length; _i++) {
-            var group = _a[_i];
-            for (var _b = 0, _c = group.series; _b < _c.length; _b++) {
-                var d = _c[_b];
-                if (!domain.includes(d.name)) {
-                    domain.push(d.name);
-                }
-            }
-        }
-        return domain;
-    };
-    BarVertical2DComponent.prototype.getValueDomain = function () {
-        var domain = [];
-        for (var _i = 0, _a = this.results; _i < _a.length; _i++) {
-            var group = _a[_i];
-            for (var _b = 0, _c = group.series; _b < _c.length; _b++) {
-                var d = _c[_b];
-                if (!domain.includes(d.value)) {
-                    domain.push(d.value);
-                }
-            }
-        }
-        var min = Math.min.apply(Math, [0].concat(domain));
-        var max = Math.max.apply(Math, domain);
-        return [min, max];
-    };
-    BarVertical2DComponent.prototype.groupTransform = function (group) {
-        return "translate(" + this.groupScale(group.name) + ", 0)";
-    };
-    BarVertical2DComponent.prototype.onClick = function (data, group) {
-        if (group) {
-            data.series = group.name;
-        }
-        this.select.emit(data);
-    };
-    BarVertical2DComponent.prototype.trackBy = function (index, item) {
-        return item.name;
-    };
-    BarVertical2DComponent.prototype.setColors = function () {
-        var domain;
-        if (this.schemeType === 'ordinal') {
-            domain = this.innerDomain;
-        }
-        else {
-            domain = this.valuesDomain;
-        }
-        this.colors = new __WEBPACK_IMPORTED_MODULE_3__common_color_helper__["a" /* ColorHelper */](this.scheme, this.schemeType, domain, this.customColors);
-    };
-    BarVertical2DComponent.prototype.getLegendOptions = function () {
-        var opts = {
-            scaleType: this.schemeType,
-            colors: undefined,
-            domain: []
-        };
-        if (opts.scaleType === 'ordinal') {
-            opts.domain = this.innerDomain;
-            opts.colors = this.colors;
-        }
-        else {
-            opts.domain = this.valuesDomain;
-            opts.colors = this.colors.scale;
-        }
-        return opts;
-    };
-    BarVertical2DComponent.prototype.updateYAxisWidth = function (_a) {
-        var width = _a.width;
-        this.yAxisWidth = width;
-        this.update();
-    };
-    BarVertical2DComponent.prototype.updateXAxisHeight = function (_a) {
-        var height = _a.height;
-        this.xAxisHeight = height;
-        this.update();
-    };
-    BarVertical2DComponent.prototype.onActivate = function (event, group) {
-        var item = Object.assign({}, event);
-        if (group) {
-            item.series = group.name;
-        }
-        var idx = this.activeEntries.findIndex(function (d) {
-            return d.name === item.name && d.value === item.value && d.series === item.series;
-        });
-        if (idx > -1) {
-            return;
-        }
-        this.activeEntries = [item].concat(this.activeEntries);
-        this.activate.emit({ value: item, entries: this.activeEntries });
-    };
-    BarVertical2DComponent.prototype.onDeactivate = function (event, group) {
-        var item = Object.assign({}, event);
-        if (group) {
-            item.series = group.name;
-        }
-        var idx = this.activeEntries.findIndex(function (d) {
-            return d.name === item.name && d.value === item.value && d.series === item.series;
-        });
-        this.activeEntries.splice(idx, 1);
-        this.activeEntries = this.activeEntries.slice();
-        this.deactivate.emit({ value: item, entries: this.activeEntries });
-    };
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarVertical2DComponent.prototype, "legend", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarVertical2DComponent.prototype, "xAxis", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarVertical2DComponent.prototype, "yAxis", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarVertical2DComponent.prototype, "showXAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarVertical2DComponent.prototype, "showYAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarVertical2DComponent.prototype, "xAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarVertical2DComponent.prototype, "yAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], BarVertical2DComponent.prototype, "tooltipDisabled", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarVertical2DComponent.prototype, "scaleType", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], BarVertical2DComponent.prototype, "gradient", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], BarVertical2DComponent.prototype, "showGridLines", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Array)
-    ], BarVertical2DComponent.prototype, "activeEntries", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', String)
-    ], BarVertical2DComponent.prototype, "schemeType", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarVertical2DComponent.prototype, "xAxisTickFormatting", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarVertical2DComponent.prototype, "yAxisTickFormatting", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarVertical2DComponent.prototype, "groupPadding", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarVertical2DComponent.prototype, "barPadding", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], BarVertical2DComponent.prototype, "roundDomains", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
-        __metadata('design:type', __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"])
-    ], BarVertical2DComponent.prototype, "activate", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
-        __metadata('design:type', __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"])
-    ], BarVertical2DComponent.prototype, "deactivate", void 0);
-    BarVertical2DComponent = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'ngx-charts-bar-vertical-2d',
-            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      (legendLabelClick)=\"onClick($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g ngx-charts-grid-panel-series\n          [xScale]=\"groupScale\"\n          [yScale]=\"valueScale\"\n          [data]=\"results\"\n          [dims]=\"dims\"\n          orient=\"vertical\">\n        </svg:g>\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"groupScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"valueScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g ngx-charts-series-vertical\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\"\n          [activeEntries]=\"activeEntries\"\n          [xScale]=\"innerScale\"\n          [yScale]=\"valueScale\"\n          [colors]=\"colors\"\n          [series]=\"group.series\"\n          [dims]=\"dims\"\n          [gradient]=\"gradient\"\n          [tooltipDisabled]=\"tooltipDisabled\"\n          [seriesName]=\"group.name\"\n          (select)=\"onClick($event, group)\"\n          (activate)=\"onActivate($event, group)\"\n          (deactivate)=\"onDeactivate($event, group)\"\n        />\n        </svg:g>\n    </ngx-charts-chart>\n  ",
-            styles: [__webpack_require__("./src/common/base-chart.component.scss")],
-            encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewEncapsulation"].None,
-            changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectionStrategy"].OnPush,
-            animations: [
-                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["trigger"])('animationState', [
-                    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["transition"])('* => void', [
-                        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["style"])({
-                            opacity: 1,
-                            transform: '*',
-                        }),
-                        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["animate"])(500, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["style"])({ opacity: 0, transform: 'scale(0)' }))
-                    ])
-                ])
-            ]
-        }), 
-        __metadata('design:paramtypes', [])
-    ], BarVertical2DComponent);
-    return BarVertical2DComponent;
-}(__WEBPACK_IMPORTED_MODULE_4__common_base_chart_component__["a" /* BaseChartComponent */]));
-
-
-/***/ }),
-
-/***/ "./src/bar-chart/bar-vertical-normalized.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_scale__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_scale___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_d3_scale__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_view_dimensions_helper__ = __webpack_require__("./src/common/view-dimensions.helper.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_color_helper__ = __webpack_require__("./src/common/color.helper.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_base_chart_component__ = __webpack_require__("./src/common/base-chart.component.ts");
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BarVerticalNormalizedComponent; });
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-var BarVerticalNormalizedComponent = (function (_super) {
-    __extends(BarVerticalNormalizedComponent, _super);
-    function BarVerticalNormalizedComponent() {
-        _super.apply(this, arguments);
-        this.legend = false;
-        this.tooltipDisabled = false;
-        this.showGridLines = true;
-        this.activeEntries = [];
-        this.barPadding = 8;
-        this.roundDomains = false;
-        this.activate = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-        this.deactivate = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-        this.margin = [10, 20, 10, 20];
-        this.xAxisHeight = 0;
-        this.yAxisWidth = 0;
-    }
-    BarVerticalNormalizedComponent.prototype.update = function () {
-        var _this = this;
-        _super.prototype.update.call(this);
-        this.zone.run(function () {
-            _this.dims = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__common_view_dimensions_helper__["a" /* calculateViewDimensions */])({
-                width: _this.width,
-                height: _this.height,
-                margins: _this.margin,
-                showXAxis: _this.xAxis,
-                showYAxis: _this.yAxis,
-                xAxisHeight: _this.xAxisHeight,
-                yAxisWidth: _this.yAxisWidth,
-                showXLabel: _this.showXAxisLabel,
-                showYLabel: _this.showYAxisLabel,
-                showLegend: _this.legend,
-                legendType: _this.schemeType
-            });
-            _this.formatDates();
-            _this.groupDomain = _this.getGroupDomain();
-            _this.innerDomain = _this.getInnerDomain();
-            _this.valueDomain = _this.getValueDomain();
-            _this.xScale = _this.getXScale();
-            _this.yScale = _this.getYScale();
-            _this.setColors();
-            _this.legendOptions = _this.getLegendOptions();
-            _this.transform = "translate(" + _this.dims.xOffset + " , " + _this.margin[0] + ")";
-        });
-    };
-    BarVerticalNormalizedComponent.prototype.getGroupDomain = function () {
-        var domain = [];
-        for (var _i = 0, _a = this.results; _i < _a.length; _i++) {
-            var group = _a[_i];
-            if (!domain.includes(group.name)) {
-                domain.push(group.name);
-            }
-        }
-        return domain;
-    };
-    BarVerticalNormalizedComponent.prototype.getInnerDomain = function () {
-        var domain = [];
-        for (var _i = 0, _a = this.results; _i < _a.length; _i++) {
-            var group = _a[_i];
-            for (var _b = 0, _c = group.series; _b < _c.length; _b++) {
-                var d = _c[_b];
-                if (!domain.includes(d.name)) {
-                    domain.push(d.name);
-                }
-            }
-        }
-        return domain;
-    };
-    BarVerticalNormalizedComponent.prototype.getValueDomain = function () {
-        return [0, 100];
-    };
-    BarVerticalNormalizedComponent.prototype.getXScale = function () {
-        var spacing = this.groupDomain.length / (this.dims.width / this.barPadding + 1);
-        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_d3_scale__["scaleBand"])()
-            .rangeRound([0, this.dims.width])
-            .paddingInner(spacing)
-            .domain(this.groupDomain);
-    };
-    BarVerticalNormalizedComponent.prototype.getYScale = function () {
-        var scale = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_d3_scale__["scaleLinear"])()
-            .range([this.dims.height, 0])
-            .domain(this.valueDomain);
-        return this.roundDomains ? scale.nice() : scale;
-    };
-    BarVerticalNormalizedComponent.prototype.groupTransform = function (group) {
-        return "translate(" + this.xScale(group.name) + ", 0)";
-    };
-    BarVerticalNormalizedComponent.prototype.onClick = function (data, group) {
-        if (group) {
-            data.series = group.name;
-        }
-        this.select.emit(data);
-    };
-    BarVerticalNormalizedComponent.prototype.trackBy = function (index, item) {
-        return item.name;
-    };
-    BarVerticalNormalizedComponent.prototype.setColors = function () {
-        var domain;
-        if (this.schemeType === 'ordinal') {
-            domain = this.innerDomain;
-        }
-        else {
-            domain = this.valueDomain;
-        }
-        this.colors = new __WEBPACK_IMPORTED_MODULE_3__common_color_helper__["a" /* ColorHelper */](this.scheme, this.schemeType, domain, this.customColors);
-    };
-    BarVerticalNormalizedComponent.prototype.getLegendOptions = function () {
-        var opts = {
-            scaleType: this.schemeType,
-            colors: undefined,
-            domain: []
-        };
-        if (opts.scaleType === 'ordinal') {
-            opts.domain = this.innerDomain;
-            opts.colors = this.colors;
-        }
-        else {
-            opts.domain = this.valueDomain;
-            opts.colors = this.colors.scale;
-        }
-        return opts;
-    };
-    BarVerticalNormalizedComponent.prototype.updateYAxisWidth = function (_a) {
-        var width = _a.width;
-        this.yAxisWidth = width;
-        this.update();
-    };
-    BarVerticalNormalizedComponent.prototype.updateXAxisHeight = function (_a) {
-        var height = _a.height;
-        this.xAxisHeight = height;
-        this.update();
-    };
-    BarVerticalNormalizedComponent.prototype.onActivate = function (event, group) {
-        var item = Object.assign({}, event);
-        if (group) {
-            item.series = group.name;
-        }
-        var idx = this.activeEntries.findIndex(function (d) {
-            return d.name === item.name && d.value === item.value && d.series === item.series;
-        });
-        if (idx > -1) {
-            return;
-        }
-        this.activeEntries = [item].concat(this.activeEntries);
-        this.activate.emit({ value: item, entries: this.activeEntries });
-    };
-    BarVerticalNormalizedComponent.prototype.onDeactivate = function (event, group) {
-        var item = Object.assign({}, event);
-        if (group) {
-            item.series = group.name;
-        }
-        var idx = this.activeEntries.findIndex(function (d) {
-            return d.name === item.name && d.value === item.value && d.series === item.series;
-        });
-        this.activeEntries.splice(idx, 1);
-        this.activeEntries = this.activeEntries.slice();
-        this.deactivate.emit({ value: item, entries: this.activeEntries });
-    };
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarVerticalNormalizedComponent.prototype, "legend", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarVerticalNormalizedComponent.prototype, "xAxis", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarVerticalNormalizedComponent.prototype, "yAxis", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarVerticalNormalizedComponent.prototype, "showXAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarVerticalNormalizedComponent.prototype, "showYAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarVerticalNormalizedComponent.prototype, "xAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarVerticalNormalizedComponent.prototype, "yAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], BarVerticalNormalizedComponent.prototype, "tooltipDisabled", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], BarVerticalNormalizedComponent.prototype, "gradient", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], BarVerticalNormalizedComponent.prototype, "showGridLines", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Array)
-    ], BarVerticalNormalizedComponent.prototype, "activeEntries", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', String)
-    ], BarVerticalNormalizedComponent.prototype, "schemeType", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarVerticalNormalizedComponent.prototype, "xAxisTickFormatting", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarVerticalNormalizedComponent.prototype, "yAxisTickFormatting", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarVerticalNormalizedComponent.prototype, "barPadding", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], BarVerticalNormalizedComponent.prototype, "roundDomains", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
-        __metadata('design:type', __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"])
-    ], BarVerticalNormalizedComponent.prototype, "activate", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
-        __metadata('design:type', __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"])
-    ], BarVerticalNormalizedComponent.prototype, "deactivate", void 0);
-    BarVerticalNormalizedComponent = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'ngx-charts-bar-vertical-normalized',
-            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      (legendLabelClick)=\"onClick($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g ngx-charts-series-vertical\n            type=\"normalized\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [activeEntries]=\"activeEntries\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            [tooltipDisabled]=\"tooltipDisabled\"\n            [seriesName]=\"group.name\"\n            (select)=\"onClick($event, group)\"\n            (activate)=\"onActivate($event, group)\"\n            (deactivate)=\"onDeactivate($event, group)\"\n          />\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
-            styles: [__webpack_require__("./src/common/base-chart.component.scss")],
-            encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewEncapsulation"].None,
-            changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectionStrategy"].OnPush,
-            animations: [
-                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["trigger"])('animationState', [
-                    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["transition"])('* => void', [
-                        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["style"])({
-                            opacity: 1,
-                            transform: '*',
-                        }),
-                        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["animate"])(500, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["style"])({ opacity: 0, transform: 'scale(0)' }))
-                    ])
-                ])
-            ]
-        }), 
-        __metadata('design:paramtypes', [])
-    ], BarVerticalNormalizedComponent);
-    return BarVerticalNormalizedComponent;
-}(__WEBPACK_IMPORTED_MODULE_4__common_base_chart_component__["a" /* BaseChartComponent */]));
-
-
-/***/ }),
-
-/***/ "./src/bar-chart/bar-vertical-stacked.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_scale__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_scale___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_d3_scale__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_view_dimensions_helper__ = __webpack_require__("./src/common/view-dimensions.helper.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_color_helper__ = __webpack_require__("./src/common/color.helper.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_base_chart_component__ = __webpack_require__("./src/common/base-chart.component.ts");
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BarVerticalStackedComponent; });
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-var BarVerticalStackedComponent = (function (_super) {
-    __extends(BarVerticalStackedComponent, _super);
-    function BarVerticalStackedComponent() {
-        _super.apply(this, arguments);
-        this.legend = false;
-        this.tooltipDisabled = false;
-        this.showGridLines = true;
-        this.activeEntries = [];
-        this.barPadding = 8;
-        this.roundDomains = false;
-        this.activate = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-        this.deactivate = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-        this.margin = [10, 20, 10, 20];
-        this.xAxisHeight = 0;
-        this.yAxisWidth = 0;
-    }
-    BarVerticalStackedComponent.prototype.update = function () {
-        var _this = this;
-        _super.prototype.update.call(this);
-        this.zone.run(function () {
-            _this.dims = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__common_view_dimensions_helper__["a" /* calculateViewDimensions */])({
-                width: _this.width,
-                height: _this.height,
-                margins: _this.margin,
-                showXAxis: _this.xAxis,
-                showYAxis: _this.yAxis,
-                xAxisHeight: _this.xAxisHeight,
-                yAxisWidth: _this.yAxisWidth,
-                showXLabel: _this.showXAxisLabel,
-                showYLabel: _this.showYAxisLabel,
-                showLegend: _this.legend,
-                legendType: _this.schemeType
-            });
-            _this.formatDates();
-            _this.groupDomain = _this.getGroupDomain();
-            _this.innerDomain = _this.getInnerDomain();
-            _this.valueDomain = _this.getValueDomain();
-            _this.xScale = _this.getXScale();
-            _this.yScale = _this.getYScale();
-            _this.setColors();
-            _this.legendOptions = _this.getLegendOptions();
-            _this.transform = "translate(" + _this.dims.xOffset + " , " + _this.margin[0] + ")";
-        });
-    };
-    BarVerticalStackedComponent.prototype.getGroupDomain = function () {
-        var domain = [];
-        for (var _i = 0, _a = this.results; _i < _a.length; _i++) {
-            var group = _a[_i];
-            if (!domain.includes(group.name)) {
-                domain.push(group.name);
-            }
-        }
-        return domain;
-    };
-    BarVerticalStackedComponent.prototype.getInnerDomain = function () {
-        var domain = [];
-        for (var _i = 0, _a = this.results; _i < _a.length; _i++) {
-            var group = _a[_i];
-            for (var _b = 0, _c = group.series; _b < _c.length; _b++) {
-                var d = _c[_b];
-                if (!domain.includes(d.name)) {
-                    domain.push(d.name);
-                }
-            }
-        }
-        return domain;
-    };
-    BarVerticalStackedComponent.prototype.getValueDomain = function () {
-        var domain = [];
-        for (var _i = 0, _a = this.results; _i < _a.length; _i++) {
-            var group = _a[_i];
-            var sum = 0;
-            for (var _b = 0, _c = group.series; _b < _c.length; _b++) {
-                var d = _c[_b];
-                sum += d.value;
-            }
-            domain.push(sum);
-        }
-        var min = Math.min.apply(Math, [0].concat(domain));
-        var max = Math.max.apply(Math, domain);
-        return [min, max];
-    };
-    BarVerticalStackedComponent.prototype.getXScale = function () {
-        var spacing = this.groupDomain.length / (this.dims.width / this.barPadding + 1);
-        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_d3_scale__["scaleBand"])()
-            .rangeRound([0, this.dims.width])
-            .paddingInner(spacing)
-            .domain(this.groupDomain);
-    };
-    BarVerticalStackedComponent.prototype.getYScale = function () {
-        var scale = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_d3_scale__["scaleLinear"])()
-            .range([this.dims.height, 0])
-            .domain(this.valueDomain);
-        return this.roundDomains ? scale.nice() : scale;
-    };
-    BarVerticalStackedComponent.prototype.groupTransform = function (group) {
-        return "translate(" + this.xScale(group.name) + ", 0)";
-    };
-    BarVerticalStackedComponent.prototype.onClick = function (data, group) {
-        if (group) {
-            data.series = group.name;
-        }
-        this.select.emit(data);
-    };
-    BarVerticalStackedComponent.prototype.trackBy = function (index, item) {
-        return item.name;
-    };
-    BarVerticalStackedComponent.prototype.setColors = function () {
-        var domain;
-        if (this.schemeType === 'ordinal') {
-            domain = this.innerDomain;
-        }
-        else {
-            domain = this.valueDomain;
-        }
-        this.colors = new __WEBPACK_IMPORTED_MODULE_3__common_color_helper__["a" /* ColorHelper */](this.scheme, this.schemeType, domain, this.customColors);
-    };
-    BarVerticalStackedComponent.prototype.getLegendOptions = function () {
-        var opts = {
-            scaleType: this.schemeType,
-            colors: undefined,
-            domain: []
-        };
-        if (opts.scaleType === 'ordinal') {
-            opts.domain = this.innerDomain;
-            opts.colors = this.colors;
-        }
-        else {
-            opts.domain = this.valueDomain;
-            opts.colors = this.colors.scale;
-        }
-        return opts;
-    };
-    BarVerticalStackedComponent.prototype.updateYAxisWidth = function (_a) {
-        var width = _a.width;
-        this.yAxisWidth = width;
-        this.update();
-    };
-    BarVerticalStackedComponent.prototype.updateXAxisHeight = function (_a) {
-        var height = _a.height;
-        this.xAxisHeight = height;
-        this.update();
-    };
-    BarVerticalStackedComponent.prototype.onActivate = function (event, group) {
-        var item = Object.assign({}, event);
-        if (group) {
-            item.series = group.name;
-        }
-        var idx = this.activeEntries.findIndex(function (d) {
-            return d.name === item.name && d.value === item.value && d.series === item.series;
-        });
-        if (idx > -1) {
-            return;
-        }
-        this.activeEntries = [item].concat(this.activeEntries);
-        this.activate.emit({ value: item, entries: this.activeEntries });
-    };
-    BarVerticalStackedComponent.prototype.onDeactivate = function (event, group) {
-        var item = Object.assign({}, event);
-        if (group) {
-            item.series = group.name;
-        }
-        var idx = this.activeEntries.findIndex(function (d) {
-            return d.name === item.name && d.value === item.value && d.series === item.series;
-        });
-        this.activeEntries.splice(idx, 1);
-        this.activeEntries = this.activeEntries.slice();
-        this.deactivate.emit({ value: item, entries: this.activeEntries });
-    };
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarVerticalStackedComponent.prototype, "legend", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarVerticalStackedComponent.prototype, "xAxis", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarVerticalStackedComponent.prototype, "yAxis", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarVerticalStackedComponent.prototype, "showXAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarVerticalStackedComponent.prototype, "showYAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarVerticalStackedComponent.prototype, "xAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarVerticalStackedComponent.prototype, "yAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], BarVerticalStackedComponent.prototype, "tooltipDisabled", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], BarVerticalStackedComponent.prototype, "gradient", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], BarVerticalStackedComponent.prototype, "showGridLines", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Array)
-    ], BarVerticalStackedComponent.prototype, "activeEntries", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', String)
-    ], BarVerticalStackedComponent.prototype, "schemeType", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarVerticalStackedComponent.prototype, "xAxisTickFormatting", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarVerticalStackedComponent.prototype, "yAxisTickFormatting", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarVerticalStackedComponent.prototype, "barPadding", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], BarVerticalStackedComponent.prototype, "roundDomains", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
-        __metadata('design:type', __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"])
-    ], BarVerticalStackedComponent.prototype, "activate", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
-        __metadata('design:type', __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"])
-    ], BarVerticalStackedComponent.prototype, "deactivate", void 0);
-    BarVerticalStackedComponent = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'ngx-charts-bar-vertical-stacked',
-            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      (legendLabelClick)=\"onClick($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g ngx-charts-series-vertical\n            type=\"stacked\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [activeEntries]=\"activeEntries\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            [tooltipDisabled]=\"tooltipDisabled\"\n            [seriesName]=\"group.name\"\n            (select)=\"onClick($event, group)\"\n            (activate)=\"onActivate($event, group)\"\n            (deactivate)=\"onDeactivate($event, group)\"\n          />\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
-            styles: [__webpack_require__("./src/common/base-chart.component.scss")],
-            encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewEncapsulation"].None,
-            changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectionStrategy"].OnPush,
-            animations: [
-                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["trigger"])('animationState', [
-                    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["transition"])('* => void', [
-                        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["style"])({
-                            opacity: 1,
-                            transform: '*',
-                        }),
-                        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["animate"])(500, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["style"])({ opacity: 0, transform: 'scale(0)' }))
-                    ])
-                ])
-            ]
-        }), 
-        __metadata('design:paramtypes', [])
-    ], BarVerticalStackedComponent);
-    return BarVerticalStackedComponent;
-}(__WEBPACK_IMPORTED_MODULE_4__common_base_chart_component__["a" /* BaseChartComponent */]));
-
-
-/***/ }),
-
-/***/ "./src/bar-chart/bar-vertical.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_scale__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_scale___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_d3_scale__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_view_dimensions_helper__ = __webpack_require__("./src/common/view-dimensions.helper.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_color_helper__ = __webpack_require__("./src/common/color.helper.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_base_chart_component__ = __webpack_require__("./src/common/base-chart.component.ts");
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BarVerticalComponent; });
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-var BarVerticalComponent = (function (_super) {
-    __extends(BarVerticalComponent, _super);
-    function BarVerticalComponent() {
-        _super.apply(this, arguments);
-        this.legend = false;
-        this.tooltipDisabled = false;
-        this.showGridLines = true;
-        this.activeEntries = [];
-        this.barPadding = 8;
-        this.roundDomains = false;
-        this.activate = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-        this.deactivate = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-        this.margin = [10, 20, 10, 20];
-        this.xAxisHeight = 0;
-        this.yAxisWidth = 0;
-    }
-    BarVerticalComponent.prototype.update = function () {
-        var _this = this;
-        _super.prototype.update.call(this);
-        this.zone.run(function () {
-            _this.dims = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__common_view_dimensions_helper__["a" /* calculateViewDimensions */])({
-                width: _this.width,
-                height: _this.height,
-                margins: _this.margin,
-                showXAxis: _this.xAxis,
-                showYAxis: _this.yAxis,
-                xAxisHeight: _this.xAxisHeight,
-                yAxisWidth: _this.yAxisWidth,
-                showXLabel: _this.showXAxisLabel,
-                showYLabel: _this.showYAxisLabel,
-                showLegend: _this.legend,
-                legendType: _this.schemeType
-            });
-            _this.xScale = _this.getXScale();
-            _this.yScale = _this.getYScale();
-            _this.setColors();
-            _this.legendOptions = _this.getLegendOptions();
-            _this.transform = "translate(" + _this.dims.xOffset + " , " + _this.margin[0] + ")";
-        });
-    };
-    BarVerticalComponent.prototype.getXScale = function () {
-        this.xDomain = this.getXDomain();
-        var spacing = this.xDomain.length / (this.dims.width / this.barPadding + 1);
-        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_d3_scale__["scaleBand"])()
-            .rangeRound([0, this.dims.width])
-            .paddingInner(spacing)
-            .domain(this.xDomain);
-    };
-    BarVerticalComponent.prototype.getYScale = function () {
-        this.yDomain = this.getYDomain();
-        var scale = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_d3_scale__["scaleLinear"])()
-            .range([this.dims.height, 0])
-            .domain(this.yDomain);
-        return this.roundDomains ? scale.nice() : scale;
-    };
-    BarVerticalComponent.prototype.getXDomain = function () {
-        return this.results.map(function (d) { return d.name; });
-    };
-    BarVerticalComponent.prototype.getYDomain = function () {
-        var values = this.results.map(function (d) { return d.value; });
-        var min = Math.min.apply(Math, [0].concat(values));
-        var max = Math.max.apply(Math, values);
-        return [min, max];
-    };
-    BarVerticalComponent.prototype.onClick = function (data) {
-        this.select.emit(data);
-    };
-    BarVerticalComponent.prototype.setColors = function () {
-        var domain;
-        if (this.schemeType === 'ordinal') {
-            domain = this.xDomain;
-        }
-        else {
-            domain = this.yDomain;
-        }
-        this.colors = new __WEBPACK_IMPORTED_MODULE_3__common_color_helper__["a" /* ColorHelper */](this.scheme, this.schemeType, domain, this.customColors);
-    };
-    BarVerticalComponent.prototype.getLegendOptions = function () {
-        var opts = {
-            scaleType: this.schemeType,
-            colors: undefined,
-            domain: []
-        };
-        if (opts.scaleType === 'ordinal') {
-            opts.domain = this.xDomain;
-            opts.colors = this.colors;
-        }
-        else {
-            opts.domain = this.yDomain;
-            opts.colors = this.colors.scale;
-        }
-        return opts;
-    };
-    BarVerticalComponent.prototype.updateYAxisWidth = function (_a) {
-        var width = _a.width;
-        this.yAxisWidth = width;
-        this.update();
-    };
-    BarVerticalComponent.prototype.updateXAxisHeight = function (_a) {
-        var height = _a.height;
-        this.xAxisHeight = height;
-        this.update();
-    };
-    BarVerticalComponent.prototype.onActivate = function (item) {
-        var idx = this.activeEntries.findIndex(function (d) {
-            return d.name === item.name && d.value === item.value && d.series === item.series;
-        });
-        if (idx > -1) {
-            return;
-        }
-        this.activeEntries = [item].concat(this.activeEntries);
-        this.activate.emit({ value: item, entries: this.activeEntries });
-    };
-    BarVerticalComponent.prototype.onDeactivate = function (item) {
-        var idx = this.activeEntries.findIndex(function (d) {
-            return d.name === item.name && d.value === item.value && d.series === item.series;
-        });
-        this.activeEntries.splice(idx, 1);
-        this.activeEntries = this.activeEntries.slice();
-        this.deactivate.emit({ value: item, entries: this.activeEntries });
-    };
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarVerticalComponent.prototype, "legend", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarVerticalComponent.prototype, "xAxis", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarVerticalComponent.prototype, "yAxis", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarVerticalComponent.prototype, "showXAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarVerticalComponent.prototype, "showYAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarVerticalComponent.prototype, "xAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarVerticalComponent.prototype, "yAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], BarVerticalComponent.prototype, "tooltipDisabled", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], BarVerticalComponent.prototype, "gradient", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], BarVerticalComponent.prototype, "showGridLines", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Array)
-    ], BarVerticalComponent.prototype, "activeEntries", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', String)
-    ], BarVerticalComponent.prototype, "schemeType", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarVerticalComponent.prototype, "xAxisTickFormatting", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarVerticalComponent.prototype, "yAxisTickFormatting", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarVerticalComponent.prototype, "barPadding", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], BarVerticalComponent.prototype, "roundDomains", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
-        __metadata('design:type', __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"])
-    ], BarVerticalComponent.prototype, "activate", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
-        __metadata('design:type', __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"])
-    ], BarVerticalComponent.prototype, "deactivate", void 0);
-    BarVerticalComponent = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'ngx-charts-bar-vertical',
-            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g ngx-charts-series-vertical\n          [xScale]=\"xScale\"\n          [yScale]=\"yScale\"\n          [colors]=\"colors\"\n          [series]=\"results\"\n          [dims]=\"dims\"\n          [gradient]=\"gradient\"\n          [tooltipDisabled]=\"tooltipDisabled\"\n          [activeEntries]=\"activeEntries\"\n          (activate)=\"onActivate($event)\"\n          (deactivate)=\"onDeactivate($event)\"\n          (select)=\"onClick($event)\">\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
-            changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectionStrategy"].OnPush,
-            styles: [__webpack_require__("./src/common/base-chart.component.scss")],
-            encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewEncapsulation"].None
-        }), 
-        __metadata('design:paramtypes', [])
-    ], BarVerticalComponent);
-    return BarVerticalComponent;
-}(__WEBPACK_IMPORTED_MODULE_4__common_base_chart_component__["a" /* BaseChartComponent */]));
-
-
-/***/ }),
-
-/***/ "./src/bar-chart/bar.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__angular_common__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_d3_selection__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_d3_selection___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_d3_selection__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_id__ = __webpack_require__("./src/utils/id.ts");
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BarComponent; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-var BarComponent = (function () {
-    function BarComponent(element, location) {
-        this.location = location;
-        this.roundEdges = true;
-        this.gradient = false;
-        this.offset = 0;
-        this.isActive = false;
-        this.select = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-        this.activate = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-        this.deactivate = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-        this.initialized = false;
-        this.hasGradient = false;
-        this.element = element.nativeElement;
-    }
-    BarComponent.prototype.ngOnChanges = function (changes) {
-        if (!this.initialized) {
-            this.loadAnimation();
-            this.initialized = true;
-        }
-        else {
-            this.update();
-        }
-    };
-    BarComponent.prototype.update = function () {
-        var pageUrl = this.location instanceof __WEBPACK_IMPORTED_MODULE_1__angular_common__["PathLocationStrategy"]
-            ? this.location.path()
-            : '';
-        this.gradientId = 'grad' + __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils_id__["a" /* id */])().toString();
-        this.gradientFill = "url(" + pageUrl + "#" + this.gradientId + ")";
-        if (this.gradient || this.stops) {
-            this.gradientStops = this.getGradient();
-            this.hasGradient = true;
-        }
-        else {
-            this.hasGradient = false;
-        }
-        this.animateToCurrentForm();
-    };
-    BarComponent.prototype.loadAnimation = function () {
-        this.path = this.getStartingPath();
-        setTimeout(this.update.bind(this), 100);
-    };
-    BarComponent.prototype.animateToCurrentForm = function () {
-        var node = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_d3_selection__["select"])(this.element).select('.bar');
-        var path = this.getPath();
-        node.transition().duration(750)
-            .attr('d', path);
-    };
-    BarComponent.prototype.getGradient = function () {
-        if (this.stops) {
-            return this.stops;
-        }
-        return [
-            {
-                offset: 0,
-                color: this.fill,
-                opacity: this.getStartOpacity()
-            },
-            {
-                offset: 100,
-                color: this.fill,
-                opacity: 1
-            }];
-    };
-    BarComponent.prototype.getStartingPath = function () {
-        var radius = this.getRadius();
-        var path;
-        if (this.roundEdges) {
-            if (this.orientation === 'vertical') {
-                radius = Math.min(this.height, radius);
-                path = this.roundedRect(this.x, this.y + this.height, this.width, 0, radius, true, true, false, false);
-            }
-            else if (this.orientation === 'horizontal') {
-                radius = Math.min(this.width, radius);
-                path = this.roundedRect(this.x, this.y, 0, this.height, radius, false, true, false, true);
-            }
-        }
-        else {
-            if (this.orientation === 'vertical') {
-                path = this.roundedRect(this.x, this.y + this.height, this.width, 0, radius, false, false, false, false);
-            }
-            else if (this.orientation === 'horizontal') {
-                path = this.roundedRect(this.x, this.y, 0, this.height, radius, false, false, false, false);
-            }
-        }
-        return path;
-    };
-    BarComponent.prototype.getPath = function () {
-        var radius = this.getRadius();
-        var path;
-        if (this.roundEdges) {
-            if (this.orientation === 'vertical') {
-                radius = Math.min(this.height, radius);
-                path = this.roundedRect(this.x, this.y, this.width, this.height, radius, true, true, false, false);
-            }
-            else if (this.orientation === 'horizontal') {
-                radius = Math.min(this.width, radius);
-                path = this.roundedRect(this.x, this.y, this.width, this.height, radius, false, true, false, true);
-            }
-        }
-        else {
-            path = this.roundedRect(this.x, this.y, this.width, this.height, radius, false, false, false, false);
-        }
-        return path;
-    };
-    BarComponent.prototype.getRadius = function () {
-        var radius = 0;
-        if (this.roundEdges && this.height > 5 && this.width > 5) {
-            radius = Math.floor(Math.min(5, this.height / 2, this.width / 2));
-        }
-        return radius;
-    };
-    BarComponent.prototype.getStartOpacity = function () {
-        if (this.roundEdges) {
-            return 0.2;
-        }
-        else {
-            return 0.5;
-        }
-    };
-    BarComponent.prototype.roundedRect = function (x, y, w, h, r, tl, tr, bl, br) {
-        var retval;
-        retval = 'M' + (x + r) + ',' + y;
-        retval += 'h' + (w - 2 * r);
-        if (tr) {
-            retval += 'a' + r + ',' + r + ' 0 0 1 ' + r + ',' + r;
-        }
-        else {
-            retval += 'h' + r;
-            retval += 'v' + r;
-        }
-        retval += 'v' + (h - 2 * r);
-        if (br) {
-            retval += 'a' + r + ',' + r + ' 0 0 1 ' + -r + ',' + r;
-        }
-        else {
-            retval += 'v' + r;
-            retval += 'h' + -r;
-        }
-        retval += 'h' + (2 * r - w);
-        if (bl) {
-            retval += 'a' + r + ',' + r + ' 0 0 1 ' + -r + ',' + -r;
-        }
-        else {
-            retval += 'h' + -r;
-            retval += 'v' + -r;
-        }
-        retval += 'v' + (2 * r - h);
-        if (tl) {
-            retval += 'a' + r + ',' + r + ' 0 0 1 ' + r + ',' + -r;
-        }
-        else {
-            retval += 'v' + -r;
-            retval += 'h' + r;
-        }
-        retval += 'z';
-        return retval;
-    };
-    BarComponent.prototype.onMouseEnter = function () {
-        this.activate.emit(this.data);
-    };
-    BarComponent.prototype.onMouseLeave = function () {
-        this.deactivate.emit(this.data);
-    };
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarComponent.prototype, "fill", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarComponent.prototype, "data", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarComponent.prototype, "width", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarComponent.prototype, "height", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarComponent.prototype, "x", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarComponent.prototype, "y", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarComponent.prototype, "orientation", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], BarComponent.prototype, "roundEdges", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], BarComponent.prototype, "gradient", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BarComponent.prototype, "offset", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], BarComponent.prototype, "isActive", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Array)
-    ], BarComponent.prototype, "stops", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
-        __metadata('design:type', Object)
-    ], BarComponent.prototype, "select", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
-        __metadata('design:type', Object)
-    ], BarComponent.prototype, "activate", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
-        __metadata('design:type', Object)
-    ], BarComponent.prototype, "deactivate", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["HostListener"])('mouseenter'), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', []), 
-        __metadata('design:returntype', void 0)
-    ], BarComponent.prototype, "onMouseEnter", null);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["HostListener"])('mouseleave'), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', []), 
-        __metadata('design:returntype', void 0)
-    ], BarComponent.prototype, "onMouseLeave", null);
-    BarComponent = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'g[ngx-charts-bar]',
-            template: "\n    <svg:defs *ngIf=\"hasGradient\">\n      <svg:g ngx-charts-svg-linear-gradient\n        [color]=\"fill\"\n        [orientation]=\"orientation\"\n        [name]=\"gradientId\"\n        [stops]=\"gradientStops\"\n      />\n    </svg:defs>\n    <svg:path\n      class=\"bar\"\n      stroke=\"none\"\n      [class.active]=\"isActive\"\n      [attr.d]=\"path\"\n      [attr.fill]=\"hasGradient ? gradientFill : fill\"\n      (click)=\"select.emit(data)\"\n    />\n  ",
-            changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectionStrategy"].OnPush
-        }), 
-        __metadata('design:paramtypes', [__WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"], __WEBPACK_IMPORTED_MODULE_1__angular_common__["LocationStrategy"]])
-    ], BarComponent);
-    return BarComponent;
-}());
-
-
-/***/ }),
-
-/***/ "./src/bar-chart/index.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bar_chart_module__ = __webpack_require__("./src/bar-chart/bar-chart.module.ts");
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__bar_chart_module__["b"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_0__bar_chart_module__["c"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_0__bar_chart_module__["d"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_0__bar_chart_module__["e"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_0__bar_chart_module__["f"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "f", function() { return __WEBPACK_IMPORTED_MODULE_0__bar_chart_module__["g"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "g", function() { return __WEBPACK_IMPORTED_MODULE_0__bar_chart_module__["h"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "h", function() { return __WEBPACK_IMPORTED_MODULE_0__bar_chart_module__["i"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "i", function() { return __WEBPACK_IMPORTED_MODULE_0__bar_chart_module__["j"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "j", function() { return __WEBPACK_IMPORTED_MODULE_0__bar_chart_module__["k"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "k", function() { return __WEBPACK_IMPORTED_MODULE_0__bar_chart_module__["l"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "l", function() { return __WEBPACK_IMPORTED_MODULE_0__bar_chart_module__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__bar_component__ = __webpack_require__("./src/bar-chart/bar.component.ts");
-/* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__bar_horizontal_component__ = __webpack_require__("./src/bar-chart/bar-horizontal.component.ts");
-/* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__bar_horizontal_2d_component__ = __webpack_require__("./src/bar-chart/bar-horizontal-2d.component.ts");
-/* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__bar_horizontal_normalized_component__ = __webpack_require__("./src/bar-chart/bar-horizontal-normalized.component.ts");
-/* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__bar_horizontal_stacked_component__ = __webpack_require__("./src/bar-chart/bar-horizontal-stacked.component.ts");
-/* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__series_horizontal_component__ = __webpack_require__("./src/bar-chart/series-horizontal.component.ts");
-/* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__bar_vertical_component__ = __webpack_require__("./src/bar-chart/bar-vertical.component.ts");
-/* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__bar_vertical_2d_component__ = __webpack_require__("./src/bar-chart/bar-vertical-2d.component.ts");
-/* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__bar_vertical_normalized_component__ = __webpack_require__("./src/bar-chart/bar-vertical-normalized.component.ts");
-/* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__bar_vertical_stacked_component__ = __webpack_require__("./src/bar-chart/bar-vertical-stacked.component.ts");
-/* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__series_vertical_component__ = __webpack_require__("./src/bar-chart/series-vertical.component.ts");
-/* unused harmony namespace reexport */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/***/ }),
-
-/***/ "./src/bar-chart/series-horizontal.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__common_label_helper__ = __webpack_require__("./src/common/label.helper.ts");
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SeriesHorizontal; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-var SeriesHorizontal = (function () {
-    function SeriesHorizontal() {
-        this.type = 'standard';
-        this.tooltipDisabled = false;
-        this.select = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-        this.activate = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-        this.deactivate = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-    }
-    SeriesHorizontal.prototype.ngOnChanges = function (changes) {
-        this.update();
-    };
-    SeriesHorizontal.prototype.update = function () {
-        var _this = this;
-        var d0 = 0;
-        var total;
-        if (this.type === 'normalized') {
-            total = this.series.map(function (d) { return d.value; }).reduce(function (sum, d) { return sum + d; }, 0);
-        }
-        this.bars = this.series.map(function (d, index) {
-            var value = d.value;
-            var label = d.name;
-            var formattedLabel = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__common_label_helper__["a" /* formatLabel */])(label);
-            var roundEdges = _this.type === 'standard';
-            var bar = {
-                value: value,
-                label: label,
-                roundEdges: roundEdges,
-                data: d,
-                formattedLabel: formattedLabel
-            };
-            bar.height = _this.yScale.bandwidth();
-            if (_this.type === 'standard') {
-                bar.width = Math.abs(_this.xScale(value) - _this.xScale(0));
-                if (value < 0) {
-                    bar.x = _this.xScale(value);
-                }
-                else {
-                    bar.x = _this.xScale(0);
-                }
-                bar.y = _this.yScale(label);
-            }
-            else if (_this.type === 'stacked') {
-                var offset0 = d0;
-                var offset1 = offset0 + value;
-                d0 += value;
-                bar.width = _this.xScale(offset1) - _this.xScale(offset0);
-                bar.x = _this.xScale(offset0);
-                bar.y = 0;
-                bar.offset0 = offset0;
-                bar.offset1 = offset1;
-            }
-            else if (_this.type === 'normalized') {
-                var offset0 = d0;
-                var offset1 = offset0 + value;
-                d0 += value;
-                if (total > 0) {
-                    offset0 = (offset0 * 100) / total;
-                    offset1 = (offset1 * 100) / total;
-                }
-                else {
-                    offset0 = 0;
-                    offset1 = 0;
-                }
-                bar.width = _this.xScale(offset1) - _this.xScale(offset0);
-                bar.x = _this.xScale(offset0);
-                bar.y = 0;
-                bar.offset0 = offset0;
-                bar.offset1 = offset1;
-                value = (offset1 - offset0).toFixed(2) + '%';
-            }
-            if (_this.colors.scaleType === 'ordinal') {
-                bar.color = _this.colors.getColor(label);
-            }
-            else {
-                if (_this.type === 'standard') {
-                    bar.color = _this.colors.getColor(value);
-                    bar.gradientStops = _this.colors.getLinearGradientStops(value);
-                }
-                else {
-                    bar.color = _this.colors.getColor(bar.offset1);
-                    bar.gradientStops = _this.colors.getLinearGradientStops(bar.offset1, bar.offset0);
-                }
-            }
-            var tooltipLabel = formattedLabel;
-            if (_this.seriesName) {
-                tooltipLabel = _this.seriesName + " \u2022 " + formattedLabel;
-            }
-            bar.tooltipText = "\n        <span class=\"tooltip-label\">" + tooltipLabel + "</span>\n        <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n      ";
-            return bar;
-        });
-    };
-    SeriesHorizontal.prototype.isActive = function (entry) {
-        if (!this.activeEntries)
-            return false;
-        var item = this.activeEntries.find(function (d) {
-            return entry.name === d.name && entry.series === d.series;
-        });
-        return item !== undefined;
-    };
-    SeriesHorizontal.prototype.trackBy = function (index, bar) {
-        return bar.label;
-    };
-    SeriesHorizontal.prototype.click = function (data) {
-        this.select.emit(data);
-    };
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], SeriesHorizontal.prototype, "dims", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], SeriesHorizontal.prototype, "type", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], SeriesHorizontal.prototype, "series", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], SeriesHorizontal.prototype, "xScale", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], SeriesHorizontal.prototype, "yScale", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], SeriesHorizontal.prototype, "colors", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], SeriesHorizontal.prototype, "tooltipDisabled", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], SeriesHorizontal.prototype, "gradient", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Array)
-    ], SeriesHorizontal.prototype, "activeEntries", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', String)
-    ], SeriesHorizontal.prototype, "seriesName", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
-        __metadata('design:type', Object)
-    ], SeriesHorizontal.prototype, "select", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
-        __metadata('design:type', Object)
-    ], SeriesHorizontal.prototype, "activate", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
-        __metadata('design:type', Object)
-    ], SeriesHorizontal.prototype, "deactivate", void 0);
-    SeriesHorizontal = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'g[ngx-charts-series-horizontal]',
-            template: "\n    <svg:g ngx-charts-bar\n      *ngFor=\"let bar of bars; trackBy:trackBy\"\n      [@animationState]=\"'active'\"\n      [width]=\"bar.width\"\n      [height]=\"bar.height\"\n      [x]=\"bar.x\"\n      [y]=\"bar.y\"\n      [fill]=\"bar.color\"\n      [stops]=\"bar.gradientStops\"\n      [data]=\"bar.data\"\n      [orientation]=\"'horizontal'\"\n      [roundEdges]=\"bar.roundEdges\"\n      (select)=\"click($event)\"\n      [gradient]=\"gradient\"\n      [isActive]=\"isActive(bar.data)\"\n      (activate)=\"activate.emit($event)\"\n      (deactivate)=\"deactivate.emit($event)\"\n      ngx-tooltip\n      [tooltipDisabled]=\"tooltipDisabled\"\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"bar.tooltipText\">\n    </svg:g>\n  ",
-            changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectionStrategy"].OnPush,
-            animations: [
-                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["trigger"])('animationState', [
-                    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["transition"])('* => void', [
-                        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["style"])({
-                            opacity: 1,
-                            transform: '*',
-                        }),
-                        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["animate"])(500, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["style"])({ opacity: 0, transform: 'scale(0)' }))
-                    ])
-                ])
-            ]
-        }), 
-        __metadata('design:paramtypes', [])
-    ], SeriesHorizontal);
-    return SeriesHorizontal;
-}());
-
-
-/***/ }),
-
-/***/ "./src/bar-chart/series-vertical.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__common_label_helper__ = __webpack_require__("./src/common/label.helper.ts");
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SeriesVerticalComponent; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-var SeriesVerticalComponent = (function () {
-    function SeriesVerticalComponent() {
-        this.type = 'standard';
-        this.tooltipDisabled = false;
-        this.select = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-        this.activate = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-        this.deactivate = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-    }
-    SeriesVerticalComponent.prototype.ngOnChanges = function (changes) {
-        this.update();
-    };
-    SeriesVerticalComponent.prototype.update = function () {
-        var _this = this;
-        var width;
-        if (this.series.length) {
-            width = this.xScale.bandwidth();
-        }
-        var d0 = 0;
-        var total;
-        if (this.type === 'normalized') {
-            total = this.series.map(function (d) { return d.value; }).reduce(function (sum, d) { return sum + d; }, 0);
-        }
-        this.bars = this.series.map(function (d, index) {
-            var value = d.value;
-            var label = d.name;
-            var formattedLabel = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__common_label_helper__["a" /* formatLabel */])(label);
-            var roundEdges = _this.type === 'standard';
-            var bar = {
-                value: value,
-                label: label,
-                roundEdges: roundEdges,
-                data: d,
-                width: width,
-                formattedLabel: formattedLabel,
-                height: 0,
-                x: 0,
-                y: 0
-            };
-            if (_this.type === 'standard') {
-                bar.height = Math.abs(_this.yScale(value) - _this.yScale(0));
-                bar.x = _this.xScale(label);
-                if (value < 0) {
-                    bar.y = _this.yScale(0);
-                }
-                else {
-                    bar.y = _this.yScale(value);
-                }
-            }
-            else if (_this.type === 'stacked') {
-                var offset0 = d0;
-                var offset1 = offset0 + value;
-                d0 += value;
-                bar.height = _this.yScale(offset0) - _this.yScale(offset1);
-                bar.x = 0;
-                bar.y = _this.yScale(offset1);
-                bar.offset0 = offset0;
-                bar.offset1 = offset1;
-            }
-            else if (_this.type === 'normalized') {
-                var offset0 = d0;
-                var offset1 = offset0 + value;
-                d0 += value;
-                if (total > 0) {
-                    offset0 = (offset0 * 100) / total;
-                    offset1 = (offset1 * 100) / total;
-                }
-                else {
-                    offset0 = 0;
-                    offset1 = 0;
-                }
-                bar.height = _this.yScale(offset0) - _this.yScale(offset1);
-                bar.x = 0;
-                bar.y = _this.yScale(offset1);
-                bar.offset0 = offset0;
-                bar.offset1 = offset1;
-                value = (offset1 - offset0).toFixed(2) + '%';
-            }
-            if (_this.colors.scaleType === 'ordinal') {
-                bar.color = _this.colors.getColor(label);
-            }
-            else {
-                if (_this.type === 'standard') {
-                    bar.color = _this.colors.getColor(value);
-                    bar.gradientStops = _this.colors.getLinearGradientStops(value);
-                }
-                else {
-                    bar.color = _this.colors.getColor(bar.offset1);
-                    bar.gradientStops = _this.colors.getLinearGradientStops(bar.offset1, bar.offset0);
-                }
-            }
-            var tooltipLabel = formattedLabel;
-            if (_this.seriesName) {
-                tooltipLabel = _this.seriesName + " \u2022 " + formattedLabel;
-            }
-            bar.tooltipText = "\n        <span class=\"tooltip-label\">" + tooltipLabel + "</span>\n        <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n      ";
-            return bar;
-        });
-    };
-    SeriesVerticalComponent.prototype.isActive = function (entry) {
-        if (!this.activeEntries)
-            return false;
-        var item = this.activeEntries.find(function (d) {
-            return entry.name === d.name && entry.series === d.series;
-        });
-        return item !== undefined;
-    };
-    SeriesVerticalComponent.prototype.onClick = function (data) {
-        this.select.emit(data);
-    };
-    SeriesVerticalComponent.prototype.trackBy = function (index, bar) {
-        return bar.label;
-    };
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], SeriesVerticalComponent.prototype, "dims", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], SeriesVerticalComponent.prototype, "type", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], SeriesVerticalComponent.prototype, "series", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], SeriesVerticalComponent.prototype, "xScale", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], SeriesVerticalComponent.prototype, "yScale", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], SeriesVerticalComponent.prototype, "colors", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], SeriesVerticalComponent.prototype, "tooltipDisabled", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], SeriesVerticalComponent.prototype, "gradient", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Array)
-    ], SeriesVerticalComponent.prototype, "activeEntries", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', String)
-    ], SeriesVerticalComponent.prototype, "seriesName", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
-        __metadata('design:type', Object)
-    ], SeriesVerticalComponent.prototype, "select", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
-        __metadata('design:type', Object)
-    ], SeriesVerticalComponent.prototype, "activate", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
-        __metadata('design:type', Object)
-    ], SeriesVerticalComponent.prototype, "deactivate", void 0);
-    SeriesVerticalComponent = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'g[ngx-charts-series-vertical]',
-            template: "\n    <svg:g ngx-charts-bar *ngFor=\"let bar of bars; trackBy: trackBy\"\n      [@animationState]=\"'active'\"\n      [width]=\"bar.width\"\n      [height]=\"bar.height\"\n      [x]=\"bar.x\"\n      [y]=\"bar.y\"\n      [fill]=\"bar.color\"\n      [stops]=\"bar.gradientStops\"\n      [data]=\"bar.data\"\n      [orientation]=\"'vertical'\"\n      [roundEdges]=\"bar.roundEdges\"\n      [gradient]=\"gradient\"\n      [isActive]=\"isActive(bar.data)\"\n      (select)=\"onClick($event)\"\n      (activate)=\"activate.emit($event)\"\n      (deactivate)=\"deactivate.emit($event)\"\n      ngx-tooltip\n      [tooltipDisabled]=\"tooltipDisabled\"\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"bar.tooltipText\">\n    </svg:g>\n  ",
-            changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectionStrategy"].OnPush,
-            animations: [
-                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["trigger"])('animationState', [
-                    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["transition"])('* => void', [
-                        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["style"])({
-                            opacity: 1,
-                            transform: '*',
-                        }),
-                        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["animate"])(500, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["style"])({ opacity: 0, transform: 'scale(0)' }))
-                    ])
-                ])
-            ]
-        }), 
-        __metadata('design:paramtypes', [])
-    ], SeriesVerticalComponent);
-    return SeriesVerticalComponent;
-}());
-
-
-/***/ }),
-
-/***/ "./src/bubble-chart/bubble-chart.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_scale__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_scale___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_d3_scale__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_base_chart_component__ = __webpack_require__("./src/common/base-chart.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_view_dimensions_helper__ = __webpack_require__("./src/common/view-dimensions.helper.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_color_helper__ = __webpack_require__("./src/common/color.helper.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__bubble_chart_utils__ = __webpack_require__("./src/bubble-chart/bubble-chart.utils.ts");
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BubbleChartComponent; });
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-
-var BubbleChartComponent = (function (_super) {
-    __extends(BubbleChartComponent, _super);
-    function BubbleChartComponent() {
-        _super.apply(this, arguments);
-        this.view = [400, 400];
-        this.showGridLines = true;
-        this.legend = false;
-        this.xAxis = true;
-        this.yAxis = true;
-        this.roundDomains = false;
-        this.maxRadius = 10;
-        this.minRadius = 3;
-        this.schemeType = 'ordinal';
-        this.legendPosition = 'right';
-        this.tooltipDisabled = false;
-        this.activate = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-        this.deactivate = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-        this.scaleType = 'linear';
-        this.margin = [10, 20, 10, 20];
-        this.bubblePadding = [0, 0, 0, 0];
-        this.xAxisHeight = 0;
-        this.yAxisWidth = 0;
-        this.activeEntries = [];
-    }
-    BubbleChartComponent.prototype.update = function () {
-        var _this = this;
-        _super.prototype.update.call(this);
-        this.zone.run(function () {
-            _this.dims = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__common_view_dimensions_helper__["a" /* calculateViewDimensions */])({
-                width: _this.width,
-                height: _this.height,
-                margins: _this.margin,
-                showXAxis: _this.xAxis,
-                showYAxis: _this.yAxis,
-                xAxisHeight: _this.xAxisHeight,
-                yAxisWidth: _this.yAxisWidth,
-                showXLabel: _this.showXAxisLabel,
-                showYLabel: _this.showYAxisLabel,
-                showLegend: _this.legend,
-                legendType: _this.schemeType
-            });
-            _this.seriesDomain = _this.results.map(function (d) { return d.name; });
-            _this.rDomain = _this.getRDomain();
-            _this.xDomain = _this.getXDomain();
-            _this.yDomain = _this.getYDomain();
-            _this.transform = "translate(" + _this.dims.xOffset + "," + _this.margin[0] + ")";
-            var colorDomain = _this.schemeType === 'ordinal' ? _this.seriesDomain : _this.rDomain;
-            _this.colors = new __WEBPACK_IMPORTED_MODULE_4__common_color_helper__["a" /* ColorHelper */](_this.scheme, _this.schemeType, colorDomain, _this.customColors);
-            _this.data = _this.results;
-            _this.minRadius = Math.max(_this.minRadius, 1);
-            _this.maxRadius = Math.max(_this.maxRadius, 1);
-            _this.rScale = _this.getRScale(_this.rDomain, [_this.minRadius, _this.maxRadius]);
-            _this.bubblePadding = [0, 0, 0, 0];
-            _this.setScales();
-            _this.bubblePadding = _this.getBubblePadding();
-            _this.setScales();
-            _this.legendOptions = _this.getLegendOptions();
-        });
-    };
-    BubbleChartComponent.prototype.hideCircles = function () {
-        this.deactivateAll();
-    };
-    BubbleChartComponent.prototype.onClick = function (data, series) {
-        if (series) {
-            data.series = series.name;
-        }
-        this.select.emit(data);
-    };
-    BubbleChartComponent.prototype.getBubblePadding = function () {
-        var yMin = 0;
-        var xMin = 0;
-        var yMax = this.dims.height;
-        var xMax = this.dims.width;
-        for (var _i = 0, _a = this.data; _i < _a.length; _i++) {
-            var s = _a[_i];
-            for (var _b = 0, _c = s.series; _b < _c.length; _b++) {
-                var d = _c[_b];
-                var r = this.rScale(d.r);
-                var cx = (this.xScaleType === 'linear') ? this.xScale(Number(d.x)) : this.xScale(d.x);
-                var cy = (this.yScaleType === 'linear') ? this.yScale(Number(d.y)) : this.yScale(d.y);
-                xMin = Math.max(r - cx, xMin);
-                yMin = Math.max(r - cy, yMin);
-                yMax = Math.max(cy + r, yMax);
-                xMax = Math.max(cx + r, xMax);
-            }
-        }
-        return [yMin, xMax - this.dims.width, yMax - this.dims.height, xMin];
-    };
-    BubbleChartComponent.prototype.setScales = function () {
-        this.xScale = this.getXScale(this.xDomain, this.dims.width - this.bubblePadding[1]);
-        this.yScale = this.getYScale(this.yDomain, this.dims.height - this.bubblePadding[2]);
-    };
-    BubbleChartComponent.prototype.getYScale = function (domain, height) {
-        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_5__bubble_chart_utils__["a" /* getScale */])(domain, [height, this.bubblePadding[0]], this.yScaleType, this.roundDomains);
-    };
-    BubbleChartComponent.prototype.getXScale = function (domain, width) {
-        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_5__bubble_chart_utils__["a" /* getScale */])(domain, [this.bubblePadding[3], width], this.xScaleType, this.roundDomains);
-    };
-    BubbleChartComponent.prototype.getRScale = function (domain, range) {
-        var scale = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_d3_scale__["scaleLinear"])()
-            .range(range)
-            .domain(domain);
-        return this.roundDomains ? scale.nice() : scale;
-    };
-    BubbleChartComponent.prototype.getLegendOptions = function () {
-        var opts = {
-            scaleType: this.schemeType,
-            colors: undefined,
-            domain: [],
-            position: this.legendPosition
-        };
-        if (opts.scaleType === 'ordinal') {
-            opts.domain = this.seriesDomain;
-            opts.colors = this.colors;
-        }
-        else {
-            opts.domain = this.rDomain;
-            opts.colors = this.colors.scale;
-        }
-        return opts;
-    };
-    BubbleChartComponent.prototype.getXDomain = function () {
-        var values = [];
-        for (var _i = 0, _a = this.results; _i < _a.length; _i++) {
-            var results = _a[_i];
-            for (var _b = 0, _c = results.series; _b < _c.length; _b++) {
-                var d = _c[_b];
-                if (!values.includes(d.x)) {
-                    values.push(d.x);
-                }
-            }
-        }
-        this.xScaleType = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_5__bubble_chart_utils__["b" /* getScaleType */])(values);
-        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_5__bubble_chart_utils__["c" /* getDomain */])(values, this.xScaleType, this.autoScale);
-    };
-    BubbleChartComponent.prototype.getYDomain = function () {
-        var values = [];
-        for (var _i = 0, _a = this.results; _i < _a.length; _i++) {
-            var results = _a[_i];
-            for (var _b = 0, _c = results.series; _b < _c.length; _b++) {
-                var d = _c[_b];
-                if (!values.includes(d.y)) {
-                    values.push(d.y);
-                }
-            }
-        }
-        this.yScaleType = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_5__bubble_chart_utils__["b" /* getScaleType */])(values);
-        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_5__bubble_chart_utils__["c" /* getDomain */])(values, this.yScaleType, this.autoScale);
-    };
-    BubbleChartComponent.prototype.getRDomain = function () {
-        var min = Infinity;
-        var max = -Infinity;
-        for (var _i = 0, _a = this.results; _i < _a.length; _i++) {
-            var results = _a[_i];
-            for (var _b = 0, _c = results.series; _b < _c.length; _b++) {
-                var d = _c[_b];
-                var value = Number(d.r) || 1;
-                min = Math.min(min, value);
-                max = Math.max(max, value);
-            }
-        }
-        return [min, max];
-    };
-    BubbleChartComponent.prototype.updateYAxisWidth = function (_a) {
-        var width = _a.width;
-        this.yAxisWidth = width;
-        this.update();
-    };
-    BubbleChartComponent.prototype.updateXAxisHeight = function (_a) {
-        var height = _a.height;
-        this.xAxisHeight = height;
-        this.update();
-    };
-    BubbleChartComponent.prototype.onActivate = function (item) {
-        var idx = this.activeEntries.findIndex(function (d) {
-            return d.name === item.name;
-        });
-        if (idx > -1) {
-            return;
-        }
-        this.activeEntries = [item].concat(this.activeEntries);
-        this.activate.emit({ value: item, entries: this.activeEntries });
-    };
-    BubbleChartComponent.prototype.onDeactivate = function (item) {
-        var idx = this.activeEntries.findIndex(function (d) {
-            return d.name === item.name;
-        });
-        this.activeEntries.splice(idx, 1);
-        this.activeEntries = this.activeEntries.slice();
-        this.deactivate.emit({ value: item, entries: this.activeEntries });
-    };
-    BubbleChartComponent.prototype.deactivateAll = function () {
-        this.activeEntries = this.activeEntries.slice();
-        for (var _i = 0, _a = this.activeEntries; _i < _a.length; _i++) {
-            var entry = _a[_i];
-            this.deactivate.emit({ value: entry, entries: [] });
-        }
-        this.activeEntries = [];
-    };
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Array)
-    ], BubbleChartComponent.prototype, "view", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BubbleChartComponent.prototype, "results", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], BubbleChartComponent.prototype, "showGridLines", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BubbleChartComponent.prototype, "legend", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], BubbleChartComponent.prototype, "xAxis", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], BubbleChartComponent.prototype, "yAxis", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], BubbleChartComponent.prototype, "showXAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], BubbleChartComponent.prototype, "showYAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', String)
-    ], BubbleChartComponent.prototype, "xAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', String)
-    ], BubbleChartComponent.prototype, "yAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BubbleChartComponent.prototype, "xAxisTickFormatting", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BubbleChartComponent.prototype, "yAxisTickFormatting", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], BubbleChartComponent.prototype, "roundDomains", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BubbleChartComponent.prototype, "maxRadius", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BubbleChartComponent.prototype, "minRadius", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], BubbleChartComponent.prototype, "autoScale", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BubbleChartComponent.prototype, "schemeType", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', String)
-    ], BubbleChartComponent.prototype, "legendPosition", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], BubbleChartComponent.prototype, "tooltipDisabled", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
-        __metadata('design:type', __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"])
-    ], BubbleChartComponent.prototype, "activate", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
-        __metadata('design:type', __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"])
-    ], BubbleChartComponent.prototype, "deactivate", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["HostListener"])('mouseleave'), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', []), 
-        __metadata('design:returntype', void 0)
-    ], BubbleChartComponent.prototype, "hideCircles", null);
-    BubbleChartComponent = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'ngx-charts-bubble-chart',
-            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [activeEntries]=\"activeEntries\"\n      [legendOptions]=\"legendOptions\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n      <svg:g [attr.transform]=\"transform\" class=\"bubble-chart chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [showGridLines]=\"showGridLines\"\n          [dims]=\"dims\"\n          [xScale]=\"xScale\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\"/>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [showGridLines]=\"showGridLines\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\"/>\n        <svg:rect\n          class=\"bubble-chart-area\"\n          x=\"0\"\n          y=\"0\"\n          [attr.width]=\"dims.width\"\n          [attr.height]=\"dims.height\"\n          style=\"fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';\"\n          (mouseenter)=\"deactivateAll()\"\n        />\n        <svg:g *ngFor=\"let series of data\">\n          <svg:g ngx-charts-bubble-series\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [rScale]=\"rScale\"\n            [xScaleType]=\"xScaleType\"\n            [yScaleType]=\"yScaleType\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [colors]=\"colors\"\n            [data]=\"series\"\n            [activeEntries]=\"activeEntries\"\n            [tooltipDisabled]=\"tooltipDisabled\"\n            (select)=\"onClick($event, series)\"\n            (activate)=\"onActivate($event)\"\n            (deactivate)=\"onDeactivate($event)\" />\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>"
-        }), 
-        __metadata('design:paramtypes', [])
-    ], BubbleChartComponent);
-    return BubbleChartComponent;
-}(__WEBPACK_IMPORTED_MODULE_2__common_base_chart_component__["a" /* BaseChartComponent */]));
-
-
-/***/ }),
-
-/***/ "./src/bubble-chart/bubble-chart.module.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__common_chart_common_module__ = __webpack_require__("./src/common/chart-common.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__bubble_chart_component__ = __webpack_require__("./src/bubble-chart/bubble-chart.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__bubble_series_component__ = __webpack_require__("./src/bubble-chart/bubble-series.component.ts");
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_2__bubble_chart_component__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_3__bubble_series_component__["a"]; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return BubbleChartModule; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-var BubbleChartModule = (function () {
-    function BubbleChartModule() {
-    }
-    BubbleChartModule = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
-            imports: [__WEBPACK_IMPORTED_MODULE_1__common_chart_common_module__["a" /* ChartCommonModule */]],
-            declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__bubble_chart_component__["a" /* BubbleChartComponent */],
-                __WEBPACK_IMPORTED_MODULE_3__bubble_series_component__["a" /* BubbleSeriesComponent */]
-            ],
-            exports: [
-                __WEBPACK_IMPORTED_MODULE_2__bubble_chart_component__["a" /* BubbleChartComponent */],
-                __WEBPACK_IMPORTED_MODULE_3__bubble_series_component__["a" /* BubbleSeriesComponent */]
-            ]
-        }), 
-        __metadata('design:paramtypes', [])
-    ], BubbleChartModule);
-    return BubbleChartModule;
-}());
-
-
-/***/ }),
-
-/***/ "./src/bubble-chart/bubble-chart.utils.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_d3_scale__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_d3_scale___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_d3_scale__);
-/* harmony export (immutable) */ __webpack_exports__["b"] = getScaleType;
-/* harmony export (immutable) */ __webpack_exports__["c"] = getDomain;
-/* harmony export (immutable) */ __webpack_exports__["a"] = getScale;
-
-function getScaleType(values) {
-    var date = true;
-    var num = true;
-    for (var _i = 0, values_1 = values; _i < values_1.length; _i++) {
-        var value = values_1[_i];
-        if (!isDate(value)) {
-            date = false;
-        }
-        if (typeof value !== 'number') {
-            num = false;
-        }
-    }
-    if (date)
-        return 'time';
-    if (num)
-        return 'linear';
-    return 'ordinal';
+function cssWithMappingToString(item, useSourceMap) {
+	var content = item[1] || '';
+	var cssMapping = item[3];
+	if (!cssMapping) {
+		return content;
+	}
+
+	if (useSourceMap) {
+		var sourceMapping = toComment(cssMapping);
+		var sourceURLs = cssMapping.sources.map(function (source) {
+			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
+		});
+
+		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+	}
+
+	return [content].join('\n');
 }
-function isDate(value) {
-    if (value instanceof Date) {
-        return true;
-    }
-    return false;
+
+// Adapted from convert-source-map (MIT)
+function toComment(sourceMap) {
+  var base64 = new Buffer(JSON.stringify(sourceMap)).toString('base64');
+  var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
+
+  return '/*# ' + data + ' */';
 }
-function getDomain(values, scaleType, autoScale) {
-    var domain = [];
-    if (scaleType === 'time') {
-        var min = Math.min.apply(Math, values);
-        var max = Math.max.apply(Math, values);
-        domain = [min, max];
-    }
-    else if (scaleType === 'linear') {
-        values = values.map(function (v) { return Number(v); });
-        var min = Math.min.apply(Math, values);
-        var max = Math.max.apply(Math, values);
-        if (!autoScale) {
-            min = Math.min(0, min);
-        }
-        domain = [min, max];
-    }
-    else {
-        domain = values;
-    }
-    return domain;
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("./node_modules/buffer/index.js").Buffer))
+
+/***/ }),
+
+/***/ "./node_modules/ieee754/index.js":
+/***/ (function(module, exports) {
+
+exports.read = function (buffer, offset, isLE, mLen, nBytes) {
+  var e, m
+  var eLen = nBytes * 8 - mLen - 1
+  var eMax = (1 << eLen) - 1
+  var eBias = eMax >> 1
+  var nBits = -7
+  var i = isLE ? (nBytes - 1) : 0
+  var d = isLE ? -1 : 1
+  var s = buffer[offset + i]
+
+  i += d
+
+  e = s & ((1 << (-nBits)) - 1)
+  s >>= (-nBits)
+  nBits += eLen
+  for (; nBits > 0; e = e * 256 + buffer[offset + i], i += d, nBits -= 8) {}
+
+  m = e & ((1 << (-nBits)) - 1)
+  e >>= (-nBits)
+  nBits += mLen
+  for (; nBits > 0; m = m * 256 + buffer[offset + i], i += d, nBits -= 8) {}
+
+  if (e === 0) {
+    e = 1 - eBias
+  } else if (e === eMax) {
+    return m ? NaN : ((s ? -1 : 1) * Infinity)
+  } else {
+    m = m + Math.pow(2, mLen)
+    e = e - eBias
+  }
+  return (s ? -1 : 1) * m * Math.pow(2, e - mLen)
 }
-function getScale(domain, range, scaleType, roundDomains) {
-    var scale;
-    if (scaleType === 'time') {
-        scale = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_d3_scale__["scaleTime"])()
-            .range(range)
-            .domain(domain);
+
+exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
+  var e, m, c
+  var eLen = nBytes * 8 - mLen - 1
+  var eMax = (1 << eLen) - 1
+  var eBias = eMax >> 1
+  var rt = (mLen === 23 ? Math.pow(2, -24) - Math.pow(2, -77) : 0)
+  var i = isLE ? 0 : (nBytes - 1)
+  var d = isLE ? 1 : -1
+  var s = value < 0 || (value === 0 && 1 / value < 0) ? 1 : 0
+
+  value = Math.abs(value)
+
+  if (isNaN(value) || value === Infinity) {
+    m = isNaN(value) ? 1 : 0
+    e = eMax
+  } else {
+    e = Math.floor(Math.log(value) / Math.LN2)
+    if (value * (c = Math.pow(2, -e)) < 1) {
+      e--
+      c *= 2
     }
-    else if (scaleType === 'linear') {
-        scale = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_d3_scale__["scaleLinear"])()
-            .range(range)
-            .domain(domain);
-        if (roundDomains) {
-            scale = scale.nice();
-        }
+    if (e + eBias >= 1) {
+      value += rt / c
+    } else {
+      value += rt * Math.pow(2, 1 - eBias)
     }
-    else if (scaleType === 'ordinal') {
-        scale = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_d3_scale__["scalePoint"])()
-            .range([range[0], range[1]])
-            .domain(domain);
+    if (value * c >= 2) {
+      e++
+      c /= 2
     }
-    return scale;
+
+    if (e + eBias >= eMax) {
+      m = 0
+      e = eMax
+    } else if (e + eBias >= 1) {
+      m = (value * c - 1) * Math.pow(2, mLen)
+      e = e + eBias
+    } else {
+      m = value * Math.pow(2, eBias - 1) * Math.pow(2, mLen)
+      e = 0
+    }
+  }
+
+  for (; mLen >= 8; buffer[offset + i] = m & 0xff, i += d, m /= 256, mLen -= 8) {}
+
+  e = (e << mLen) | m
+  eLen += mLen
+  for (; eLen > 0; buffer[offset + i] = e & 0xff, i += d, e /= 256, eLen -= 8) {}
+
+  buffer[offset + i - d] |= s * 128
 }
 
 
 /***/ }),
 
-/***/ "./src/bubble-chart/bubble-series.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ "./node_modules/webpack/buildin/global.js":
+/***/ (function(module, exports) {
 
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__common_label_helper__ = __webpack_require__("./src/common/label.helper.ts");
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BubbleSeriesComponent; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
+var g;
 
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
 
-var BubbleSeriesComponent = (function () {
-    function BubbleSeriesComponent() {
-        this.tooltipDisabled = false;
-        this.select = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-        this.activate = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-        this.deactivate = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-    }
-    BubbleSeriesComponent.prototype.ngOnChanges = function (changes) {
-        this.update();
-    };
-    BubbleSeriesComponent.prototype.update = function () {
-        this.circles = this.getCircles();
-    };
-    BubbleSeriesComponent.prototype.getCircles = function () {
-        var _this = this;
-        var seriesName = this.data.name;
-        return this.data.series.map(function (d, i) {
-            if (typeof d.y !== 'undefined' && typeof d.x !== 'undefined') {
-                var y = d.y;
-                var x = d.x;
-                var r = d.r;
-                var radius = _this.rScale(r || 1);
-                var tooltipLabel = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__common_label_helper__["a" /* formatLabel */])(d.name);
-                var cx = (_this.xScaleType === 'linear') ? _this.xScale(Number(x)) : _this.xScale(x);
-                var cy = (_this.yScaleType === 'linear') ? _this.yScale(Number(y)) : _this.yScale(y);
-                var color = (_this.colors.scaleType === 'linear') ?
-                    _this.colors.getColor(r) :
-                    _this.colors.getColor(seriesName);
-                var isActive = !_this.activeEntries.length ? true : _this.isActive({ name: seriesName });
-                var opacity = isActive ? 1 : 0.3;
-                return {
-                    x: x,
-                    y: y,
-                    r: r,
-                    classNames: [("circle-data-" + i)],
-                    value: y,
-                    label: x,
-                    cx: cx,
-                    cy: cy,
-                    radius: radius,
-                    tooltipLabel: tooltipLabel,
-                    color: color,
-                    opacity: opacity,
-                    seriesName: seriesName,
-                    isActive: isActive
-                };
-            }
-        }).filter(function (circle) { return circle !== undefined; });
-    };
-    BubbleSeriesComponent.prototype.getTooltipText = function (circle) {
-        var hasRadius = typeof circle.r !== 'undefined';
-        var radiusValue = hasRadius ? circle.r.toLocaleString() : '';
-        var xAxisLabel = this.xAxisLabel && this.xAxisLabel !== '' ? this.xAxisLabel + ":" : '';
-        var yAxisLabel = this.yAxisLabel && this.yAxisLabel !== '' ? this.yAxisLabel + ":" : '';
-        return "\n      <span class=\"tooltip-label\">\n        " + circle.seriesName + " \u2022 " + circle.tooltipLabel + "\n      </span>\n      <span class=\"tooltip-label\">\n        <label>" + xAxisLabel + "</label> " + circle.x.toLocaleString() + "<br />\n        <label>" + yAxisLabel + "</label> " + circle.y.toLocaleString() + "\n      </span>\n      <span class=\"tooltip-val\">\n        " + radiusValue + "\n      </span>\n    ";
-    };
-    BubbleSeriesComponent.prototype.onClick = function (value, label) {
-        this.select.emit({
-            name: label,
-            value: value
-        });
-    };
-    BubbleSeriesComponent.prototype.isActive = function (entry) {
-        if (!this.activeEntries)
-            return false;
-        var item = this.activeEntries.find(function (d) {
-            return entry.name === d.name;
-        });
-        return item !== undefined;
-    };
-    BubbleSeriesComponent.prototype.isVisible = function (circle) {
-        if (this.activeEntries.length > 0) {
-            return this.isActive({ name: circle.seriesName });
-        }
-        return circle.opacity !== 0;
-    };
-    BubbleSeriesComponent.prototype.activateCircle = function (circle) {
-        circle.barVisible = true;
-        this.activate.emit({ name: this.data.name });
-    };
-    BubbleSeriesComponent.prototype.deactivateCircle = function (circle) {
-        circle.barVisible = false;
-        this.deactivate.emit({ name: this.data.name });
-    };
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BubbleSeriesComponent.prototype, "data", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BubbleSeriesComponent.prototype, "xScale", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BubbleSeriesComponent.prototype, "yScale", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BubbleSeriesComponent.prototype, "rScale", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BubbleSeriesComponent.prototype, "xScaleType", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BubbleSeriesComponent.prototype, "yScaleType", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BubbleSeriesComponent.prototype, "colors", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], BubbleSeriesComponent.prototype, "visibleValue", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Array)
-    ], BubbleSeriesComponent.prototype, "activeEntries", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', String)
-    ], BubbleSeriesComponent.prototype, "xAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', String)
-    ], BubbleSeriesComponent.prototype, "yAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], BubbleSeriesComponent.prototype, "tooltipDisabled", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
-        __metadata('design:type', Object)
-    ], BubbleSeriesComponent.prototype, "select", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
-        __metadata('design:type', Object)
-    ], BubbleSeriesComponent.prototype, "activate", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
-        __metadata('design:type', Object)
-    ], BubbleSeriesComponent.prototype, "deactivate", void 0);
-    BubbleSeriesComponent = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'g[ngx-charts-bubble-series]',
-            template: "\n    <svg:g *ngFor=\"let circle of circles\">\n      <svg:g ngx-charts-circle\n        class=\"circle\"\n        [cx]=\"circle.cx\"\n        [cy]=\"circle.cy\"\n        [r]=\"circle.radius\"\n        [fill]=\"circle.color\"\n        [style.opacity]=\"circle.opacity\"\n        [class.active]=\"circle.isActive\"\n        [pointerEvents]=\"'all'\"\n        [data]=\"circle.value\"\n        [classNames]=\"circle.classNames\"\n        (select)=\"onClick($event, circle.label)\"\n        (activate)=\"activateCircle(circle)\"\n        (deactivate)=\"deactivateCircle(circle)\"\n        ngx-tooltip\n        [tooltipDisabled]=\"tooltipDisabled\"\n        [tooltipPlacement]=\"'top'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipTitle]=\"getTooltipText(circle)\"\n      />\n    </svg:g>\n  ",
-            changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectionStrategy"].OnPush,
-            animations: [
-                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["trigger"])('animationState', [
-                    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["transition"])('void => *', [
-                        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["style"])({
-                            opacity: 0,
-                        }),
-                        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["animate"])(250, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["style"])({ opacity: 1 }))
-                    ])
-                ])
-            ]
-        }), 
-        __metadata('design:paramtypes', [])
-    ], BubbleSeriesComponent);
-    return BubbleSeriesComponent;
-}());
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
 
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
 
-/***/ }),
-
-/***/ "./src/bubble-chart/index.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bubble_chart_module__ = __webpack_require__("./src/bubble-chart/bubble-chart.module.ts");
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__bubble_chart_module__["a"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_0__bubble_chart_module__["b"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_0__bubble_chart_module__["c"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__bubble_chart_component__ = __webpack_require__("./src/bubble-chart/bubble-chart.component.ts");
-/* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__bubble_series_component__ = __webpack_require__("./src/bubble-chart/bubble-series.component.ts");
-/* unused harmony namespace reexport */
-
-
-
+module.exports = g;
 
 
 /***/ }),
@@ -5901,9 +2593,9 @@ var AreaTooltip = (function () {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_selection__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_selection__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_selection___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_d3_selection__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__angular_common__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_id__ = __webpack_require__("./src/utils/id.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AreaComponent; });
@@ -6050,7 +2742,7 @@ var AreaComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__x_axis_ticks_component__ = __webpack_require__("./src/common/axes/x-axis-ticks.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__y_axis_component__ = __webpack_require__("./src/common/axes/y-axis.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__y_axis_ticks_component__ = __webpack_require__("./src/common/axes/y-axis-ticks.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_common__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_common__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_common___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__angular_common__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AxesModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -6303,21 +2995,13 @@ var XAxisTicksComponent = (function () {
     };
     XAxisTicksComponent.prototype.getTicks = function () {
         var ticks;
-        var maxTicks = this.getMaxTicks();
+        var maxTicks = this.getMaxTicks(20);
+        var maxScaleTicks = this.getMaxTicks(100);
         if (this.tickValues) {
             ticks = this.tickValues;
         }
         else if (this.scale.ticks) {
-            ticks = this.scale.ticks.apply(this.scale, this.tickArguments);
-            if (ticks.length > maxTicks) {
-                if (this.tickArguments) {
-                    this.tickArguments[0] = Math.min(this.tickArguments[0], maxTicks);
-                }
-                else {
-                    this.tickArguments = [maxTicks];
-                }
-                ticks = this.scale.ticks.apply(this.scale, this.tickArguments);
-            }
+            ticks = this.scale.ticks.apply(this.scale, [maxScaleTicks]);
         }
         else {
             ticks = this.scale.domain();
@@ -6325,8 +3009,7 @@ var XAxisTicksComponent = (function () {
         }
         return ticks;
     };
-    XAxisTicksComponent.prototype.getMaxTicks = function () {
-        var tickWidth = 20;
+    XAxisTicksComponent.prototype.getMaxTicks = function (tickWidth) {
         return Math.floor(this.width / tickWidth);
     };
     XAxisTicksComponent.prototype.tickTransform = function (tick) {
@@ -6614,21 +3297,13 @@ var YAxisTicksComponent = (function () {
     };
     YAxisTicksComponent.prototype.getTicks = function () {
         var ticks;
-        var maxTicks = this.getMaxTicks();
+        var maxTicks = this.getMaxTicks(20);
+        var maxScaleTicks = this.getMaxTicks(50);
         if (this.tickValues) {
             ticks = this.tickValues;
         }
         else if (this.scale.ticks) {
-            ticks = this.scale.ticks.apply(this.scale, this.tickArguments);
-            if (ticks.length > maxTicks) {
-                if (this.tickArguments) {
-                    this.tickArguments[0] = Math.min(this.tickArguments[0], maxTicks);
-                }
-                else {
-                    this.tickArguments = [maxTicks];
-                }
-                ticks = this.scale.ticks.apply(this.scale, this.tickArguments);
-            }
+            ticks = this.scale.ticks.apply(this.scale, [maxScaleTicks]);
         }
         else {
             ticks = this.scale.domain();
@@ -6636,8 +3311,7 @@ var YAxisTicksComponent = (function () {
         }
         return ticks;
     };
-    YAxisTicksComponent.prototype.getMaxTicks = function () {
-        var tickHeight = 20;
+    YAxisTicksComponent.prototype.getMaxTicks = function (tickHeight) {
         return Math.floor(this.height / tickHeight);
     };
     YAxisTicksComponent.prototype.tickTransform = function (tick) {
@@ -6819,7 +3493,7 @@ var YAxisComponent = (function () {
 /***/ (function(module, exports, __webpack_require__) {
 
 
-        var result = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/index.js?sourceMap!./src/common/base-chart.component.scss");
+        var result = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/lib/loader.js?sourceMap!./src/common/base-chart.component.scss");
 
         if (typeof result === "string") {
             module.exports = result;
@@ -6836,13 +3510,13 @@ var YAxisComponent = (function () {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__angular_common__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_observable_fromEvent__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_observable_fromEvent__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_observable_fromEvent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_observable_fromEvent__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_debounceTime__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_debounceTime__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_debounceTime___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_debounceTime__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils__ = __webpack_require__("./src/utils/index.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BaseChartComponent; });
@@ -7035,7 +3709,7 @@ var BaseChartComponent = (function () {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__angular_common__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__charts_chart_component__ = __webpack_require__("./src/common/charts/chart.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__legend__ = __webpack_require__("./src/common/legend/index.ts");
@@ -7274,7 +3948,7 @@ var ChartComponent = (function () {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__angular_common__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_label_helper__ = __webpack_require__("./src/common/label.helper.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_id__ = __webpack_require__("./src/utils/id.ts");
@@ -7632,9 +4306,9 @@ var CircleComponent = (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_d3_array__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_d3_array__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_d3_array___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_d3_array__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_scale__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_scale__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_scale___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_d3_scale__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_color_sets__ = __webpack_require__("./src/utils/color-sets.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ColorHelper; });
@@ -7991,8 +4665,8 @@ function decimalChecker(countTo) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__count_directive__ = __webpack_require__("./src/common/count/count.directive.ts");
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__count_directive__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__count_helper__ = __webpack_require__("./src/common/count/count.helper.ts");
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_1__count_helper__["a"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_1__count_helper__["b"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_1__count_helper__["b"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_1__count_helper__["a"]; });
 
 
 
@@ -8003,7 +4677,7 @@ function decimalChecker(countTo) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_d3_scale__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_d3_scale__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_d3_scale___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_d3_scale__);
 /* harmony export (immutable) */ __webpack_exports__["b"] = gridSize;
 /* harmony export (immutable) */ __webpack_exports__["a"] = gridLayout;
@@ -8053,7 +4727,7 @@ function gridLayout(dims, data, minWidth) {
         res[i].y = yScale(Math.floor(i / columns));
         res[i].width = cardWidth;
         res[i].height = cardHeight;
-        res[i].data.percent = res[i].data.value / total;
+        res[i].data.percent = (total > 0) ? res[i].data.value / total : 0;
         res[i].data.total = total;
     }
     return res;
@@ -8245,8 +4919,8 @@ var GridPanelComponent = (function () {
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "B", function() { return __WEBPACK_IMPORTED_MODULE_2__tooltip__["g"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__count__ = __webpack_require__("./src/common/count/index.ts");
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "C", function() { return __WEBPACK_IMPORTED_MODULE_3__count__["a"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "D", function() { return __WEBPACK_IMPORTED_MODULE_3__count__["c"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "E", function() { return __WEBPACK_IMPORTED_MODULE_3__count__["b"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "D", function() { return __WEBPACK_IMPORTED_MODULE_3__count__["b"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "E", function() { return __WEBPACK_IMPORTED_MODULE_3__count__["c"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__timeline__ = __webpack_require__("./src/common/timeline/index.ts");
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "F", function() { return __WEBPACK_IMPORTED_MODULE_4__timeline__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__color_helper__ = __webpack_require__("./src/common/color.helper.ts");
@@ -8336,7 +5010,7 @@ function formatLabel(label) {
 /***/ (function(module, exports, __webpack_require__) {
 
 
-        var result = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/index.js?sourceMap!./src/common/legend/advanced-legend.component.scss");
+        var result = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/lib/loader.js?sourceMap!./src/common/legend/advanced-legend.component.scss");
 
         if (typeof result === "string") {
             module.exports = result;
@@ -8568,7 +5242,7 @@ var LegendEntryComponent = (function () {
 /***/ (function(module, exports, __webpack_require__) {
 
 
-        var result = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/index.js?sourceMap!./src/common/legend/legend.component.scss");
+        var result = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/lib/loader.js?sourceMap!./src/common/legend/legend.component.scss");
 
         if (typeof result === "string") {
             module.exports = result;
@@ -8718,7 +5392,7 @@ var LegendComponent = (function () {
 /***/ (function(module, exports, __webpack_require__) {
 
 
-        var result = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/index.js?sourceMap!./src/common/legend/scale-legend.component.scss");
+        var result = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/lib/loader.js?sourceMap!./src/common/legend/scale-legend.component.scss");
 
         if (typeof result === "string") {
             module.exports = result;
@@ -8935,7 +5609,7 @@ var SvgRadialGradientComponent = (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_d3_time_format__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_d3_time_format__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_d3_time_format___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_d3_time_format__);
 /* harmony export (immutable) */ __webpack_exports__["a"] = tickFormat;
 
@@ -8970,7 +5644,7 @@ function tickFormat(fieldType, groupByType) {
 /***/ (function(module, exports, __webpack_require__) {
 
 
-        var result = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/index.js?sourceMap!./src/common/timeline/timeline.component.scss");
+        var result = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/lib/loader.js?sourceMap!./src/common/timeline/timeline.component.scss");
 
         if (typeof result === "string") {
             module.exports = result;
@@ -8987,13 +5661,13 @@ function tickFormat(fieldType, groupByType) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__angular_common__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_d3_brush__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_d3_brush___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_d3_brush__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_d3_scale__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_d3_scale__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_d3_scale___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_d3_scale__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_d3_selection__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_d3_selection__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_d3_selection___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_d3_selection__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils__ = __webpack_require__("./src/utils/index.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Timeline; });
@@ -9820,7 +6494,7 @@ var StyleTypes;
 /***/ (function(module, exports, __webpack_require__) {
 
 
-        var result = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/index.js?sourceMap!./src/common/tooltip/tooltip.component.scss");
+        var result = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/lib/loader.js?sourceMap!./src/common/tooltip/tooltip.component.scss");
 
         if (typeof result === "string") {
             module.exports = result;
@@ -10273,7 +6947,7 @@ var TooltipDirective = (function () {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__angular_common__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__tooltip_directive__ = __webpack_require__("./src/common/tooltip/tooltip.directive.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__tooltip_component__ = __webpack_require__("./src/common/tooltip/tooltip.component.ts");
@@ -10438,1686 +7112,6 @@ function calculateViewDimensions(_a) {
 
 /***/ }),
 
-/***/ "./src/force-directed-graph/force-directed-graph.component.scss":
-/***/ (function(module, exports, __webpack_require__) {
-
-
-        var result = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/index.js?sourceMap!./src/force-directed-graph/force-directed-graph.component.scss");
-
-        if (typeof result === "string") {
-            module.exports = result;
-        } else {
-            module.exports = result.toString();
-        }
-    
-
-/***/ }),
-
-/***/ "./src/force-directed-graph/force-directed-graph.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_force__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_force___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_d3_force__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_charts_chart_component__ = __webpack_require__("./src/common/charts/chart.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_base_chart_component__ = __webpack_require__("./src/common/base-chart.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_view_dimensions_helper__ = __webpack_require__("./src/common/view-dimensions.helper.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_color_helper__ = __webpack_require__("./src/common/color.helper.ts");
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ForceDirectedGraphComponent; });
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-
-var ForceDirectedGraphComponent = (function (_super) {
-    __extends(ForceDirectedGraphComponent, _super);
-    function ForceDirectedGraphComponent() {
-        _super.apply(this, arguments);
-        this.force = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_d3_force__["forceSimulation"])()
-            .force('charge', __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_d3_force__["forceManyBody"])())
-            .force('collide', __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_d3_force__["forceCollide"])(5))
-            .force('x', __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_d3_force__["forceX"])())
-            .force('y', __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_d3_force__["forceY"])());
-        this.forceLink = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_d3_force__["forceLink"])().id(function (node) { return node.value; });
-        this.nodes = [];
-        this.links = [];
-        this.activeEntries = [];
-        this.tooltipDisabled = false;
-        this.activate = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-        this.deactivate = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-        this.margin = [0, 0, 0, 0];
-        this.results = [];
-        this.groupResultsBy = function (node) { return node.value; };
-    }
-    ForceDirectedGraphComponent.prototype.update = function () {
-        var _this = this;
-        _super.prototype.update.call(this);
-        this.zone.run(function () {
-            // center graph
-            _this.dims = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__common_view_dimensions_helper__["a" /* calculateViewDimensions */])({
-                width: _this.width,
-                height: _this.height,
-                margins: _this.margin,
-                showLegend: _this.legend,
-            });
-            _this.seriesDomain = _this.getSeriesDomain();
-            _this.setColors();
-            _this.legendOptions = _this.getLegendOptions();
-            _this.transform = "\n        translate(" + (_this.dims.xOffset + _this.dims.width / 2) + ", " + (_this.margin[0] + _this.dims.height / 2) + ")\n      ";
-            if (_this.force) {
-                _this.force.nodes(_this.nodes)
-                    .force('link', _this.forceLink.links(_this.links))
-                    .alpha(0.5).restart();
-            }
-        });
-    };
-    ForceDirectedGraphComponent.prototype.onClick = function (data) {
-        this.select.emit(data);
-    };
-    ForceDirectedGraphComponent.prototype.onActivate = function (event) {
-        if (this.activeEntries.indexOf(event) > -1)
-            return;
-        this.activeEntries = [event].concat(this.activeEntries);
-        this.activate.emit({ value: event, entries: this.activeEntries });
-    };
-    ForceDirectedGraphComponent.prototype.onDeactivate = function (event) {
-        var idx = this.activeEntries.indexOf(event);
-        this.activeEntries.splice(idx, 1);
-        this.activeEntries = this.activeEntries.slice();
-        this.deactivate.emit({ value: event, entries: this.activeEntries });
-    };
-    ForceDirectedGraphComponent.prototype.getSeriesDomain = function () {
-        var _this = this;
-        return this.nodes.map(function (d) { return _this.groupResultsBy(d); })
-            .reduce(function (nodes, node) { return nodes.includes(node) ? nodes : nodes.concat([node]); }, [])
-            .sort();
-    };
-    ForceDirectedGraphComponent.prototype.trackLinkBy = function (index, link) {
-        return link.index;
-    };
-    ForceDirectedGraphComponent.prototype.trackNodeBy = function (index, node) {
-        return node.value;
-    };
-    ForceDirectedGraphComponent.prototype.setColors = function () {
-        this.colors = new __WEBPACK_IMPORTED_MODULE_5__common_color_helper__["a" /* ColorHelper */](this.scheme, 'ordinal', this.seriesDomain, this.customColors);
-    };
-    ForceDirectedGraphComponent.prototype.getLegendOptions = function () {
-        return {
-            scaleType: 'ordinal',
-            domain: this.seriesDomain,
-            colors: this.colors
-        };
-    };
-    // Easier to use Angular2 event management than use d3.drag
-    ForceDirectedGraphComponent.prototype.onDragStart = function (node, $event) {
-        this.force.alphaTarget(0.3).restart();
-        this.draggingNode = node;
-        this.draggingStart = { x: $event.x - node.x, y: $event.y - node.y };
-        this.draggingNode.fx = $event.x - this.draggingStart.x;
-        this.draggingNode.fy = $event.y - this.draggingStart.y;
-    };
-    ForceDirectedGraphComponent.prototype.onDrag = function ($event) {
-        if (!this.draggingNode)
-            return;
-        this.draggingNode.fx = $event.x - this.draggingStart.x;
-        this.draggingNode.fy = $event.y - this.draggingStart.y;
-    };
-    ForceDirectedGraphComponent.prototype.onDragEnd = function (node, $event) {
-        if (!this.draggingNode)
-            return;
-        this.force.alphaTarget(0);
-        this.draggingNode.fx = undefined;
-        this.draggingNode.fy = undefined;
-        this.draggingNode = undefined;
-    };
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], ForceDirectedGraphComponent.prototype, "force", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], ForceDirectedGraphComponent.prototype, "forceLink", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], ForceDirectedGraphComponent.prototype, "legend", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Array)
-    ], ForceDirectedGraphComponent.prototype, "nodes", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Array)
-    ], ForceDirectedGraphComponent.prototype, "links", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Array)
-    ], ForceDirectedGraphComponent.prototype, "activeEntries", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], ForceDirectedGraphComponent.prototype, "tooltipDisabled", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
-        __metadata('design:type', __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"])
-    ], ForceDirectedGraphComponent.prototype, "activate", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
-        __metadata('design:type', __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"])
-    ], ForceDirectedGraphComponent.prototype, "deactivate", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ContentChild"])('linkTemplate'), 
-        __metadata('design:type', __WEBPACK_IMPORTED_MODULE_0__angular_core__["TemplateRef"])
-    ], ForceDirectedGraphComponent.prototype, "linkTemplate", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ContentChild"])('nodeTemplate'), 
-        __metadata('design:type', __WEBPACK_IMPORTED_MODULE_0__angular_core__["TemplateRef"])
-    ], ForceDirectedGraphComponent.prototype, "nodeTemplate", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_2__common_charts_chart_component__["a" /* ChartComponent */], { read: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] }), 
-        __metadata('design:type', __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"])
-    ], ForceDirectedGraphComponent.prototype, "chart", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Function)
-    ], ForceDirectedGraphComponent.prototype, "groupResultsBy", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["HostListener"])('document:mousemove', ['$event']), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', [MouseEvent]), 
-        __metadata('design:returntype', void 0)
-    ], ForceDirectedGraphComponent.prototype, "onDrag", null);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["HostListener"])('document:mouseup'), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', [Object, MouseEvent]), 
-        __metadata('design:returntype', void 0)
-    ], ForceDirectedGraphComponent.prototype, "onDragEnd", null);
-    ForceDirectedGraphComponent = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'ngx-charts-force-directed-graph',
-            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"force-directed-graph chart\">\n        <svg:g class=\"links\">\n          <svg:g *ngFor=\"let link of links; trackBy:trackLinkBy\">\n            <template *ngIf=\"linkTemplate\"\n              [ngTemplateOutlet]=\"linkTemplate\"\n              [ngOutletContext]=\"{ $implicit: link }\">\n            </template>\n            <svg:line *ngIf=\"!linkTemplate\"\n              strokeWidth=\"1\" class=\"edge\"\n              [attr.x1]=\"link.source.x\"\n              [attr.y1]=\"link.source.y\"\n              [attr.x2]=\"link.target.x\"\n              [attr.y2]=\"link.target.y\"\n            />\n          </svg:g>\n        </svg:g>\n        <svg:g class=\"nodes\">\n          <svg:g *ngFor=\"let node of nodes; trackBy:trackNodeBy\"\n            [attr.transform]=\"'translate(' + node.x + ',' + node.y + ')'\"\n            [attr.fill]=\"colors.getColor(groupResultsBy(node))\"\n            [attr.stroke]=\"colors.getColor(groupResultsBy(node))\"\n            (mousedown)=\"onDragStart(node, $event)\"\n            (click)=\"onClick({name: node.value})\"\n            ngx-tooltip\n            [tooltipDisabled]=\"tooltipDisabled\"\n            [tooltipPlacement]=\"'top'\"\n            [tooltipType]=\"'tooltip'\"\n            [tooltipTitle]=\"node.value\">\n            <template *ngIf=\"nodeTemplate\"\n              [ngTemplateOutlet]=\"nodeTemplate\"\n              [ngOutletContext]=\"{ $implicit: node }\">\n            </template>\n            <svg:circle *ngIf=\"!nodeTemplate\" r=\"5\" />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
-            styles: [
-                __webpack_require__("./src/common/base-chart.component.scss"),
-                __webpack_require__("./src/force-directed-graph/force-directed-graph.component.scss")
-            ],
-            encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewEncapsulation"].None,
-            changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectionStrategy"].OnPush,
-        }), 
-        __metadata('design:paramtypes', [])
-    ], ForceDirectedGraphComponent);
-    return ForceDirectedGraphComponent;
-}(__WEBPACK_IMPORTED_MODULE_3__common_base_chart_component__["a" /* BaseChartComponent */]));
-
-
-/***/ }),
-
-/***/ "./src/force-directed-graph/force-directed-graph.module.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__force_directed_graph_component__ = __webpack_require__("./src/force-directed-graph/force-directed-graph.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_chart_common_module__ = __webpack_require__("./src/common/chart-common.module.ts");
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_1__force_directed_graph_component__["a"]; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return ForceDirectedGraphModule; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-var ForceDirectedGraphModule = (function () {
-    function ForceDirectedGraphModule() {
-    }
-    ForceDirectedGraphModule = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
-            imports: [__WEBPACK_IMPORTED_MODULE_2__common_chart_common_module__["a" /* ChartCommonModule */]],
-            declarations: [
-                __WEBPACK_IMPORTED_MODULE_1__force_directed_graph_component__["a" /* ForceDirectedGraphComponent */],
-            ],
-            exports: [
-                __WEBPACK_IMPORTED_MODULE_1__force_directed_graph_component__["a" /* ForceDirectedGraphComponent */],
-            ]
-        }), 
-        __metadata('design:paramtypes', [])
-    ], ForceDirectedGraphModule);
-    return ForceDirectedGraphModule;
-}());
-
-
-/***/ }),
-
-/***/ "./src/force-directed-graph/index.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__force_directed_graph_module__ = __webpack_require__("./src/force-directed-graph/force-directed-graph.module.ts");
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__force_directed_graph_module__["a"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_0__force_directed_graph_module__["b"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__force_directed_graph_component__ = __webpack_require__("./src/force-directed-graph/force-directed-graph.component.ts");
-/* unused harmony namespace reexport */
-
-
-
-
-/***/ }),
-
-/***/ "./src/gauge/gauge-arc.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__common_label_helper__ = __webpack_require__("./src/common/label.helper.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_color_helper__ = __webpack_require__("./src/common/color.helper.ts");
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GaugeArcComponent; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-var GaugeArcComponent = (function () {
-    function GaugeArcComponent() {
-        this.isActive = false;
-        this.tooltipDisabled = false;
-        this.select = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-        this.activate = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-        this.deactivate = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-    }
-    GaugeArcComponent.prototype.tooltipText = function (arc) {
-        var label = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__common_label_helper__["a" /* formatLabel */])(arc.data.name);
-        var val = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__common_label_helper__["a" /* formatLabel */])(arc.data.value);
-        return "\n      <span class=\"tooltip-label\">" + label + "</span>\n      <span class=\"tooltip-val\">" + val + "</span>\n    ";
-    };
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], GaugeArcComponent.prototype, "backgroundArc", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], GaugeArcComponent.prototype, "valueArc", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], GaugeArcComponent.prototype, "cornerRadius", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', __WEBPACK_IMPORTED_MODULE_2__common_color_helper__["a" /* ColorHelper */])
-    ], GaugeArcComponent.prototype, "colors", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], GaugeArcComponent.prototype, "isActive", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], GaugeArcComponent.prototype, "tooltipDisabled", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
-        __metadata('design:type', Object)
-    ], GaugeArcComponent.prototype, "select", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
-        __metadata('design:type', Object)
-    ], GaugeArcComponent.prototype, "activate", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
-        __metadata('design:type', Object)
-    ], GaugeArcComponent.prototype, "deactivate", void 0);
-    GaugeArcComponent = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'g[ngx-charts-gauge-arc]',
-            template: "\n    <svg:g ngx-charts-pie-arc\n        class=\"background-arc\"\n        [startAngle]=\"0\"\n        [endAngle]=\"backgroundArc.endAngle\"\n        [innerRadius]=\"backgroundArc.innerRadius\"\n        [outerRadius]=\"backgroundArc.outerRadius\"\n        [cornerRadius]=\"cornerRadius\"\n        [data]=\"backgroundArc.data\"\n        [animate]=\"false\"\n        [pointerEvents]=\"false\">\n    </svg:g>\n    <svg:g ngx-charts-pie-arc\n        [startAngle]=\"0\"\n        [endAngle]=\"valueArc.endAngle\"\n        [innerRadius]=\"valueArc.innerRadius\"\n        [outerRadius]=\"valueArc.outerRadius\"\n        [cornerRadius]=\"cornerRadius\"\n        [fill]=\"colors.getColor(valueArc.data.name)\"\n        [data]=\"valueArc.data\"\n        [animate]=\"true\"\n        [isActive]=\"isActive\"\n        (select)=\"select.emit($event)\"\n        (activate)=\"activate.emit($event)\"\n        (deactivate)=\"deactivate.emit($event)\"\n        ngx-tooltip\n        [tooltipDisabled]=\"tooltipDisabled\"\n        [tooltipPlacement]=\"'top'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipTitle]=\"tooltipText(valueArc)\">\n    </svg:g>\n  ",
-            changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectionStrategy"].OnPush,
-        }), 
-        __metadata('design:paramtypes', [])
-    ], GaugeArcComponent);
-    return GaugeArcComponent;
-}());
-
-
-/***/ }),
-
-/***/ "./src/gauge/gauge-axis.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_shape__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_shape___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_d3_shape__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GaugeAxisComponent; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-var GaugeAxisComponent = (function () {
-    function GaugeAxisComponent() {
-        this.rotate = '';
-    }
-    GaugeAxisComponent.prototype.ngOnChanges = function () {
-        this.update();
-    };
-    GaugeAxisComponent.prototype.update = function () {
-        this.rotationAngle = -90 + this.startAngle;
-        this.rotate = "rotate(" + this.rotationAngle + ")";
-        this.ticks = this.getTicks();
-    };
-    GaugeAxisComponent.prototype.getTicks = function () {
-        var bigTickSegment = this.angleSpan / this.bigSegments;
-        var smallTickSegment = bigTickSegment / (this.smallSegments);
-        var tickLength = 20;
-        var ticks = {
-            big: [],
-            small: []
-        };
-        var startDistance = this.radius + 10;
-        var textDist = startDistance + tickLength + 10;
-        for (var i = 0; i <= this.bigSegments; i++) {
-            var angleDeg = i * bigTickSegment;
-            var angle = angleDeg * Math.PI / 180;
-            var textAnchor = this.getTextAnchor(angleDeg);
-            var skip = false;
-            if (i === 0 && this.angleSpan === 360) {
-                skip = true;
-            }
-            if (!skip) {
-                var text = Number.parseFloat(this.valueScale.invert(angleDeg).toString()).toLocaleString();
-                if (this.tickFormatting) {
-                    text = this.tickFormatting(text);
-                }
-                ticks.big.push({
-                    line: this.getTickPath(startDistance, tickLength, angle),
-                    textAnchor: textAnchor,
-                    text: text,
-                    textTransform: "\n            translate(" + textDist * Math.cos(angle) + ", " + textDist * Math.sin(angle) + ") rotate(" + -this.rotationAngle + ")\n          "
-                });
-            }
-            if (i === this.bigSegments) {
-                continue;
-            }
-            for (var j = 1; j <= this.smallSegments; j++) {
-                var smallAngleDeg = angleDeg + j * smallTickSegment;
-                var smallAngle = smallAngleDeg * Math.PI / 180;
-                ticks.small.push({
-                    line: this.getTickPath(startDistance, tickLength / 2, smallAngle)
-                });
-            }
-        }
-        return ticks;
-    };
-    GaugeAxisComponent.prototype.getTextAnchor = function (angle) {
-        // [0, 45] = 'middle';
-        // [46, 135] = 'start';
-        // [136, 225] = 'middle';
-        // [226, 315] = 'end';
-        angle = (this.startAngle + angle) % 360;
-        var textAnchor = 'middle';
-        if (angle > 45 && angle <= 135) {
-            textAnchor = 'start';
-        }
-        else if (angle > 225 && angle <= 315) {
-            textAnchor = 'end';
-        }
-        return textAnchor;
-    };
-    GaugeAxisComponent.prototype.getTickPath = function (startDistance, tickLength, angle) {
-        var y1 = startDistance * Math.sin(angle);
-        var y2 = (startDistance + tickLength) * Math.sin(angle);
-        var x1 = startDistance * Math.cos(angle);
-        var x2 = (startDistance + tickLength) * Math.cos(angle);
-        var points = [{ x: x1, y: y1 }, { x: x2, y: y2 }];
-        var lineGenerator = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_d3_shape__["line"])().x(function (d) { return d.x; }).y(function (d) { return d.y; });
-        return lineGenerator(points);
-    };
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], GaugeAxisComponent.prototype, "bigSegments", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], GaugeAxisComponent.prototype, "smallSegments", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], GaugeAxisComponent.prototype, "min", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], GaugeAxisComponent.prototype, "max", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Number)
-    ], GaugeAxisComponent.prototype, "angleSpan", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Number)
-    ], GaugeAxisComponent.prototype, "startAngle", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], GaugeAxisComponent.prototype, "radius", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], GaugeAxisComponent.prototype, "valueScale", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], GaugeAxisComponent.prototype, "tickFormatting", void 0);
-    GaugeAxisComponent = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'g[ngx-charts-gauge-axis]',
-            template: "\n    <svg:g [attr.transform]=\"rotate\">\n        <svg:g *ngFor=\"let tick of ticks.big\"\n            class=\"gauge-tick gauge-tick-large\">\n            <svg:path [attr.d]=\"tick.line\" />\n        </svg:g>\n        <svg:g *ngFor=\"let tick of ticks.big\"\n            class=\"gauge-tick gauge-tick-large\">\n            <svg:text\n                [style.textAnchor]=\"tick.textAnchor\"\n                [attr.transform]=\"tick.textTransform\"\n                alignment-baseline=\"central\">\n                {{tick.text}}\n            </svg:text>\n        </svg:g>\n        <svg:g *ngFor=\"let tick of ticks.small\"\n            class=\"gauge-tick gauge-tick-small\">\n            <svg:path [attr.d]=\"tick.line\" />\n        </svg:g>\n    </svg:g>\n  ",
-            changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectionStrategy"].OnPush
-        }), 
-        __metadata('design:paramtypes', [])
-    ], GaugeAxisComponent);
-    return GaugeAxisComponent;
-}());
-
-
-/***/ }),
-
-/***/ "./src/gauge/gauge.component.scss":
-/***/ (function(module, exports, __webpack_require__) {
-
-
-        var result = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/index.js?sourceMap!./src/gauge/gauge.component.scss");
-
-        if (typeof result === "string") {
-            module.exports = result;
-        } else {
-            module.exports = result.toString();
-        }
-    
-
-/***/ }),
-
-/***/ "./src/gauge/gauge.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_scale__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_scale___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_d3_scale__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_base_chart_component__ = __webpack_require__("./src/common/base-chart.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_view_dimensions_helper__ = __webpack_require__("./src/common/view-dimensions.helper.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_color_helper__ = __webpack_require__("./src/common/color.helper.ts");
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GaugeComponent; });
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-var GaugeComponent = (function (_super) {
-    __extends(GaugeComponent, _super);
-    function GaugeComponent() {
-        _super.apply(this, arguments);
-        this.legend = false;
-        this.min = 0;
-        this.max = 100;
-        this.bigSegments = 10;
-        this.smallSegments = 5;
-        this.showAxis = true;
-        this.startAngle = -120;
-        this.angleSpan = 240;
-        this.activeEntries = [];
-        this.tooltipDisabled = false;
-        this.activate = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-        this.deactivate = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-        this.resizeScale = 1;
-        this.rotation = '';
-        this.textTransform = 'scale(1, 1)';
-        this.cornerRadius = 10;
-    }
-    GaugeComponent.prototype.ngAfterViewInit = function () {
-        var _this = this;
-        _super.prototype.ngAfterViewInit.call(this);
-        setTimeout(function () { return _this.scaleText(); });
-    };
-    GaugeComponent.prototype.update = function () {
-        var _this = this;
-        _super.prototype.update.call(this);
-        this.zone.run(function () {
-            if (!_this.showAxis) {
-                if (!_this.margin) {
-                    _this.margin = [10, 20, 10, 20];
-                }
-            }
-            else {
-                if (!_this.margin) {
-                    _this.margin = [60, 100, 60, 100];
-                }
-            }
-            // make the starting angle positive
-            if (_this.startAngle < 0) {
-                _this.startAngle = (_this.startAngle % 360) + 360;
-            }
-            _this.angleSpan = Math.min(_this.angleSpan, 360);
-            _this.dims = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__common_view_dimensions_helper__["a" /* calculateViewDimensions */])({
-                width: _this.width,
-                height: _this.height,
-                margins: _this.margin,
-                showLegend: _this.legend
-            });
-            _this.domain = _this.getDomain();
-            _this.valueDomain = _this.getValueDomain();
-            _this.valueScale = _this.getValueScale();
-            _this.displayValue = _this.getDisplayValue();
-            _this.outerRadius = Math.min(_this.dims.width, _this.dims.height) / 2;
-            _this.arcs = _this.getArcs();
-            _this.setColors();
-            _this.legendOptions = _this.getLegendOptions();
-            var xOffset = _this.margin[3] + _this.dims.width / 2;
-            var yOffset = _this.margin[0] + _this.dims.height / 2;
-            _this.transform = "translate(" + xOffset + ", " + yOffset + ")";
-            _this.rotation = "rotate(" + _this.startAngle + ")";
-            setTimeout(function () { return _this.scaleText(); }, 50);
-        });
-    };
-    GaugeComponent.prototype.getArcs = function () {
-        var arcs = [];
-        var availableRadius = this.outerRadius * 0.7;
-        var radiusPerArc = Math.min(availableRadius / this.results.length, 10);
-        var arcWidth = radiusPerArc * 0.7;
-        this.textRadius = this.outerRadius - this.results.length * radiusPerArc;
-        this.cornerRadius = Math.floor(arcWidth / 2);
-        var i = 0;
-        for (var _i = 0, _a = this.results; _i < _a.length; _i++) {
-            var d = _a[_i];
-            var outerRadius = this.outerRadius - (i * radiusPerArc);
-            var innerRadius = outerRadius - arcWidth;
-            var backgroundArc = {
-                endAngle: this.angleSpan * Math.PI / 180,
-                innerRadius: innerRadius,
-                outerRadius: outerRadius,
-                data: {
-                    value: this.max,
-                    name: d.name
-                }
-            };
-            var valueArc = {
-                endAngle: Math.min(this.valueScale(d.value), this.angleSpan) * Math.PI / 180,
-                innerRadius: innerRadius,
-                outerRadius: outerRadius,
-                data: {
-                    value: d.value,
-                    name: d.name
-                }
-            };
-            var arc = {
-                backgroundArc: backgroundArc,
-                valueArc: valueArc
-            };
-            arcs.push(arc);
-            i++;
-        }
-        return arcs;
-    };
-    GaugeComponent.prototype.getDomain = function () {
-        return this.results.map(function (d) { return d.name; });
-    };
-    GaugeComponent.prototype.getValueDomain = function () {
-        var values = this.results.map(function (d) { return d.value; });
-        var dataMin = Math.min.apply(Math, values);
-        var dataMax = Math.max.apply(Math, values);
-        if (this.min !== undefined) {
-            this.min = Math.min(this.min, dataMin);
-        }
-        else {
-            this.min = dataMin;
-        }
-        if (this.max !== undefined) {
-            this.max = Math.max(this.max, dataMax);
-        }
-        else {
-            this.max = dataMax;
-        }
-        return [this.min, this.max];
-    };
-    GaugeComponent.prototype.getValueScale = function () {
-        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_d3_scale__["scaleLinear"])()
-            .range([0, this.angleSpan])
-            .nice()
-            .domain(this.valueDomain);
-    };
-    GaugeComponent.prototype.getDisplayValue = function () {
-        var value = this.results.map(function (d) { return d.value; }).reduce(function (a, b) { return a + b; }, 0);
-        if (this.textValue && 0 !== this.textValue.length) {
-            return this.textValue.toLocaleString();
-        }
-        return value.toLocaleString();
-    };
-    GaugeComponent.prototype.scaleText = function (repeat) {
-        var _this = this;
-        if (repeat === void 0) { repeat = true; }
-        this.zone.run(function () {
-            var width = _this.textEl.nativeElement.getBoundingClientRect().width;
-            var oldScale = _this.resizeScale;
-            if (width === 0) {
-                _this.resizeScale = 1;
-            }
-            else {
-                var availableSpace = _this.textRadius;
-                _this.resizeScale = Math.floor((availableSpace / (width / _this.resizeScale)) * 100) / 100;
-            }
-            if (_this.resizeScale !== oldScale) {
-                _this.textTransform = "scale(" + _this.resizeScale + ", " + _this.resizeScale + ")";
-                _this.cd.markForCheck();
-                if (repeat) {
-                    setTimeout(function () { return _this.scaleText(false); }, 50);
-                }
-            }
-        });
-    };
-    GaugeComponent.prototype.onClick = function (data) {
-        this.select.emit(data);
-    };
-    GaugeComponent.prototype.getLegendOptions = function () {
-        return {
-            scaleType: 'ordinal',
-            colors: this.colors,
-            domain: this.domain
-        };
-    };
-    GaugeComponent.prototype.setColors = function () {
-        this.colors = new __WEBPACK_IMPORTED_MODULE_4__common_color_helper__["a" /* ColorHelper */](this.scheme, 'ordinal', this.domain, this.customColors);
-    };
-    GaugeComponent.prototype.onActivate = function (item) {
-        var idx = this.activeEntries.findIndex(function (d) {
-            return d.name === item.name && d.value === item.value;
-        });
-        if (idx > -1) {
-            return;
-        }
-        this.activeEntries = [item].concat(this.activeEntries);
-        this.activate.emit({ value: item, entries: this.activeEntries });
-    };
-    GaugeComponent.prototype.onDeactivate = function (item) {
-        var idx = this.activeEntries.findIndex(function (d) {
-            return d.name === item.name && d.value === item.value;
-        });
-        this.activeEntries.splice(idx, 1);
-        this.activeEntries = this.activeEntries.slice();
-        this.deactivate.emit({ value: event, entries: this.activeEntries });
-    };
-    GaugeComponent.prototype.isActive = function (entry) {
-        if (!this.activeEntries)
-            return false;
-        var item = this.activeEntries.find(function (d) {
-            return entry.name === d.name && entry.series === d.series;
-        });
-        return item !== undefined;
-    };
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], GaugeComponent.prototype, "legend", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Number)
-    ], GaugeComponent.prototype, "min", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Number)
-    ], GaugeComponent.prototype, "max", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', String)
-    ], GaugeComponent.prototype, "textValue", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', String)
-    ], GaugeComponent.prototype, "units", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Number)
-    ], GaugeComponent.prototype, "bigSegments", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Number)
-    ], GaugeComponent.prototype, "smallSegments", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Array)
-    ], GaugeComponent.prototype, "results", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], GaugeComponent.prototype, "showAxis", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Number)
-    ], GaugeComponent.prototype, "startAngle", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Number)
-    ], GaugeComponent.prototype, "angleSpan", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Array)
-    ], GaugeComponent.prototype, "activeEntries", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], GaugeComponent.prototype, "axisTickFormatting", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], GaugeComponent.prototype, "tooltipDisabled", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Array)
-    ], GaugeComponent.prototype, "margin", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
-        __metadata('design:type', __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"])
-    ], GaugeComponent.prototype, "activate", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
-        __metadata('design:type', __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"])
-    ], GaugeComponent.prototype, "deactivate", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('textEl'), 
-        __metadata('design:type', __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"])
-    ], GaugeComponent.prototype, "textEl", void 0);
-    GaugeComponent = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'ngx-charts-gauge',
-            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"gauge chart\">\n        <svg:g *ngFor=\"let arc of arcs\" [attr.transform]=\"rotation\">\n          <svg:g ngx-charts-gauge-arc\n            [backgroundArc]=\"arc.backgroundArc\"\n            [valueArc]=\"arc.valueArc\"\n            [cornerRadius]=\"cornerRadius\"\n            [colors]=\"colors\"\n            [isActive]=\"isActive(arc.valueArc.data)\"\n            [tooltipDisabled]=\"tooltipDisabled\"\n            (select)=\"onClick($event)\"\n            (activate)=\"onActivate($event)\"\n            (deactivate)=\"onDeactivate($event)\">\n          </svg:g>\n        </svg:g>\n\n        <svg:g ngx-charts-gauge-axis\n          *ngIf=\"showAxis\"\n          [bigSegments]=\"bigSegments\"\n          [smallSegments]=\"smallSegments\"\n          [min]=\"min\"\n          [max]=\"max\"\n          [radius]=\"outerRadius\"\n          [angleSpan]=\"angleSpan\"\n          [valueScale]=\"valueScale\"\n          [startAngle]=\"startAngle\"\n          [tickFormatting]=\"axisTickFormatting\">\n        </svg:g>\n\n        <svg:text #textEl\n            [style.textAnchor]=\"'middle'\"\n            [attr.transform]=\"textTransform\"\n            alignment-baseline=\"central\">\n          <tspan x=\"0\" dy=\"0\">{{displayValue}}</tspan>\n          <tspan x=\"0\" dy=\"1.2em\">{{units}}</tspan>\n        </svg:text>\n\n      </svg:g>\n    </ngx-charts-chart>\n  ",
-            styles: [
-                __webpack_require__("./src/common/base-chart.component.scss"),
-                __webpack_require__("./src/gauge/gauge.component.scss")
-            ],
-            encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewEncapsulation"].None,
-            changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectionStrategy"].OnPush,
-        }), 
-        __metadata('design:paramtypes', [])
-    ], GaugeComponent);
-    return GaugeComponent;
-}(__WEBPACK_IMPORTED_MODULE_2__common_base_chart_component__["a" /* BaseChartComponent */]));
-
-
-/***/ }),
-
-/***/ "./src/gauge/gauge.module.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__common_chart_common_module__ = __webpack_require__("./src/common/chart-common.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__linear_gauge_component__ = __webpack_require__("./src/gauge/linear-gauge.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__gauge_component__ = __webpack_require__("./src/gauge/gauge.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__gauge_arc_component__ = __webpack_require__("./src/gauge/gauge-arc.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__gauge_axis_component__ = __webpack_require__("./src/gauge/gauge-axis.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pie_chart_pie_chart_module__ = __webpack_require__("./src/pie-chart/pie-chart.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__bar_chart_bar_chart_module__ = __webpack_require__("./src/bar-chart/bar-chart.module.ts");
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_3__gauge_component__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_4__gauge_arc_component__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_5__gauge_axis_component__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_2__linear_gauge_component__["a"]; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return GaugeModule; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-
-
-
-
-var GaugeModule = (function () {
-    function GaugeModule() {
-    }
-    GaugeModule = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
-            imports: [__WEBPACK_IMPORTED_MODULE_1__common_chart_common_module__["a" /* ChartCommonModule */], __WEBPACK_IMPORTED_MODULE_6__pie_chart_pie_chart_module__["a" /* PieChartModule */], __WEBPACK_IMPORTED_MODULE_7__bar_chart_bar_chart_module__["a" /* BarChartModule */]],
-            declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__linear_gauge_component__["a" /* LinearGaugeComponent */],
-                __WEBPACK_IMPORTED_MODULE_3__gauge_component__["a" /* GaugeComponent */],
-                __WEBPACK_IMPORTED_MODULE_4__gauge_arc_component__["a" /* GaugeArcComponent */],
-                __WEBPACK_IMPORTED_MODULE_5__gauge_axis_component__["a" /* GaugeAxisComponent */]
-            ],
-            exports: [
-                __WEBPACK_IMPORTED_MODULE_2__linear_gauge_component__["a" /* LinearGaugeComponent */],
-                __WEBPACK_IMPORTED_MODULE_3__gauge_component__["a" /* GaugeComponent */],
-                __WEBPACK_IMPORTED_MODULE_4__gauge_arc_component__["a" /* GaugeArcComponent */],
-                __WEBPACK_IMPORTED_MODULE_5__gauge_axis_component__["a" /* GaugeAxisComponent */]
-            ]
-        }), 
-        __metadata('design:paramtypes', [])
-    ], GaugeModule);
-    return GaugeModule;
-}());
-
-
-/***/ }),
-
-/***/ "./src/gauge/index.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__gauge_module__ = __webpack_require__("./src/gauge/gauge.module.ts");
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__gauge_module__["a"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_0__gauge_module__["b"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_0__gauge_module__["c"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_0__gauge_module__["d"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_0__gauge_module__["e"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__gauge_component__ = __webpack_require__("./src/gauge/gauge.component.ts");
-/* unused harmony namespace reexport */
-
-
-
-
-/***/ }),
-
-/***/ "./src/gauge/linear-gauge.component.scss":
-/***/ (function(module, exports, __webpack_require__) {
-
-
-        var result = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/index.js?sourceMap!./src/gauge/linear-gauge.component.scss");
-
-        if (typeof result === "string") {
-            module.exports = result;
-        } else {
-            module.exports = result.toString();
-        }
-    
-
-/***/ }),
-
-/***/ "./src/gauge/linear-gauge.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_scale__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_scale___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_d3_scale__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_base_chart_component__ = __webpack_require__("./src/common/base-chart.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_view_dimensions_helper__ = __webpack_require__("./src/common/view-dimensions.helper.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_color_helper__ = __webpack_require__("./src/common/color.helper.ts");
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LinearGaugeComponent; });
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-var LinearGaugeComponent = (function (_super) {
-    __extends(LinearGaugeComponent, _super);
-    function LinearGaugeComponent() {
-        _super.apply(this, arguments);
-        this.min = 0;
-        this.max = 100;
-        this.value = 0;
-        this.margin = [10, 20, 10, 20];
-        this.valueResizeScale = 1;
-        this.unitsResizeScale = 1;
-        this.valueTextTransform = '';
-        this.valueTranslate = '';
-        this.unitsTextTransform = '';
-        this.unitsTranslate = '';
-    }
-    LinearGaugeComponent.prototype.ngAfterViewInit = function () {
-        var _this = this;
-        _super.prototype.ngAfterViewInit.call(this);
-        setTimeout(function () {
-            _this.scaleText('value');
-            _this.scaleText('units');
-        });
-    };
-    LinearGaugeComponent.prototype.update = function () {
-        var _this = this;
-        _super.prototype.update.call(this);
-        this.zone.run(function () {
-            _this.hasPreviousValue = _this.previousValue !== undefined;
-            _this.max = Math.max(_this.max, _this.value);
-            _this.min = Math.min(_this.min, _this.value);
-            if (_this.hasPreviousValue) {
-                _this.max = Math.max(_this.max, _this.previousValue);
-                _this.min = Math.min(_this.min, _this.previousValue);
-            }
-            _this.dims = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__common_view_dimensions_helper__["a" /* calculateViewDimensions */])({
-                width: _this.width,
-                height: _this.height,
-                margins: _this.margin
-            });
-            _this.valueDomain = _this.getValueDomain();
-            _this.valueScale = _this.getValueScale();
-            _this.displayValue = _this.getDisplayValue();
-            _this.setColors();
-            var xOffset = _this.margin[3] + _this.dims.width / 2;
-            var yOffset = _this.margin[0] + _this.dims.height / 2;
-            _this.transform = "translate(" + xOffset + ", " + yOffset + ")";
-            _this.transformLine = "translate(" + (_this.margin[3] + _this.valueScale(_this.previousValue)) + ", " + yOffset + ")";
-            _this.valueTranslate = "translate(0, -15)";
-            _this.unitsTranslate = "translate(0, 15)";
-            setTimeout(function () { return _this.scaleText('value'); }, 50);
-            setTimeout(function () { return _this.scaleText('units'); }, 50);
-        });
-    };
-    LinearGaugeComponent.prototype.getValueDomain = function () {
-        return [this.min, this.max];
-    };
-    LinearGaugeComponent.prototype.getValueScale = function () {
-        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_d3_scale__["scaleLinear"])()
-            .range([0, this.dims.width])
-            .domain(this.valueDomain);
-    };
-    LinearGaugeComponent.prototype.getDisplayValue = function () {
-        return this.value.toLocaleString();
-    };
-    LinearGaugeComponent.prototype.scaleText = function (element, repeat) {
-        var _this = this;
-        if (repeat === void 0) { repeat = true; }
-        this.zone.run(function () {
-            var el;
-            var resizeScale;
-            if (element === 'value') {
-                el = _this.valueTextEl;
-                resizeScale = _this.valueResizeScale;
-            }
-            else {
-                el = _this.unitsTextEl;
-                resizeScale = _this.unitsResizeScale;
-            }
-            var _a = el.nativeElement.getBoundingClientRect(), width = _a.width, height = _a.height;
-            if (width === 0 || height === 0)
-                return;
-            var oldScale = resizeScale;
-            var availableWidth = _this.dims.width;
-            var availableHeight = Math.max(_this.dims.height / 2 - 15, 0);
-            var resizeScaleWidth = Math.floor((availableWidth / (width / resizeScale)) * 100) / 100;
-            var resizeScaleHeight = Math.floor((availableHeight / (height / resizeScale)) * 100) / 100;
-            resizeScale = Math.min(resizeScaleHeight, resizeScaleWidth);
-            if (resizeScale !== oldScale) {
-                if (element === 'value') {
-                    _this.valueResizeScale = resizeScale;
-                    _this.valueTextTransform = "scale(" + resizeScale + ", " + resizeScale + ")";
-                }
-                else {
-                    _this.unitsResizeScale = resizeScale;
-                    _this.unitsTextTransform = "scale(" + resizeScale + ", " + resizeScale + ")";
-                }
-                _this.cd.markForCheck();
-                if (repeat) {
-                    setTimeout(function () { _this.scaleText(element, false); }, 50);
-                }
-            }
-        });
-    };
-    LinearGaugeComponent.prototype.onClick = function () {
-        this.select.emit({
-            name: 'Value',
-            value: this.value
-        });
-    };
-    LinearGaugeComponent.prototype.setColors = function () {
-        this.colors = new __WEBPACK_IMPORTED_MODULE_4__common_color_helper__["a" /* ColorHelper */](this.scheme, 'ordinal', [this.value], this.customColors);
-    };
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Number)
-    ], LinearGaugeComponent.prototype, "min", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Number)
-    ], LinearGaugeComponent.prototype, "max", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Number)
-    ], LinearGaugeComponent.prototype, "value", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', String)
-    ], LinearGaugeComponent.prototype, "units", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], LinearGaugeComponent.prototype, "previousValue", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('valueTextEl'), 
-        __metadata('design:type', __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"])
-    ], LinearGaugeComponent.prototype, "valueTextEl", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('unitsTextEl'), 
-        __metadata('design:type', __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"])
-    ], LinearGaugeComponent.prototype, "unitsTextEl", void 0);
-    LinearGaugeComponent = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'ngx-charts-linear-gauge',
-            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"false\"\n      (click)=\"onClick()\">\n      <svg:g class=\"linear-gauge chart\">\n        <svg:g ngx-charts-bar \n          class=\"background-bar\"\n          [width]=\"dims.width\"\n          [height]=\"3\"\n          [x]=\"margin[3]\"\n          [y]=\"dims.height / 2 + margin[0] - 2\"\n          [data]=\"{}\"\n          [orientation]=\"'horizontal'\"\n          [roundEdges]=\"true\">\n        </svg:g>\n        <svg:g ngx-charts-bar \n          [width]=\"valueScale(value)\"\n          [height]=\"3\"\n          [x]=\"margin[3]\"\n          [y]=\"dims.height / 2 + margin[0] - 2\"\n          [fill]=\"colors.getColor(units)\"\n          [data]=\"{}\"\n          [orientation]=\"'horizontal'\"\n          [roundEdges]=\"true\">\n        </svg:g>\n\n        <svg:line \n          *ngIf=\"hasPreviousValue\"\n          [attr.transform]=\"transformLine\"\n          x1=\"0\"\n          y1=\"5\" \n          x2=\"0\"\n          y2=\"15\"\n          [attr.stroke]=\"colors.getColor(units)\"          \n        />\n\n        <svg:line \n          *ngIf=\"hasPreviousValue\"\n          [attr.transform]=\"transformLine\"\n          x1=\"0\"\n          y1=\"-5\" \n          x2=\"0\"\n          y2=\"-15\"\n          [attr.stroke]=\"colors.getColor(units)\"          \n        />\n        \n        <svg:g [attr.transform]=\"transform\">        \n          <svg:g [attr.transform]=\"valueTranslate\">\n            <svg:text #valueTextEl\n              class=\"value\"\n              [style.textAnchor]=\"'middle'\"\n              [attr.transform]=\"valueTextTransform\"          \n              alignment-baseline=\"after-edge\">\n              {{displayValue}}\n            </svg:text>        \n          </svg:g>\n          \n          <svg:g [attr.transform]=\"unitsTranslate\">\n            <svg:text #unitsTextEl\n              class=\"units\"\n              [style.textAnchor]=\"'middle'\"\n              [attr.transform]=\"unitsTextTransform\"          \n              alignment-baseline=\"before-edge\">\n              {{units}}\n            </svg:text>        \n          </svg:g>\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
-            styles: [
-                __webpack_require__("./src/common/base-chart.component.scss"),
-                __webpack_require__("./src/gauge/linear-gauge.component.scss")
-            ],
-            encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewEncapsulation"].None,
-            changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectionStrategy"].OnPush,
-        }), 
-        __metadata('design:paramtypes', [])
-    ], LinearGaugeComponent);
-    return LinearGaugeComponent;
-}(__WEBPACK_IMPORTED_MODULE_2__common_base_chart_component__["a" /* BaseChartComponent */]));
-
-
-/***/ }),
-
-/***/ "./src/heat-map/heat-map-cell-series.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HeatCellSeriesComponent; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var HeatCellSeriesComponent = (function () {
-    function HeatCellSeriesComponent() {
-        this.tooltipDisabled = false;
-        this.select = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-    }
-    HeatCellSeriesComponent.prototype.ngOnChanges = function (changes) {
-        this.update();
-    };
-    HeatCellSeriesComponent.prototype.update = function () {
-        this.cells = this.getCells();
-    };
-    HeatCellSeriesComponent.prototype.getCells = function () {
-        var _this = this;
-        var cells = [];
-        this.data.map(function (row) {
-            row.series.map(function (cell) {
-                var value = cell.value;
-                var label = cell.name;
-                var tooltipLabel = label;
-                if (tooltipLabel.constructor.name === 'Date') {
-                    tooltipLabel = tooltipLabel.toLocaleDateString();
-                }
-                cells.push({
-                    x: _this.xScale(row.name),
-                    y: _this.yScale(cell.name),
-                    width: _this.xScale.bandwidth(),
-                    height: _this.yScale.bandwidth(),
-                    fill: _this.colors.getColor(value),
-                    data: value,
-                    label: label,
-                    series: row.name
-                });
-            });
-        });
-        return cells;
-    };
-    HeatCellSeriesComponent.prototype.getTooltipText = function (_a) {
-        var label = _a.label, data = _a.data, series = _a.series;
-        return "\n      <span class=\"tooltip-label\">" + series + " \u2022 " + label + "</span>\n      <span class=\"tooltip-val\">" + data.toLocaleString() + "</span>\n    ";
-    };
-    HeatCellSeriesComponent.prototype.trackBy = function (index, item) {
-        return item.tooltipText;
-    };
-    HeatCellSeriesComponent.prototype.onClick = function (value, label, series) {
-        this.select.emit({
-            name: label,
-            value: value,
-            series: series
-        });
-    };
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], HeatCellSeriesComponent.prototype, "data", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], HeatCellSeriesComponent.prototype, "colors", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], HeatCellSeriesComponent.prototype, "xScale", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], HeatCellSeriesComponent.prototype, "yScale", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], HeatCellSeriesComponent.prototype, "gradient", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], HeatCellSeriesComponent.prototype, "tooltipDisabled", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
-        __metadata('design:type', Object)
-    ], HeatCellSeriesComponent.prototype, "select", void 0);
-    HeatCellSeriesComponent = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'g[ngx-charts-heat-map-cell-series]',
-            template: "\n    <svg:g\n      ngx-charts-heat-map-cell\n      *ngFor=\"let c of cells; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [fill]=\"c.fill\"\n      [data]=\"c.data\"\n      (select)=\"onClick($event, c.label, c.series)\"\n      [gradient]=\"gradient\"\n      ngx-tooltip\n      [tooltipDisabled]=\"tooltipDisabled\"\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"getTooltipText(c)\"\n    />\n  ",
-            changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectionStrategy"].OnPush,
-        }), 
-        __metadata('design:paramtypes', [])
-    ], HeatCellSeriesComponent);
-    return HeatCellSeriesComponent;
-}());
-
-
-/***/ }),
-
-/***/ "./src/heat-map/heat-map-cell.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__angular_common__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_d3_selection__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_d3_selection___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_d3_selection__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_id__ = __webpack_require__("./src/utils/id.ts");
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HeatMapCellComponent; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-var HeatMapCellComponent = (function () {
-    function HeatMapCellComponent(element, location) {
-        this.location = location;
-        this.gradient = false;
-        this.select = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-        this.element = element.nativeElement;
-    }
-    HeatMapCellComponent.prototype.ngOnChanges = function (changes) {
-        this.transform = "translate(" + this.x + " , " + this.y + ")";
-        var pageUrl = this.location instanceof __WEBPACK_IMPORTED_MODULE_1__angular_common__["PathLocationStrategy"]
-            ? this.location.path()
-            : '';
-        this.startOpacity = 0.3;
-        this.gradientId = 'grad' + __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils_id__["a" /* id */])().toString();
-        this.gradientUrl = "url(" + pageUrl + "#" + this.gradientId + ")";
-        this.gradientStops = this.getGradientStops();
-        this.loadAnimation();
-    };
-    HeatMapCellComponent.prototype.getGradientStops = function () {
-        return [
-            {
-                offset: 0,
-                color: this.fill,
-                opacity: this.startOpacity
-            },
-            {
-                offset: 100,
-                color: this.fill,
-                opacity: 1
-            }];
-    };
-    HeatMapCellComponent.prototype.loadAnimation = function () {
-        var node = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_d3_selection__["select"])(this.element).select('.cell');
-        node.attr('opacity', 0);
-        this.animateToCurrentForm();
-    };
-    HeatMapCellComponent.prototype.animateToCurrentForm = function () {
-        var node = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_d3_selection__["select"])(this.element).select('.cell');
-        node.transition().duration(750)
-            .attr('opacity', 1);
-    };
-    HeatMapCellComponent.prototype.onClick = function () {
-        this.select.emit(this.data);
-    };
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], HeatMapCellComponent.prototype, "fill", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], HeatMapCellComponent.prototype, "x", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], HeatMapCellComponent.prototype, "y", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], HeatMapCellComponent.prototype, "width", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], HeatMapCellComponent.prototype, "height", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], HeatMapCellComponent.prototype, "data", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], HeatMapCellComponent.prototype, "label", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], HeatMapCellComponent.prototype, "gradient", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
-        __metadata('design:type', Object)
-    ], HeatMapCellComponent.prototype, "select", void 0);
-    HeatMapCellComponent = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'g[ngx-charts-heat-map-cell]',
-            template: "\n    <svg:g [attr.transform]=\"transform\" class=\"cell\">\n      <defs *ngIf=\"gradient\">\n        <svg:g ngx-charts-svg-linear-gradient\n          [color]=\"fill\"\n          orientation=\"vertical\"\n          [name]=\"gradientId\"\n          [stops]=\"gradientStops\"\n        />\n      </defs>\n      <svg:rect\n        [attr.fill]=\"gradient ? gradientUrl : fill\"\n        rx=\"3\"\n        [attr.width]=\"width\"\n        [attr.height]=\"height\"\n        class=\"cell\"\n        style=\"cursor: pointer\"\n        (click)=\"onClick()\"\n      />\n    </svg:g>\n  ",
-            changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectionStrategy"].OnPush
-        }), 
-        __metadata('design:paramtypes', [__WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"], __WEBPACK_IMPORTED_MODULE_1__angular_common__["LocationStrategy"]])
-    ], HeatMapCellComponent);
-    return HeatMapCellComponent;
-}());
-
-
-/***/ }),
-
-/***/ "./src/heat-map/heat-map.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_scale__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_scale___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_d3_scale__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_base_chart_component__ = __webpack_require__("./src/common/base-chart.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_view_dimensions_helper__ = __webpack_require__("./src/common/view-dimensions.helper.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_color_helper__ = __webpack_require__("./src/common/color.helper.ts");
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HeatMapComponent; });
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-var HeatMapComponent = (function (_super) {
-    __extends(HeatMapComponent, _super);
-    function HeatMapComponent() {
-        _super.apply(this, arguments);
-        this.innerPadding = 8;
-        this.tooltipDisabled = false;
-        this.margin = [10, 20, 10, 20];
-        this.xAxisHeight = 0;
-        this.yAxisWidth = 0;
-    }
-    HeatMapComponent.prototype.update = function () {
-        var _this = this;
-        _super.prototype.update.call(this);
-        this.zone.run(function () {
-            _this.dims = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__common_view_dimensions_helper__["a" /* calculateViewDimensions */])({
-                width: _this.width,
-                height: _this.height,
-                margins: _this.margin,
-                showXAxis: _this.xAxis,
-                showYAxis: _this.yAxis,
-                xAxisHeight: _this.xAxisHeight,
-                yAxisWidth: _this.yAxisWidth,
-                showXLabel: _this.showXAxisLabel,
-                showYLabel: _this.showYAxisLabel,
-                showLegend: _this.legend,
-                legendType: 'linear'
-            });
-            _this.formatDates();
-            _this.xDomain = _this.getXDomain();
-            _this.yDomain = _this.getYDomain();
-            _this.valueDomain = _this.getValueDomain();
-            _this.xScale = _this.getXScale();
-            _this.yScale = _this.getYScale();
-            _this.setColors();
-            _this.legendOptions = _this.getLegendOptions();
-            _this.transform = "translate(" + _this.dims.xOffset + " , " + _this.margin[0] + ")";
-            _this.rects = _this.getRects();
-        });
-    };
-    HeatMapComponent.prototype.getXDomain = function () {
-        var domain = [];
-        for (var _i = 0, _a = this.results; _i < _a.length; _i++) {
-            var group = _a[_i];
-            if (!domain.includes(group.name)) {
-                domain.push(group.name);
-            }
-        }
-        return domain;
-    };
-    HeatMapComponent.prototype.getYDomain = function () {
-        var domain = [];
-        for (var _i = 0, _a = this.results; _i < _a.length; _i++) {
-            var group = _a[_i];
-            for (var _b = 0, _c = group.series; _b < _c.length; _b++) {
-                var d = _c[_b];
-                if (!domain.includes(d.name)) {
-                    domain.push(d.name);
-                }
-            }
-        }
-        return domain;
-    };
-    HeatMapComponent.prototype.getValueDomain = function () {
-        var domain = [];
-        for (var _i = 0, _a = this.results; _i < _a.length; _i++) {
-            var group = _a[_i];
-            for (var _b = 0, _c = group.series; _b < _c.length; _b++) {
-                var d = _c[_b];
-                if (!domain.includes(d.value)) {
-                    domain.push(d.value);
-                }
-            }
-        }
-        var min = Math.min.apply(Math, [0].concat(domain));
-        var max = Math.max.apply(Math, domain);
-        return [min, max];
-    };
-    HeatMapComponent.prototype.getXScale = function () {
-        var innerPadding = typeof this.innerPadding === 'number' ? this.innerPadding : this.innerPadding[0];
-        var f = this.xDomain.length / (this.dims.width / innerPadding + 1);
-        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_d3_scale__["scaleBand"])()
-            .rangeRound([0, this.dims.width])
-            .domain(this.xDomain)
-            .paddingInner(f);
-    };
-    HeatMapComponent.prototype.getYScale = function () {
-        var innerPadding = typeof this.innerPadding === 'number' ? this.innerPadding : this.innerPadding[1];
-        var f = this.yDomain.length / (this.dims.height / innerPadding + 1);
-        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_d3_scale__["scaleBand"])()
-            .rangeRound([this.dims.height, 0])
-            .domain(this.yDomain)
-            .paddingInner(f);
-    };
-    HeatMapComponent.prototype.getRects = function () {
-        var _this = this;
-        var rects = [];
-        this.xDomain.map(function (xVal) {
-            _this.yDomain.map(function (yVal) {
-                rects.push({
-                    x: _this.xScale(xVal),
-                    y: _this.yScale(yVal),
-                    rx: 3,
-                    width: _this.xScale.bandwidth(),
-                    height: _this.yScale.bandwidth(),
-                    fill: 'rgba(200,200,200,0.03)'
-                });
-            });
-        });
-        return rects;
-    };
-    HeatMapComponent.prototype.onClick = function (data) {
-        this.select.emit(data);
-    };
-    HeatMapComponent.prototype.setColors = function () {
-        this.colors = new __WEBPACK_IMPORTED_MODULE_4__common_color_helper__["a" /* ColorHelper */](this.scheme, 'linear', this.valueDomain);
-    };
-    HeatMapComponent.prototype.getLegendOptions = function () {
-        return {
-            scaleType: 'linear',
-            domain: this.valueDomain,
-            colors: this.colors.scale
-        };
-    };
-    HeatMapComponent.prototype.updateYAxisWidth = function (_a) {
-        var width = _a.width;
-        this.yAxisWidth = width;
-        this.update();
-    };
-    HeatMapComponent.prototype.updateXAxisHeight = function (_a) {
-        var height = _a.height;
-        this.xAxisHeight = height;
-        this.update();
-    };
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], HeatMapComponent.prototype, "legend", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], HeatMapComponent.prototype, "xAxis", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], HeatMapComponent.prototype, "yAxis", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], HeatMapComponent.prototype, "showXAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], HeatMapComponent.prototype, "showYAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], HeatMapComponent.prototype, "xAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], HeatMapComponent.prototype, "yAxisLabel", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], HeatMapComponent.prototype, "gradient", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], HeatMapComponent.prototype, "innerPadding", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], HeatMapComponent.prototype, "xAxisTickFormatting", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], HeatMapComponent.prototype, "yAxisTickFormatting", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], HeatMapComponent.prototype, "tooltipDisabled", void 0);
-    HeatMapComponent = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'ngx-charts-heat-map',
-            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      (legendLabelClick)=\"onClick($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"heat-map chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:rect *ngFor=\"let rect of rects\"\n          [attr.x]=\"rect.x\"\n          [attr.y]=\"rect.y\"\n          [attr.rx]=\"rect.rx\"\n          [attr.width]=\"rect.width\"\n          [attr.height]=\"rect.height\"\n          [attr.fill]=\"rect.fill\"\n        />\n        <svg:g ngx-charts-heat-map-cell-series\n          [xScale]=\"xScale\"\n          [yScale]=\"yScale\"\n          [colors]=\"colors\"\n          [data]=\"results\"\n          [gradient]=\"gradient\"\n          [tooltipDisabled]=\"tooltipDisabled\"\n          (select)=\"onClick($event)\"\n        />\n      </svg:g>\n    </ngx-charts-chart>\n  ",
-            changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectionStrategy"].OnPush,
-            styles: [__webpack_require__("./src/common/base-chart.component.scss")],
-            encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewEncapsulation"].None
-        }), 
-        __metadata('design:paramtypes', [])
-    ], HeatMapComponent);
-    return HeatMapComponent;
-}(__WEBPACK_IMPORTED_MODULE_2__common_base_chart_component__["a" /* BaseChartComponent */]));
-
-
-/***/ }),
-
-/***/ "./src/heat-map/heat-map.module.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__common_chart_common_module__ = __webpack_require__("./src/common/chart-common.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__heat_map_cell_component__ = __webpack_require__("./src/heat-map/heat-map-cell.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__heat_map_cell_series_component__ = __webpack_require__("./src/heat-map/heat-map-cell-series.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__heat_map_component__ = __webpack_require__("./src/heat-map/heat-map.component.ts");
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_2__heat_map_cell_component__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_3__heat_map_cell_series_component__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_4__heat_map_component__["a"]; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return HeatMapModule; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-
-var HeatMapModule = (function () {
-    function HeatMapModule() {
-    }
-    HeatMapModule = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
-            imports: [__WEBPACK_IMPORTED_MODULE_1__common_chart_common_module__["a" /* ChartCommonModule */]],
-            declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__heat_map_cell_component__["a" /* HeatMapCellComponent */],
-                __WEBPACK_IMPORTED_MODULE_3__heat_map_cell_series_component__["a" /* HeatCellSeriesComponent */],
-                __WEBPACK_IMPORTED_MODULE_4__heat_map_component__["a" /* HeatMapComponent */]
-            ],
-            exports: [
-                __WEBPACK_IMPORTED_MODULE_2__heat_map_cell_component__["a" /* HeatMapCellComponent */],
-                __WEBPACK_IMPORTED_MODULE_3__heat_map_cell_series_component__["a" /* HeatCellSeriesComponent */],
-                __WEBPACK_IMPORTED_MODULE_4__heat_map_component__["a" /* HeatMapComponent */]
-            ]
-        }), 
-        __metadata('design:paramtypes', [])
-    ], HeatMapModule);
-    return HeatMapModule;
-}());
-
-
-/***/ }),
-
-/***/ "./src/heat-map/index.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__heat_map_module__ = __webpack_require__("./src/heat-map/heat-map.module.ts");
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__heat_map_module__["a"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_0__heat_map_module__["b"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_0__heat_map_module__["c"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_0__heat_map_module__["d"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__heat_map_component__ = __webpack_require__("./src/heat-map/heat-map.component.ts");
-/* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__heat_map_cell_component__ = __webpack_require__("./src/heat-map/heat-map-cell.component.ts");
-/* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__heat_map_cell_series_component__ = __webpack_require__("./src/heat-map/heat-map-cell-series.component.ts");
-/* unused harmony namespace reexport */
-
-
-
-
-
-
-/***/ }),
-
 /***/ "./src/index.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -12159,79 +7153,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "decimalChecker", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["E"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "Timeline", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["F"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "ChartComponent", function() { return __WEBPACK_IMPORTED_MODULE_1__common__["G"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__area_chart__ = __webpack_require__("./src/area-chart/index.ts");
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "AreaChartComponent", function() { return __WEBPACK_IMPORTED_MODULE_2__area_chart__["a"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "AreaChartNormalizedComponent", function() { return __WEBPACK_IMPORTED_MODULE_2__area_chart__["b"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "AreaChartStackedComponent", function() { return __WEBPACK_IMPORTED_MODULE_2__area_chart__["c"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "AreaSeriesComponent", function() { return __WEBPACK_IMPORTED_MODULE_2__area_chart__["d"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "AreaChartModule", function() { return __WEBPACK_IMPORTED_MODULE_2__area_chart__["e"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__bar_chart__ = __webpack_require__("./src/bar-chart/index.ts");
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "BarComponent", function() { return __WEBPACK_IMPORTED_MODULE_3__bar_chart__["a"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "BarHorizontalComponent", function() { return __WEBPACK_IMPORTED_MODULE_3__bar_chart__["b"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "BarHorizontal2DComponent", function() { return __WEBPACK_IMPORTED_MODULE_3__bar_chart__["c"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "BarHorizontalNormalizedComponent", function() { return __WEBPACK_IMPORTED_MODULE_3__bar_chart__["d"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "BarHorizontalStackedComponent", function() { return __WEBPACK_IMPORTED_MODULE_3__bar_chart__["e"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "BarVerticalComponent", function() { return __WEBPACK_IMPORTED_MODULE_3__bar_chart__["f"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "BarVertical2DComponent", function() { return __WEBPACK_IMPORTED_MODULE_3__bar_chart__["g"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "BarVerticalNormalizedComponent", function() { return __WEBPACK_IMPORTED_MODULE_3__bar_chart__["h"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "BarVerticalStackedComponent", function() { return __WEBPACK_IMPORTED_MODULE_3__bar_chart__["i"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "SeriesHorizontal", function() { return __WEBPACK_IMPORTED_MODULE_3__bar_chart__["j"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "SeriesVerticalComponent", function() { return __WEBPACK_IMPORTED_MODULE_3__bar_chart__["k"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "BarChartModule", function() { return __WEBPACK_IMPORTED_MODULE_3__bar_chart__["l"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__bubble_chart__ = __webpack_require__("./src/bubble-chart/index.ts");
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "BubbleChartComponent", function() { return __WEBPACK_IMPORTED_MODULE_4__bubble_chart__["a"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "BubbleSeriesComponent", function() { return __WEBPACK_IMPORTED_MODULE_4__bubble_chart__["b"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "BubbleChartModule", function() { return __WEBPACK_IMPORTED_MODULE_4__bubble_chart__["c"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__force_directed_graph__ = __webpack_require__("./src/force-directed-graph/index.ts");
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "ForceDirectedGraphComponent", function() { return __WEBPACK_IMPORTED_MODULE_5__force_directed_graph__["a"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "ForceDirectedGraphModule", function() { return __WEBPACK_IMPORTED_MODULE_5__force_directed_graph__["b"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__heat_map__ = __webpack_require__("./src/heat-map/index.ts");
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HeatMapCellComponent", function() { return __WEBPACK_IMPORTED_MODULE_6__heat_map__["a"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HeatCellSeriesComponent", function() { return __WEBPACK_IMPORTED_MODULE_6__heat_map__["b"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HeatMapComponent", function() { return __WEBPACK_IMPORTED_MODULE_6__heat_map__["c"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HeatMapModule", function() { return __WEBPACK_IMPORTED_MODULE_6__heat_map__["d"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__line_chart__ = __webpack_require__("./src/line-chart/index.ts");
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "LineComponent", function() { return __WEBPACK_IMPORTED_MODULE_7__line_chart__["a"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "LineChartComponent", function() { return __WEBPACK_IMPORTED_MODULE_7__line_chart__["b"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "LineSeriesComponent", function() { return __WEBPACK_IMPORTED_MODULE_7__line_chart__["c"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "LineChartModule", function() { return __WEBPACK_IMPORTED_MODULE_7__line_chart__["d"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__number_card__ = __webpack_require__("./src/number-card/index.ts");
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "CardComponent", function() { return __WEBPACK_IMPORTED_MODULE_8__number_card__["a"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "CardSeriesComponent", function() { return __WEBPACK_IMPORTED_MODULE_8__number_card__["b"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "NumberCardComponent", function() { return __WEBPACK_IMPORTED_MODULE_8__number_card__["c"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "NumberCardModule", function() { return __WEBPACK_IMPORTED_MODULE_8__number_card__["d"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pie_chart__ = __webpack_require__("./src/pie-chart/index.ts");
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "AdvancedPieChartComponent", function() { return __WEBPACK_IMPORTED_MODULE_9__pie_chart__["a"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "PieLabelComponent", function() { return __WEBPACK_IMPORTED_MODULE_9__pie_chart__["b"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "PieArcComponent", function() { return __WEBPACK_IMPORTED_MODULE_9__pie_chart__["c"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "PieChartComponent", function() { return __WEBPACK_IMPORTED_MODULE_9__pie_chart__["d"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "PieGridComponent", function() { return __WEBPACK_IMPORTED_MODULE_9__pie_chart__["e"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "PieGridSeriesComponent", function() { return __WEBPACK_IMPORTED_MODULE_9__pie_chart__["f"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "PieSeriesComponent", function() { return __WEBPACK_IMPORTED_MODULE_9__pie_chart__["g"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "PieChartModule", function() { return __WEBPACK_IMPORTED_MODULE_9__pie_chart__["h"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__tree_map__ = __webpack_require__("./src/tree-map/index.ts");
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "TreeMapCellComponent", function() { return __WEBPACK_IMPORTED_MODULE_10__tree_map__["a"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "TreeMapCellSeriesComponent", function() { return __WEBPACK_IMPORTED_MODULE_10__tree_map__["b"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "TreeMapComponent", function() { return __WEBPACK_IMPORTED_MODULE_10__tree_map__["c"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "TreeMapModule", function() { return __WEBPACK_IMPORTED_MODULE_10__tree_map__["d"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__gauge__ = __webpack_require__("./src/gauge/index.ts");
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "GaugeComponent", function() { return __WEBPACK_IMPORTED_MODULE_11__gauge__["a"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "GaugeArcComponent", function() { return __WEBPACK_IMPORTED_MODULE_11__gauge__["b"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "GaugeAxisComponent", function() { return __WEBPACK_IMPORTED_MODULE_11__gauge__["c"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "LinearGaugeComponent", function() { return __WEBPACK_IMPORTED_MODULE_11__gauge__["d"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "GaugeModule", function() { return __WEBPACK_IMPORTED_MODULE_11__gauge__["e"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__line_chart__ = __webpack_require__("./src/line-chart/index.ts");
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "LineComponent", function() { return __WEBPACK_IMPORTED_MODULE_2__line_chart__["a"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "LineChartComponent", function() { return __WEBPACK_IMPORTED_MODULE_2__line_chart__["b"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "LineSeriesComponent", function() { return __WEBPACK_IMPORTED_MODULE_2__line_chart__["c"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "LineChartModule", function() { return __WEBPACK_IMPORTED_MODULE_2__line_chart__["d"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pie_chart__ = __webpack_require__("./src/pie-chart/index.ts");
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "AdvancedPieChartComponent", function() { return __WEBPACK_IMPORTED_MODULE_3__pie_chart__["a"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "PieLabelComponent", function() { return __WEBPACK_IMPORTED_MODULE_3__pie_chart__["b"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "PieArcComponent", function() { return __WEBPACK_IMPORTED_MODULE_3__pie_chart__["c"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "PieChartComponent", function() { return __WEBPACK_IMPORTED_MODULE_3__pie_chart__["d"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "PieGridComponent", function() { return __WEBPACK_IMPORTED_MODULE_3__pie_chart__["e"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "PieGridSeriesComponent", function() { return __WEBPACK_IMPORTED_MODULE_3__pie_chart__["f"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "PieSeriesComponent", function() { return __WEBPACK_IMPORTED_MODULE_3__pie_chart__["g"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "PieChartModule", function() { return __WEBPACK_IMPORTED_MODULE_3__pie_chart__["h"]; });
 
 
+// export * from './area-chart';
+// export * from './bar-chart';
+// export * from './bubble-chart';
+// export * from './force-directed-graph';
+// export * from './heat-map';
 
+// export * from './number-card';
 
-
-
-
-
-
-
-
-
+// export * from './tree-map';
+// export * from './gauge';
 
 
 /***/ }),
@@ -12265,11 +7212,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__angular_common__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_d3_scale__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_d3_scale__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_d3_scale___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_d3_scale__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_d3_shape__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_d3_shape__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_d3_shape___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_d3_shape__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_view_dimensions_helper__ = __webpack_require__("./src/common/view-dimensions.helper.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_color_helper__ = __webpack_require__("./src/common/color.helper.ts");
@@ -12438,6 +7385,9 @@ var LineChartComponent = (function (_super) {
             scale = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_d3_scale__["scaleLinear"])()
                 .range([0, width])
                 .domain(domain);
+            if (this.roundDomains) {
+                scale = scale.nice();
+            }
         }
         else if (this.scaleType === 'ordinal') {
             scale = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_d3_scale__["scalePoint"])()
@@ -12445,7 +7395,7 @@ var LineChartComponent = (function (_super) {
                 .padding(0.1)
                 .domain(domain);
         }
-        return this.roundDomains ? scale.nice() : scale;
+        return scale;
     };
     LineChartComponent.prototype.getYScale = function (domain, height) {
         var scale = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_d3_scale__["scaleLinear"])()
@@ -12727,9 +7677,9 @@ var LineChartModule = (function () {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__angular_common__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_d3_shape__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_d3_shape__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_d3_shape___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_d3_shape__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_id__ = __webpack_require__("./src/utils/id.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__utils_sort__ = __webpack_require__("./src/utils/sort.ts");
@@ -12984,16 +7934,8 @@ var LineComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__common_chart_common_module__ = __webpack_require__("./src/common/chart-common.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__area_chart_area_chart_module__ = __webpack_require__("./src/area-chart/area-chart.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__bar_chart_bar_chart_module__ = __webpack_require__("./src/bar-chart/bar-chart.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__bubble_chart_bubble_chart_module__ = __webpack_require__("./src/bubble-chart/bubble-chart.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__force_directed_graph_force_directed_graph_module__ = __webpack_require__("./src/force-directed-graph/force-directed-graph.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__heat_map_heat_map_module__ = __webpack_require__("./src/heat-map/heat-map.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__line_chart_line_chart_module__ = __webpack_require__("./src/line-chart/line-chart.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__number_card_number_card_module__ = __webpack_require__("./src/number-card/number-card.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pie_chart_pie_chart_module__ = __webpack_require__("./src/pie-chart/pie-chart.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__tree_map_tree_map_module__ = __webpack_require__("./src/tree-map/tree-map.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__gauge_gauge_module__ = __webpack_require__("./src/gauge/gauge.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__line_chart_line_chart_module__ = __webpack_require__("./src/line-chart/line-chart.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pie_chart_pie_chart_module__ = __webpack_require__("./src/pie-chart/pie-chart.module.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NgxChartsModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -13008,14 +7950,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
-
-
-
-
-
-
-
+// import { TreeMapModule } from './tree-map/tree-map.module';
+// import { GaugeModule } from './gauge/gauge.module';
 var NgxChartsModule = (function () {
     function NgxChartsModule() {
     }
@@ -13023,16 +7959,14 @@ var NgxChartsModule = (function () {
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
             exports: [
                 __WEBPACK_IMPORTED_MODULE_1__common_chart_common_module__["a" /* ChartCommonModule */],
-                __WEBPACK_IMPORTED_MODULE_2__area_chart_area_chart_module__["e" /* AreaChartModule */],
-                __WEBPACK_IMPORTED_MODULE_3__bar_chart_bar_chart_module__["a" /* BarChartModule */],
-                __WEBPACK_IMPORTED_MODULE_4__bubble_chart_bubble_chart_module__["c" /* BubbleChartModule */],
-                __WEBPACK_IMPORTED_MODULE_5__force_directed_graph_force_directed_graph_module__["b" /* ForceDirectedGraphModule */],
-                __WEBPACK_IMPORTED_MODULE_6__heat_map_heat_map_module__["d" /* HeatMapModule */],
-                __WEBPACK_IMPORTED_MODULE_7__line_chart_line_chart_module__["d" /* LineChartModule */],
-                __WEBPACK_IMPORTED_MODULE_8__number_card_number_card_module__["d" /* NumberCardModule */],
-                __WEBPACK_IMPORTED_MODULE_9__pie_chart_pie_chart_module__["a" /* PieChartModule */],
-                __WEBPACK_IMPORTED_MODULE_10__tree_map_tree_map_module__["d" /* TreeMapModule */],
-                __WEBPACK_IMPORTED_MODULE_11__gauge_gauge_module__["e" /* GaugeModule */]
+                // AreaChartModule,
+                // BarChartModule,
+                // BubbleChartModule,
+                // ForceDirectedGraphModule,
+                // HeatMapModule,
+                __WEBPACK_IMPORTED_MODULE_2__line_chart_line_chart_module__["d" /* LineChartModule */],
+                // NumberCardModule,
+                __WEBPACK_IMPORTED_MODULE_3__pie_chart_pie_chart_module__["h" /* PieChartModule */],
             ]
         }), 
         __metadata('design:paramtypes', [])
@@ -13043,517 +7977,11 @@ var NgxChartsModule = (function () {
 
 /***/ }),
 
-/***/ "./src/number-card/card-series.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CardSeriesComponent; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var CardSeriesComponent = (function () {
-    function CardSeriesComponent(zone) {
-        this.zone = zone;
-        this.innerPadding = 2.5;
-        this.emptyColor = 'rgba(0, 0, 0, 0)';
-        this.select = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-    }
-    CardSeriesComponent.prototype.ngOnChanges = function (changes) {
-        this.update();
-    };
-    CardSeriesComponent.prototype.update = function () {
-        var _this = this;
-        this.zone.run(function () {
-            if (_this.data.length > 2) {
-                var sortedLengths = _this.data.map(function (d) { return ('' + d.data.value).length; }).sort(function (a, b) { return b - a; });
-                var idx = Math.ceil(_this.data.length / 2);
-                _this.medianSize = sortedLengths[idx];
-            }
-            var cards = _this.getCards();
-            _this.cards = cards.filter(function (d) { return d.data.value !== null; });
-            _this.emptySlots = cards.filter(function (d) { return d.data.value === null; });
-        });
-    };
-    CardSeriesComponent.prototype.getCards = function () {
-        var _this = this;
-        var yPadding = typeof this.innerPadding === 'number' ?
-            this.innerPadding :
-            this.innerPadding[0] + this.innerPadding[2];
-        var xPadding = typeof this.innerPadding === 'number' ?
-            this.innerPadding :
-            this.innerPadding[1] + this.innerPadding[3];
-        return this.data
-            .map(function (d, index) {
-            var label = d.data.name;
-            if (label && label.constructor.name === 'Date') {
-                label = label.toLocaleDateString();
-            }
-            else {
-                label = label ? label.toLocaleString() : label;
-            }
-            d.data.name = label;
-            var value = d.data.value;
-            var labelColor = label ? _this.colors.getColor(label) : _this.emptyColor;
-            return {
-                x: d.x,
-                y: d.y,
-                width: d.width - xPadding,
-                height: d.height - yPadding,
-                color: _this.cardColor || labelColor,
-                bandColor: _this.bandColor || labelColor,
-                label: label,
-                data: d.data,
-                tooltipText: label + ": " + value
-            };
-        });
-    };
-    CardSeriesComponent.prototype.trackBy = function (index, card) {
-        return card.label;
-    };
-    CardSeriesComponent.prototype.onClick = function (data) {
-        this.select.emit(data);
-    };
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Array)
-    ], CardSeriesComponent.prototype, "data", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Array)
-    ], CardSeriesComponent.prototype, "slots", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], CardSeriesComponent.prototype, "dims", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], CardSeriesComponent.prototype, "colors", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], CardSeriesComponent.prototype, "innerPadding", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], CardSeriesComponent.prototype, "cardColor", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], CardSeriesComponent.prototype, "bandColor", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], CardSeriesComponent.prototype, "emptyColor", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
-        __metadata('design:type', Object)
-    ], CardSeriesComponent.prototype, "select", void 0);
-    CardSeriesComponent = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'g[ngx-charts-card-series]',
-            template: "\n    <svg:rect\n      *ngFor=\"let c of emptySlots; trackBy:trackBy\"\n      class=\"card-empty\"\n      [attr.x]=\"c.x\"\n      [attr.y]=\"c.y\"\n      [style.fill]=\"emptyColor\"\n      [attr.width]=\"c.width\"\n      [attr.height]=\"c.height\"\n      rx=\"3\"\n      ry=\"3\"\n    />\n    <svg:g ngx-charts-card *ngFor=\"let c of cards; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [color]=\"c.color\"\n      [bandColor]=\"c.bandColor\"\n      [data]=\"c.data\"\n      [medianSize]=\"medianSize\"\n      (select)=\"onClick($event)\"\n    />\n  ",
-            changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectionStrategy"].OnPush
-        }), 
-        __metadata('design:paramtypes', [__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgZone"]])
-    ], CardSeriesComponent);
-    return CardSeriesComponent;
-}());
-
-
-/***/ }),
-
-/***/ "./src/number-card/card.component.scss":
-/***/ (function(module, exports, __webpack_require__) {
-
-
-        var result = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/index.js?sourceMap!./src/number-card/card.component.scss");
-
-        if (typeof result === "string") {
-            module.exports = result;
-        } else {
-            module.exports = result.toString();
-        }
-    
-
-/***/ }),
-
-/***/ "./src/number-card/card.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__common_trim_label_helper__ = __webpack_require__("./src/common/trim-label.helper.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_color_utils__ = __webpack_require__("./src/utils/color-utils.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_count__ = __webpack_require__("./src/common/count/index.ts");
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CardComponent; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-var CardComponent = (function () {
-    function CardComponent(element, cd, zone) {
-        this.cd = cd;
-        this.zone = zone;
-        this.select = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-        this.value = '';
-        this.resizeScale = 1;
-        this.textFontSize = 35;
-        this.textTransform = '';
-        this.initialized = false;
-        this.bandHeight = 10;
-        this.textPadding = [10, 20, 10, 20];
-        this.labelFontSize = 12;
-        this.element = element.nativeElement;
-    }
-    CardComponent.prototype.ngOnChanges = function (changes) {
-        this.update();
-    };
-    CardComponent.prototype.ngOnDestroy = function () {
-        cancelAnimationFrame(this.animationReq);
-    };
-    CardComponent.prototype.update = function () {
-        var _this = this;
-        this.zone.run(function () {
-            var hasValue = _this.data && typeof _this.data.value !== 'undefined';
-            _this.transform = "translate(" + _this.x + " , " + _this.y + ")";
-            _this.textWidth = Math.max(0, _this.width) - _this.textPadding[1] - _this.textPadding[3];
-            _this.cardWidth = Math.max(0, _this.width);
-            _this.cardHeight = Math.max(0, _this.height);
-            _this.label = _this.data ? _this.data.name : '';
-            _this.trimmedLabel = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__common_trim_label_helper__["a" /* trimLabel */])(_this.label, 55);
-            _this.transformBand = "translate(0 , " + (_this.cardHeight - _this.bandHeight) + ")";
-            var value = _this.value = hasValue ? _this.data.value.toLocaleString() : '';
-            if (_this.medianSize && _this.medianSize > value.length) {
-                _this.value = _this.value + '\u2007'.repeat(_this.medianSize - value.length);
-            }
-            var textHeight = _this.textFontSize + 2 * _this.labelFontSize;
-            _this.textPadding[0] = _this.textPadding[2] = (_this.cardHeight - textHeight - _this.bandHeight) / 2;
-            setTimeout(function () {
-                _this.scaleText();
-                _this.value = value;
-                setTimeout(function () { return _this.startCount(); }, 20);
-            }, 0);
-        });
-    };
-    CardComponent.prototype.getTextColor = function (color) {
-        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__utils_color_utils__["a" /* invertColor */])(color);
-    };
-    CardComponent.prototype.startCount = function () {
-        var _this = this;
-        if (!this.initialized) {
-            cancelAnimationFrame(this.animationReq);
-            var val = this.data.value;
-            var decs = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__common_count__["b" /* decimalChecker */])(val);
-            var callback = function (_a) {
-                var value = _a.value;
-                _this.zone.run(function () {
-                    _this.value = value.toLocaleString();
-                    if (_this.medianSize && _this.medianSize > value.length) {
-                        _this.value = _this.value + '\u2007'.repeat(_this.medianSize - value.length);
-                    }
-                    _this.cd.markForCheck();
-                });
-            };
-            this.animationReq = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__common_count__["c" /* count */])(0, val, decs, 1, callback);
-            this.initialized = true;
-        }
-    };
-    CardComponent.prototype.scaleText = function () {
-        var _this = this;
-        this.zone.run(function () {
-            var _a = _this.textEl.nativeElement.getBoundingClientRect(), width = _a.width, height = _a.height;
-            if (width === 0 || height === 0) {
-                return;
-            }
-            _this.textPadding[1] = _this.textPadding[3] = _this.cardWidth / 8;
-            var availableWidth = _this.cardWidth - _this.textPadding[1] - _this.textPadding[3];
-            var availableHeight = _this.cardHeight / 3;
-            if (!_this.originalWidthRatio) {
-                _this.originalWidthRatio = availableWidth / width;
-                _this.originalWidth = availableWidth;
-            }
-            if (!_this.originalHeightRatio) {
-                _this.originalHeightRatio = availableHeight / height;
-                _this.originalHeight = availableHeight;
-            }
-            var newWidthRatio = (availableWidth / _this.originalWidth) * _this.originalWidthRatio;
-            var newHeightRatio = (availableHeight / _this.originalHeight) * _this.originalHeightRatio;
-            _this.resizeScale = Math.min(newWidthRatio, newHeightRatio);
-            _this.textFontSize = Number.parseInt((35 * _this.resizeScale).toString());
-            _this.labelFontSize = Math.min(_this.textFontSize, 12);
-            var textHeight = _this.textFontSize + 2 * _this.labelFontSize;
-            _this.textPadding[0] = _this.textPadding[2] = (_this.cardHeight - textHeight - _this.bandHeight) / 2;
-            _this.cd.markForCheck();
-        });
-    };
-    CardComponent.prototype.onClick = function () {
-        this.select.emit({
-            name: this.data.name,
-            value: this.data.value
-        });
-    };
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], CardComponent.prototype, "color", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], CardComponent.prototype, "bandColor", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], CardComponent.prototype, "x", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], CardComponent.prototype, "y", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], CardComponent.prototype, "width", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], CardComponent.prototype, "height", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], CardComponent.prototype, "label", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], CardComponent.prototype, "data", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Number)
-    ], CardComponent.prototype, "medianSize", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
-        __metadata('design:type', Object)
-    ], CardComponent.prototype, "select", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('textEl'), 
-        __metadata('design:type', __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"])
-    ], CardComponent.prototype, "textEl", void 0);
-    CardComponent = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'g[ngx-charts-card]',
-            template: "\n    <svg:g\n      [attr.transform]=\"transform\"\n      class=\"cell\"\n      (click)=\"onClick()\">\n      <svg:rect\n        class=\"card\"\n        [style.fill]=\"color\"\n        [attr.width]=\"cardWidth\"\n        [attr.height]=\"cardHeight\"\n        rx=\"3\"\n        ry=\"3\"\n      />\n      <svg:rect\n        *ngIf=\"bandColor && bandColor !== color\"\n        class=\"card-band\"\n        [style.fill]=\"bandColor\"\n        [attr.transform]=\"transformBand\"\n        [attr.width]=\"cardWidth\"\n        [attr.height]=\"bandHeight\"\n        rx=\"3\"\n        ry=\"3\"\n      />\n      <title>{{label}}</title>\n      <svg:foreignObject\n        class=\"trimmed-label\"\n        x=\"5\"\n        [attr.x]=\"textPadding[3]\"\n        [attr.y]=\"textPadding[0] + textFontSize + labelFontSize\"\n        [attr.width]=\"textWidth\"\n        [attr.height]=\"labelFontSize + textPadding[2]\"\n        alignment-baseline=\"hanging\">\n        <xhtml:p\n          [style.color]=\"getTextColor(color)\"\n          [style.fontSize.px]=\"labelFontSize\">\n          {{trimmedLabel}}\n        </xhtml:p>\n      </svg:foreignObject>\n      <svg:text #textEl\n        class=\"value-text\"\n        [attr.x]=\"textPadding[3]\"\n        [attr.y]=\"textPadding[0]\"\n        [style.fill]=\"getTextColor(color)\"\n        text-anchor=\"start\"\n        alignment-baseline=\"hanging\"\n        [style.font-size.pt]=\"textFontSize\">\n        {{value}}\n      </svg:text>\n    </svg:g>\n  ",
-            changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectionStrategy"].OnPush
-        }), 
-        __metadata('design:paramtypes', [__WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"], __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectorRef"], __WEBPACK_IMPORTED_MODULE_0__angular_core__["NgZone"]])
-    ], CardComponent);
-    return CardComponent;
-}());
-
-
-/***/ }),
-
-/***/ "./src/number-card/index.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__number_card_module__ = __webpack_require__("./src/number-card/number-card.module.ts");
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__number_card_module__["a"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_0__number_card_module__["b"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_0__number_card_module__["c"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_0__number_card_module__["d"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__number_card_component__ = __webpack_require__("./src/number-card/number-card.component.ts");
-/* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__card_component__ = __webpack_require__("./src/number-card/card.component.ts");
-/* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__card_series_component__ = __webpack_require__("./src/number-card/card-series.component.ts");
-/* unused harmony namespace reexport */
-
-
-
-
-
-
-/***/ }),
-
-/***/ "./src/number-card/number-card.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__common_base_chart_component__ = __webpack_require__("./src/common/base-chart.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_view_dimensions_helper__ = __webpack_require__("./src/common/view-dimensions.helper.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_color_helper__ = __webpack_require__("./src/common/color.helper.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_grid_layout_helper__ = __webpack_require__("./src/common/grid-layout.helper.ts");
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NumberCardComponent; });
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-var NumberCardComponent = (function (_super) {
-    __extends(NumberCardComponent, _super);
-    function NumberCardComponent() {
-        _super.apply(this, arguments);
-        this.innerPadding = 2.5;
-        this.margin = [10, 10, 10, 10];
-    }
-    NumberCardComponent.prototype.update = function () {
-        var _this = this;
-        _super.prototype.update.call(this);
-        this.zone.run(function () {
-            _this.dims = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__common_view_dimensions_helper__["a" /* calculateViewDimensions */])({
-                width: _this.width,
-                height: _this.height,
-                margins: _this.margin
-            });
-            _this.domain = _this.getDomain();
-            _this.setColors();
-            _this.transform = "translate(" + _this.dims.xOffset + " , " + _this.margin[0] + ")";
-            var size = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__common_grid_layout_helper__["b" /* gridSize */])(_this.dims, _this.results.length, 150);
-            var N = size[0] * size[1];
-            var data = _this.results.slice();
-            while (data.length < N) {
-                data.push({ value: null });
-            }
-            _this.data = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__common_grid_layout_helper__["a" /* gridLayout */])(_this.dims, data, 150);
-        });
-    };
-    NumberCardComponent.prototype.getDomain = function () {
-        return this.results.map(function (d) { return d.name; });
-    };
-    NumberCardComponent.prototype.onClick = function (data) {
-        this.select.emit(data);
-    };
-    NumberCardComponent.prototype.setColors = function () {
-        this.colors = new __WEBPACK_IMPORTED_MODULE_3__common_color_helper__["a" /* ColorHelper */](this.scheme, 'ordinal', this.domain, this.customColors);
-    };
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', String)
-    ], NumberCardComponent.prototype, "cardColor", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', String)
-    ], NumberCardComponent.prototype, "bandColor", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', String)
-    ], NumberCardComponent.prototype, "emptyColor", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], NumberCardComponent.prototype, "innerPadding", void 0);
-    NumberCardComponent = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'ngx-charts-number-card',
-            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"false\">\n      <svg:g [attr.transform]=\"transform\" class=\"number-card chart\">\n        <svg:g ngx-charts-card-series\n          [colors]=\"colors\"\n          [cardColor]=\"cardColor\"\n          [bandColor]=\"bandColor\"\n          [emptyColor]=\"emptyColor\"\n          [data]=\"data\"\n          [dims]=\"dims\"\n          [innerPadding]=\"innerPadding\"\n          (select)=\"onClick($event)\"\n        />\n      </svg:g>\n    </ngx-charts-chart>\n  ",
-            styles: [
-                __webpack_require__("./src/common/base-chart.component.scss"),
-                __webpack_require__("./src/number-card/card.component.scss")
-            ],
-            encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewEncapsulation"].None,
-            changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectionStrategy"].OnPush
-        }), 
-        __metadata('design:paramtypes', [])
-    ], NumberCardComponent);
-    return NumberCardComponent;
-}(__WEBPACK_IMPORTED_MODULE_1__common_base_chart_component__["a" /* BaseChartComponent */]));
-
-
-/***/ }),
-
-/***/ "./src/number-card/number-card.module.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__common_chart_common_module__ = __webpack_require__("./src/common/chart-common.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__card_component__ = __webpack_require__("./src/number-card/card.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__card_series_component__ = __webpack_require__("./src/number-card/card-series.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__number_card_component__ = __webpack_require__("./src/number-card/number-card.component.ts");
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_2__card_component__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_3__card_series_component__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_4__number_card_component__["a"]; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return NumberCardModule; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-
-var NumberCardModule = (function () {
-    function NumberCardModule() {
-    }
-    NumberCardModule = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
-            imports: [__WEBPACK_IMPORTED_MODULE_1__common_chart_common_module__["a" /* ChartCommonModule */]],
-            declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__card_component__["a" /* CardComponent */],
-                __WEBPACK_IMPORTED_MODULE_3__card_series_component__["a" /* CardSeriesComponent */],
-                __WEBPACK_IMPORTED_MODULE_4__number_card_component__["a" /* NumberCardComponent */]
-            ],
-            exports: [
-                __WEBPACK_IMPORTED_MODULE_2__card_component__["a" /* CardComponent */],
-                __WEBPACK_IMPORTED_MODULE_3__card_series_component__["a" /* CardSeriesComponent */],
-                __WEBPACK_IMPORTED_MODULE_4__number_card_component__["a" /* NumberCardComponent */]
-            ]
-        }), 
-        __metadata('design:paramtypes', [])
-    ], NumberCardModule);
-    return NumberCardModule;
-}());
-
-
-/***/ }),
-
 /***/ "./src/pie-chart/advanced-pie-chart.component.scss":
 /***/ (function(module, exports, __webpack_require__) {
 
 
-        var result = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/index.js?sourceMap!./src/pie-chart/advanced-pie-chart.component.scss");
+        var result = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/lib/loader.js?sourceMap!./src/pie-chart/advanced-pie-chart.component.scss");
 
         if (typeof result === "string") {
             module.exports = result;
@@ -13644,6 +8072,10 @@ var AdvancedPieChartComponent = (function (_super) {
     };
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
+        __metadata('design:type', Object)
+    ], AdvancedPieChartComponent.prototype, "labels", void 0);
+    __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
         __metadata('design:type', Boolean)
     ], AdvancedPieChartComponent.prototype, "gradient", void 0);
     __decorate([
@@ -13665,7 +8097,7 @@ var AdvancedPieChartComponent = (function (_super) {
     AdvancedPieChartComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'ngx-charts-advanced-pie-chart',
-            template: "\n    <div\n      [style.width.px]=\"width\"\n      [style.height.px]=\"height\">\n      <div class=\"advanced-pie chart\"\n        [style.width.px]=\"dims.width\"\n        [style.height.px]=\"dims.height\">\n        <ngx-charts-chart\n          [view]=\"[width, height]\"\n          [showLegend]=\"false\">\n          <svg:g\n            [attr.transform]=\"transform\"\n            class=\"pie chart\">\n            <svg:g ngx-charts-pie-series\n              [colors]=\"colors\"\n              [showLabels]=\"labels\"\n              [series]=\"results\"\n              [innerRadius]=\"innerRadius\"\n              [activeEntries]=\"activeEntries\"\n              [outerRadius]=\"outerRadius\"\n              [gradient]=\"gradient\"\n              [tooltipDisabled]=\"tooltipDisabled\"\n              (select)=\"onClick($event)\">\n            </svg:g>\n          </svg:g>\n        </ngx-charts-chart>\n      </div>\n      <div\n        class=\"advanced-pie-legend-wrapper\"\n        [style.width.px]=\"width - dims.width\"\n        [style.height.px]=\"height\">\n        <ngx-charts-advanced-legend\n          [data]=\"results\"\n          [colors]=\"colors\"\n          [width]=\"width - dims.width - margin[1]\"\n          (select)=\"onClick($event)\"\n          (activate)=\"onActivate($event)\"\n          (deactivate)=\"onDeactivate($event)\">\n        </ngx-charts-advanced-legend>\n      </div>\n    </div>\n  ",
+            template: "\n    <div\n      [style.width.px]=\"width\"\n      [style.height.px]=\"height\">\n      <div class=\"advanced-pie chart\"\n        [style.width.px]=\"dims.width\"\n        [style.height.px]=\"dims.height\">\n        <ngx-charts-chart\n          [view]=\"[width, height]\"\n          [showLegend]=\"false\">\n          <svg:g\n            [attr.transform]=\"transform\"\n            class=\"pie chart\">\n            <svg:g ngx-charts-pie-series\n              [colors]=\"colors\"\n              [series]=\"results\"\n              [innerRadius]=\"innerRadius\"\n              [activeEntries]=\"activeEntries\"\n              [outerRadius]=\"outerRadius\"\n              [gradient]=\"gradient\"\n              [tooltipDisabled]=\"tooltipDisabled\"\n              (select)=\"onClick($event)\">\n            </svg:g>\n          </svg:g>\n        </ngx-charts-chart>\n      </div>\n      <div\n        class=\"advanced-pie-legend-wrapper\"\n        [style.width.px]=\"width - dims.width\"\n        [style.height.px]=\"height\">\n        <ngx-charts-advanced-legend\n          [data]=\"results\"\n          [colors]=\"colors\"\n          [width]=\"width - dims.width - margin[1]\"\n          (select)=\"onClick($event)\"\n          (activate)=\"onActivate($event)\"\n          (deactivate)=\"onDeactivate($event)\">\n        </ngx-charts-advanced-legend>\n      </div>\n    </div>\n  ",
             styles: [
                 __webpack_require__("./src/common/base-chart.component.scss"),
                 __webpack_require__("./src/pie-chart/advanced-pie-chart.component.scss")
@@ -13686,14 +8118,14 @@ var AdvancedPieChartComponent = (function (_super) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__pie_chart_module__ = __webpack_require__("./src/pie-chart/pie-chart.module.ts");
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__pie_chart_module__["b"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_0__pie_chart_module__["c"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_0__pie_chart_module__["d"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_0__pie_chart_module__["e"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_0__pie_chart_module__["f"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "f", function() { return __WEBPACK_IMPORTED_MODULE_0__pie_chart_module__["g"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "g", function() { return __WEBPACK_IMPORTED_MODULE_0__pie_chart_module__["h"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "h", function() { return __WEBPACK_IMPORTED_MODULE_0__pie_chart_module__["a"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__pie_chart_module__["a"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_0__pie_chart_module__["b"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_0__pie_chart_module__["c"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_0__pie_chart_module__["d"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_0__pie_chart_module__["e"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "f", function() { return __WEBPACK_IMPORTED_MODULE_0__pie_chart_module__["f"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "g", function() { return __WEBPACK_IMPORTED_MODULE_0__pie_chart_module__["g"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "h", function() { return __WEBPACK_IMPORTED_MODULE_0__pie_chart_module__["h"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__pie_chart_component__ = __webpack_require__("./src/pie-chart/pie-chart.component.ts");
 /* unused harmony namespace reexport */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pie_arc_component__ = __webpack_require__("./src/pie-chart/pie-arc.component.ts");
@@ -13722,13 +8154,13 @@ var AdvancedPieChartComponent = (function (_super) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__angular_common__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_d3_interpolate__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_d3_interpolate__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_d3_interpolate___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_d3_interpolate__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_d3_selection__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_d3_selection__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_d3_selection___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_d3_selection__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_d3_shape__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_d3_shape__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_d3_shape___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_d3_shape__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_id__ = __webpack_require__("./src/utils/id.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PieArcComponent; });
@@ -13928,7 +8360,7 @@ var PieArcComponent = (function () {
 /***/ (function(module, exports, __webpack_require__) {
 
 
-        var result = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/index.js?sourceMap!./src/pie-chart/pie-chart.component.scss");
+        var result = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/lib/loader.js?sourceMap!./src/pie-chart/pie-chart.component.scss");
 
         if (typeof result === "string") {
             module.exports = result;
@@ -13995,7 +8427,6 @@ var PieChartComponent = (function (_super) {
                 height: _this.height,
                 margins: _this.margin,
                 showLegend: _this.legend,
-                columns: 10
             });
             var xOffset = _this.margin[3] + _this.dims.width / 2;
             var yOffset = _this.margin[0] + _this.dims.height / 2;
@@ -14101,6 +8532,10 @@ var PieChartComponent = (function (_super) {
         __metadata('design:type', Boolean)
     ], PieChartComponent.prototype, "tooltipDisabled", void 0);
     __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
+        __metadata('design:type', Object)
+    ], PieChartComponent.prototype, "labelFormatting", void 0);
+    __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
         __metadata('design:type', Object)
     ], PieChartComponent.prototype, "select", void 0);
@@ -14115,7 +8550,7 @@ var PieChartComponent = (function (_super) {
     PieChartComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'ngx-charts-pie-chart',
-            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      (legendLabelClick)=\"onClick($event)\">\n      <svg:g [attr.transform]=\"translation\" class=\"pie-chart chart\">\n        <svg:g ngx-charts-pie-series\n          [colors]=\"colors\"\n          [showLabels]=\"labels\"\n          [series]=\"data\"\n          [activeEntries]=\"activeEntries\"\n          [innerRadius]=\"innerRadius\"\n          [outerRadius]=\"outerRadius\"\n          [explodeSlices]=\"explodeSlices\"\n          [gradient]=\"gradient\"\n          [tooltipDisabled]=\"tooltipDisabled\"\n          (select)=\"onClick($event)\"\n          (activate)=\"onActivate($event)\"\n          (deactivate)=\"onDeactivate($event)\"\n        />\n      </svg:g>\n    </ngx-charts-chart>\n  ",
+            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      (legendLabelClick)=\"onClick($event)\">\n      <svg:g [attr.transform]=\"translation\" class=\"pie-chart chart\">\n        <svg:g ngx-charts-pie-series\n          [colors]=\"colors\"\n          [showLabels]=\"labels\"\n          [labelFormatting]=\"labelFormatting\"\n          [series]=\"data\"\n          [activeEntries]=\"activeEntries\"\n          [innerRadius]=\"innerRadius\"\n          [outerRadius]=\"outerRadius\"\n          [explodeSlices]=\"explodeSlices\"\n          [gradient]=\"gradient\"\n          [tooltipDisabled]=\"tooltipDisabled\"\n          (select)=\"onClick($event)\"\n          (activate)=\"onActivate($event)\"\n          (deactivate)=\"onDeactivate($event)\"\n        />\n      </svg:g>\n    </ngx-charts-chart>\n  ",
             styles: [
                 __webpack_require__("./src/common/base-chart.component.scss"),
                 __webpack_require__("./src/pie-chart/pie-chart.component.scss")
@@ -14145,14 +8580,14 @@ var PieChartComponent = (function (_super) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pie_grid_component__ = __webpack_require__("./src/pie-chart/pie-grid.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pie_grid_series_component__ = __webpack_require__("./src/pie-chart/pie-grid-series.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pie_series_component__ = __webpack_require__("./src/pie-chart/pie-series.component.ts");
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_2__advanced_pie_chart_component__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_3__pie_label_component__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_4__pie_arc_component__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_5__pie_chart_component__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return __WEBPACK_IMPORTED_MODULE_6__pie_grid_component__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return __WEBPACK_IMPORTED_MODULE_7__pie_grid_series_component__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return __WEBPACK_IMPORTED_MODULE_8__pie_series_component__["a"]; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PieChartModule; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_2__advanced_pie_chart_component__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_3__pie_label_component__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_4__pie_arc_component__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_5__pie_chart_component__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_6__pie_grid_component__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return __WEBPACK_IMPORTED_MODULE_7__pie_grid_series_component__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return __WEBPACK_IMPORTED_MODULE_8__pie_series_component__["a"]; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return PieChartModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -14211,7 +8646,7 @@ var PieChartModule = (function () {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_shape__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_shape__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_shape___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_d3_shape__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PieGridSeriesComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -14313,7 +8748,7 @@ var PieGridSeriesComponent = (function () {
 /***/ (function(module, exports, __webpack_require__) {
 
 
-        var result = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/index.js?sourceMap!./src/pie-chart/pie-grid.component.scss");
+        var result = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/lib/loader.js?sourceMap!./src/pie-chart/pie-grid.component.scss");
 
         if (typeof result === "string") {
             module.exports = result;
@@ -14330,9 +8765,9 @@ var PieGridSeriesComponent = (function () {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_array__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_array__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_array___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_d3_array__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_d3_format__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_d3_format__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_d3_format___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_d3_format__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_view_dimensions_helper__ = __webpack_require__("./src/common/view-dimensions.helper.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_color_helper__ = __webpack_require__("./src/common/color.helper.ts");
@@ -14474,11 +8909,9 @@ var PieGridComponent = (function (_super) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_selection__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_selection___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_d3_selection__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_d3_shape__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_d3_shape___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_d3_shape__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_trim_label_helper__ = __webpack_require__("./src/common/trim-label.helper.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_shape__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_shape___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_d3_shape__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_trim_label_helper__ = __webpack_require__("./src/common/trim-label.helper.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PieLabelComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -14492,55 +8925,77 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
 var PieLabelComponent = (function () {
-    function PieLabelComponent(element) {
-        this.element = element.nativeElement;
-        this.trimLabel = __WEBPACK_IMPORTED_MODULE_3__common_trim_label_helper__["a" /* trimLabel */];
+    function PieLabelComponent() {
+        this.isIE = /(edge|msie|trident)/i.test(navigator.userAgent);
     }
+    // constructor() {
+    //   this.trimLabel = trimLabel;
+    // }
     PieLabelComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     PieLabelComponent.prototype.update = function () {
         var factor = 1.5;
-        var outerArc = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_d3_shape__["arc"])()
+        var outerArc = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_d3_shape__["arc"])()
             .innerRadius(this.radius * factor)
             .outerRadius(this.radius * factor);
         var startRadius = this.radius;
         if (this.explodeSlices) {
             startRadius = this.radius * this.value / this.max;
         }
-        var innerArc = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_d3_shape__["arc"])()
+        var innerArc = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_d3_shape__["arc"])()
             .innerRadius(startRadius)
             .outerRadius(startRadius);
-        this.labelXY = this.data.pos;
         // Calculate innerPos then scale outer position to match label position
         var innerPos = innerArc.centroid(this.data);
         var scale = this.data.pos[1] / innerPos[1];
         var outerPos = [scale * innerPos[0], scale * innerPos[1]];
-        this.line = "M" + innerPos + "L" + outerPos + "L" + this.labelXY;
-        this.transform = "translate(" + this.labelXY + ")";
-        this.loadAnimation();
+        this.line = "M" + innerPos + "L" + outerPos + "L" + this.data.pos;
     };
+    Object.defineProperty(PieLabelComponent.prototype, "textX", {
+        get: function () {
+            return this.data.pos[0];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(PieLabelComponent.prototype, "textY", {
+        get: function () {
+            return this.data.pos[1];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(PieLabelComponent.prototype, "styleTransform", {
+        get: function () {
+            return this.isIE ? null : "translate3d(" + this.textX + "px," + this.textY + "px, 0)";
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(PieLabelComponent.prototype, "attrTransform", {
+        get: function () {
+            return !this.isIE ? null : "translate(" + this.textX + "," + this.textY + ")";
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(PieLabelComponent.prototype, "textTransition", {
+        get: function () {
+            return this.isIE ? null : 'transform 0.75s';
+        },
+        enumerable: true,
+        configurable: true
+    });
     PieLabelComponent.prototype.textAnchor = function () {
         return this.midAngle(this.data) < Math.PI ? 'start' : 'end';
     };
     PieLabelComponent.prototype.midAngle = function (d) {
         return d.startAngle + (d.endAngle - d.startAngle) / 2;
     };
-    PieLabelComponent.prototype.loadAnimation = function () {
-        var label = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_d3_selection__["select"])(this.element).select('.label');
-        var line = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_d3_selection__["select"])(this.element).select('.line');
-        label
-            .attr('opacity', 0)
-            .transition().delay(750).duration(750)
-            .attr('opacity', 1);
-        line
-            .style('stroke-dashoffset', 2000)
-            .transition().delay(750).duration(750)
-            .style('stroke-dashoffset', '0')
-            .transition()
-            .style('stroke-dasharray', 'none');
+    PieLabelComponent.prototype.trimLabel = function (label, max) {
+        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__common_trim_label_helper__["a" /* trimLabel */])(label, max);
     };
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
@@ -14573,20 +9028,10 @@ var PieLabelComponent = (function () {
     PieLabelComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'g[ngx-charts-pie-label]',
-            template: "\n    <title>{{label}}</title>\n    <svg:text\n      [@animationState]=\"'active'\"\n      class=\"pie-label\"\n      [attr.transform]=\"transform\"\n      dy=\".35em\"\n      [style.textAnchor]=\"textAnchor()\"\n      [style.shapeRendering]=\"'crispEdges'\"\n      [style.textTransform]=\"'uppercase'\">\n      {{trimLabel(label, 10)}}\n    </svg:text>\n    <svg:path\n      [@animationState]=\"'active'\"\n      [attr.d]=\"line\"\n      [attr.stroke]=\"color\"\n      fill=\"none\"\n      class=\"line\"\n      [style.strokeDasharray]=\"2000\"\n      [style.strokeDashoffset]=\"0\">\n    </svg:path>\n  ",
-            changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectionStrategy"].OnPush,
-            animations: [
-                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["trigger"])('animationState', [
-                    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["transition"])('void => *', [
-                        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["style"])({
-                            opacity: 0,
-                        }),
-                        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["animate"])('0.25s 1s', __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["style"])({ opacity: 1 }))
-                    ])
-                ])
-            ]
+            template: "\n    <title>{{label}}</title>\n    <svg:g\n      [attr.transform]=\"attrTransform\"\n      [style.transform]=\"styleTransform\"\n      [style.transition]=\"textTransition\">\n      <svg:text\n        class=\"pie-label\"\n        dy=\".35em\"\n        [style.textAnchor]=\"textAnchor()\"\n        [style.shapeRendering]=\"'crispEdges'\"\n        [style.textTransform]=\"'uppercase'\">\n        {{trimLabel(label, 10)}}\n      </svg:text>\n    </svg:g>\n    <svg:path\n      [attr.d]=\"line\"\n      [attr.stroke]=\"color\"\n      fill=\"none\"\n      class=\"pie-label-line line\">\n    </svg:path>\n  ",
+            changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectionStrategy"].OnPush
         }), 
-        __metadata('design:paramtypes', [__WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]])
+        __metadata('design:paramtypes', [])
     ], PieLabelComponent);
     return PieLabelComponent;
 }());
@@ -14600,9 +9045,9 @@ var PieLabelComponent = (function () {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_array__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_array__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_array___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_d3_array__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_d3_shape__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_d3_shape__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_d3_shape___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_d3_shape__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_label_helper__ = __webpack_require__("./src/common/label.helper.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PieSeriesComponent; });
@@ -14680,6 +9125,12 @@ var PieSeriesComponent = (function () {
     PieSeriesComponent.prototype.labelVisible = function (arc) {
         return this.showLabels && (arc.endAngle - arc.startAngle > Math.PI / 30);
     };
+    PieSeriesComponent.prototype.labelText = function (arc) {
+        if (this.labelFormatting) {
+            return this.labelFormatting(arc.data.name);
+        }
+        return this.label(arc);
+    };
     PieSeriesComponent.prototype.label = function (arc) {
         return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__common_label_helper__["a" /* formatLabel */])(arc.data.name);
     };
@@ -14746,6 +9197,10 @@ var PieSeriesComponent = (function () {
         __metadata('design:type', Boolean)
     ], PieSeriesComponent.prototype, "tooltipDisabled", void 0);
     __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
+        __metadata('design:type', Object)
+    ], PieSeriesComponent.prototype, "labelFormatting", void 0);
+    __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
         __metadata('design:type', Object)
     ], PieSeriesComponent.prototype, "select", void 0);
@@ -14760,420 +9215,12 @@ var PieSeriesComponent = (function () {
     PieSeriesComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'g[ngx-charts-pie-series]',
-            template: "\n    <svg:g *ngFor=\"let arc of data; trackBy:trackBy\">\n      <svg:g ngx-charts-pie-label\n        *ngIf=\"labelVisible(arc)\"\n        [data]=\"arc\"\n        [radius]=\"outerRadius\"\n        [color]=\"color(arc)\"\n        [label]=\"label(arc)\"\n        [max]=\"max\"\n        [value]=\"arc.value\"\n        [explodeSlices]=\"explodeSlices\">\n      </svg:g>\n      <svg:g\n        ngx-charts-pie-arc\n        [startAngle]=\"arc.startAngle\"\n        [endAngle]=\"arc.endAngle\"\n        [innerRadius]=\"innerRadius\"\n        [outerRadius]=\"outerRadius\"\n        [fill]=\"color(arc)\"\n        [value]=\"arc.data.value\"\n        [gradient]=\"gradient\"\n        [data]=\"arc.data\"\n        [max]=\"max\"\n        [explodeSlices]=\"explodeSlices\"\n        [isActive]=\"isActive(arc.data)\"\n        (select)=\"onClick($event)\"\n        (activate)=\"activate.emit($event)\"\n        (deactivate)=\"deactivate.emit($event)\"\n        ngx-tooltip\n        [tooltipDisabled]=\"tooltipDisabled\"\n        [tooltipPlacement]=\"'top'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipTitle]=\"tooltipText(arc)\">\n      </svg:g>\n    </svg:g>\n  ",
+            template: "\n    <svg:g *ngFor=\"let arc of data; trackBy:trackBy\">\n      <svg:g ngx-charts-pie-label\n        *ngIf=\"labelVisible(arc)\"\n        [data]=\"arc\"\n        [radius]=\"outerRadius\"\n        [color]=\"color(arc)\"\n        [label]=\"labelText(arc)\"\n        [max]=\"max\"\n        [value]=\"arc.value\"\n        [explodeSlices]=\"explodeSlices\">\n      </svg:g>\n      <svg:g\n        ngx-charts-pie-arc\n        [startAngle]=\"arc.startAngle\"\n        [endAngle]=\"arc.endAngle\"\n        [innerRadius]=\"innerRadius\"\n        [outerRadius]=\"outerRadius\"\n        [fill]=\"color(arc)\"\n        [value]=\"arc.data.value\"\n        [gradient]=\"gradient\"\n        [data]=\"arc.data\"\n        [max]=\"max\"\n        [explodeSlices]=\"explodeSlices\"\n        [isActive]=\"isActive(arc.data)\"\n        (select)=\"onClick($event)\"\n        (activate)=\"activate.emit($event)\"\n        (deactivate)=\"deactivate.emit($event)\"\n        ngx-tooltip\n        [tooltipDisabled]=\"tooltipDisabled\"\n        [tooltipPlacement]=\"'top'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipTitle]=\"tooltipText(arc)\">\n      </svg:g>\n    </svg:g>\n  ",
             changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectionStrategy"].OnPush,
         }), 
         __metadata('design:paramtypes', [])
     ], PieSeriesComponent);
     return PieSeriesComponent;
-}());
-
-
-/***/ }),
-
-/***/ "./src/tree-map/index.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__tree_map_module__ = __webpack_require__("./src/tree-map/tree-map.module.ts");
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__tree_map_module__["a"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_0__tree_map_module__["b"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_0__tree_map_module__["c"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_0__tree_map_module__["d"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__tree_map_component__ = __webpack_require__("./src/tree-map/tree-map.component.ts");
-/* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__tree_map_cell_component__ = __webpack_require__("./src/tree-map/tree-map-cell.component.ts");
-/* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__tree_map_cell_series_component__ = __webpack_require__("./src/tree-map/tree-map-cell-series.component.ts");
-/* unused harmony namespace reexport */
-
-
-
-
-
-
-/***/ }),
-
-/***/ "./src/tree-map/tree-map-cell-series.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TreeMapCellSeriesComponent; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var TreeMapCellSeriesComponent = (function () {
-    function TreeMapCellSeriesComponent() {
-        this.tooltipDisabled = false;
-        this.select = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-    }
-    TreeMapCellSeriesComponent.prototype.ngOnChanges = function (changes) {
-        this.cells = this.getCells();
-    };
-    TreeMapCellSeriesComponent.prototype.getCells = function () {
-        var _this = this;
-        return this.data.children
-            .filter(function (d) {
-            return d.depth === 1;
-        })
-            .map(function (d, index) {
-            var label = d.id;
-            return {
-                x: d.x0,
-                y: d.y0,
-                width: d.x1 - d.x0,
-                height: d.y1 - d.y0,
-                fill: _this.colors.getColor(label),
-                label: label,
-                value: d.value,
-                valueType: d.valueType
-            };
-        });
-    };
-    TreeMapCellSeriesComponent.prototype.getTooltipText = function (_a) {
-        var label = _a.label, value = _a.value;
-        return "\n      <span class=\"tooltip-label\">" + label + "</span>\n      <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n    ";
-    };
-    TreeMapCellSeriesComponent.prototype.onClick = function (data) {
-        this.select.emit(data);
-    };
-    TreeMapCellSeriesComponent.prototype.trackBy = function (index, item) {
-        return item.label;
-    };
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], TreeMapCellSeriesComponent.prototype, "data", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], TreeMapCellSeriesComponent.prototype, "dims", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], TreeMapCellSeriesComponent.prototype, "colors", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], TreeMapCellSeriesComponent.prototype, "tooltipDisabled", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
-        __metadata('design:type', Object)
-    ], TreeMapCellSeriesComponent.prototype, "select", void 0);
-    TreeMapCellSeriesComponent = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'g[ngx-charts-tree-map-cell-series]',
-            template: "\n    <svg:g ngx-charts-tree-map-cell *ngFor=\"let c of cells; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [fill]=\"c.fill\"\n      [label]=\"c.label\"\n      [value]=\"c.value\"\n      [valueType]=\"c.valueType\"\n      (select)=\"onClick($event)\"\n      ngx-tooltip\n      [tooltipDisabled]=\"tooltipDisabled\"\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"getTooltipText(c)\"\n    />\n  ",
-            changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectionStrategy"].OnPush
-        }), 
-        __metadata('design:paramtypes', [])
-    ], TreeMapCellSeriesComponent);
-    return TreeMapCellSeriesComponent;
-}());
-
-
-/***/ }),
-
-/***/ "./src/tree-map/tree-map-cell.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_selection__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_selection___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_d3_selection__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_color_utils__ = __webpack_require__("./src/utils/color-utils.ts");
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TreeMapCellComponent; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-var TreeMapCellComponent = (function () {
-    function TreeMapCellComponent(element) {
-        this.select = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-        this.initialized = false;
-        this.element = element.nativeElement;
-    }
-    TreeMapCellComponent.prototype.ngOnChanges = function (changes) {
-        this.update();
-    };
-    TreeMapCellComponent.prototype.update = function () {
-        if (this.initialized) {
-            this.animateToCurrentForm();
-        }
-        else {
-            this.loadAnimation();
-            this.initialized = true;
-        }
-    };
-    TreeMapCellComponent.prototype.loadAnimation = function () {
-        var node = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_d3_selection__["select"])(this.element).select('.cell');
-        node
-            .attr('opacity', 0)
-            .attr('x', this.x)
-            .attr('y', this.y);
-        this.animateToCurrentForm();
-    };
-    TreeMapCellComponent.prototype.getTextColor = function () {
-        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__utils_color_utils__["a" /* invertColor */])(this.fill);
-    };
-    TreeMapCellComponent.prototype.animateToCurrentForm = function () {
-        var node = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_d3_selection__["select"])(this.element).select('.cell');
-        node.transition().duration(750)
-            .attr('opacity', 1)
-            .attr('x', this.x)
-            .attr('y', this.y)
-            .attr('width', this.width)
-            .attr('height', this.height);
-    };
-    TreeMapCellComponent.prototype.onClick = function () {
-        this.select.emit({
-            name: this.label,
-            value: this.value
-        });
-    };
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], TreeMapCellComponent.prototype, "fill", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], TreeMapCellComponent.prototype, "x", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], TreeMapCellComponent.prototype, "y", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], TreeMapCellComponent.prototype, "width", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], TreeMapCellComponent.prototype, "height", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], TreeMapCellComponent.prototype, "label", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], TreeMapCellComponent.prototype, "value", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], TreeMapCellComponent.prototype, "valueType", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
-        __metadata('design:type', Object)
-    ], TreeMapCellComponent.prototype, "select", void 0);
-    TreeMapCellComponent = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'g[ngx-charts-tree-map-cell]',
-            template: "\n    <svg:g>\n      <svg:rect\n        [attr.fill]=\"fill\"\n        [attr.width]=\"width\"\n        [attr.height]=\"height\"\n        [style.cursor]=\"'pointer'\"\n        class=\"cell\"\n        (click)=\"onClick()\"\n      />\n      <svg:foreignObject\n        *ngIf=\"width >= 70 && height >= 35\"\n        [attr.x]=\"x\"\n        [attr.y]=\"y\"\n        [attr.width]=\"width\"\n        [attr.height]=\"height\"\n        class=\"label\"\n        [style.pointer-events]=\"'none'\">\n        <xhtml:p\n          [style.color]=\"getTextColor()\"\n          [style.height]=\"height + 'px'\"\n          [style.width]=\"width + 'px'\">\n          <xhtml:span class=\"treemap-label\">\n            {{label}}\n          </xhtml:span>\n          <xhtml:br />\n          <xhtml:span \n            class=\"treemap-val\" \n            ngx-charts-count-up \n            [countTo]=\"value\">\n          </xhtml:span>\n        </xhtml:p>\n      </svg:foreignObject>\n    </svg:g>\n  ",
-            changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectionStrategy"].OnPush
-        }), 
-        __metadata('design:paramtypes', [__WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]])
-    ], TreeMapCellComponent);
-    return TreeMapCellComponent;
-}());
-
-
-/***/ }),
-
-/***/ "./src/tree-map/tree-map.component.scss":
-/***/ (function(module, exports, __webpack_require__) {
-
-
-        var result = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/index.js?sourceMap!./src/tree-map/tree-map.component.scss");
-
-        if (typeof result === "string") {
-            module.exports = result;
-        } else {
-            module.exports = result.toString();
-        }
-    
-
-/***/ }),
-
-/***/ "./src/tree-map/tree-map.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_hierarchy__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_hierarchy___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_d3_hierarchy__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_base_chart_component__ = __webpack_require__("./src/common/base-chart.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_view_dimensions_helper__ = __webpack_require__("./src/common/view-dimensions.helper.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_color_helper__ = __webpack_require__("./src/common/color.helper.ts");
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TreeMapComponent; });
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-var TreeMapComponent = (function (_super) {
-    __extends(TreeMapComponent, _super);
-    function TreeMapComponent() {
-        _super.apply(this, arguments);
-        this.tooltipDisabled = false;
-        this.select = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-        this.margin = [10, 10, 10, 10];
-    }
-    TreeMapComponent.prototype.update = function () {
-        var _this = this;
-        _super.prototype.update.call(this);
-        this.zone.run(function () {
-            _this.dims = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__common_view_dimensions_helper__["a" /* calculateViewDimensions */])({
-                width: _this.width,
-                height: _this.height,
-                margins: _this.margin
-            });
-            _this.domain = _this.getDomain();
-            _this.treemap = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_d3_hierarchy__["treemap"])()
-                .size([_this.dims.width, _this.dims.height]);
-            var rootNode = {
-                name: 'root',
-                value: 0,
-                isRoot: true
-            };
-            var root = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_d3_hierarchy__["stratify"])()
-                .id(function (d) {
-                var label = d.name;
-                if (label.constructor.name === 'Date') {
-                    label = label.toLocaleDateString();
-                }
-                else {
-                    label = label.toLocaleString();
-                }
-                return label;
-            })
-                .parentId(function (d) { return d.isRoot ? null : 'root'; })([rootNode].concat(_this.results))
-                .sum(function (d) { return d.value; });
-            _this.data = _this.treemap(root);
-            _this.setColors();
-            _this.transform = "translate(" + _this.dims.xOffset + " , " + _this.margin[0] + ")";
-        });
-    };
-    TreeMapComponent.prototype.getDomain = function () {
-        return this.results.map(function (d) { return d.name; });
-    };
-    TreeMapComponent.prototype.onClick = function (data) {
-        this.select.emit(data);
-    };
-    TreeMapComponent.prototype.setColors = function () {
-        this.colors = new __WEBPACK_IMPORTED_MODULE_4__common_color_helper__["a" /* ColorHelper */](this.scheme, 'ordinal', this.domain, this.customColors);
-    };
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Object)
-    ], TreeMapComponent.prototype, "results", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', Boolean)
-    ], TreeMapComponent.prototype, "tooltipDisabled", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
-        __metadata('design:type', Object)
-    ], TreeMapComponent.prototype, "select", void 0);
-    TreeMapComponent = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'ngx-charts-tree-map',
-            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"false\">\n      <svg:g [attr.transform]=\"transform\" class=\"tree-map chart\">\n        <svg:g ngx-charts-tree-map-cell-series\n          [colors]=\"colors\"\n          [data]=\"data\"\n          [dims]=\"dims\"\n          [tooltipDisabled]=\"tooltipDisabled\"\n          (select)=\"onClick($event)\"\n        />\n      </svg:g>\n    </ngx-charts-chart>\n  ",
-            styles: [__webpack_require__("./src/tree-map/tree-map.component.scss")],
-            encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewEncapsulation"].None,
-            changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectionStrategy"].OnPush
-        }), 
-        __metadata('design:paramtypes', [])
-    ], TreeMapComponent);
-    return TreeMapComponent;
-}(__WEBPACK_IMPORTED_MODULE_2__common_base_chart_component__["a" /* BaseChartComponent */]));
-
-
-/***/ }),
-
-/***/ "./src/tree-map/tree-map.module.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__common_chart_common_module__ = __webpack_require__("./src/common/chart-common.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__tree_map_cell_component__ = __webpack_require__("./src/tree-map/tree-map-cell.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__tree_map_cell_series_component__ = __webpack_require__("./src/tree-map/tree-map-cell-series.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__tree_map_component__ = __webpack_require__("./src/tree-map/tree-map.component.ts");
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_2__tree_map_cell_component__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_3__tree_map_cell_series_component__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_4__tree_map_component__["a"]; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return TreeMapModule; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-
-var TreeMapModule = (function () {
-    function TreeMapModule() {
-    }
-    TreeMapModule = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
-            imports: [__WEBPACK_IMPORTED_MODULE_1__common_chart_common_module__["a" /* ChartCommonModule */]],
-            declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__tree_map_cell_component__["a" /* TreeMapCellComponent */],
-                __WEBPACK_IMPORTED_MODULE_3__tree_map_cell_series_component__["a" /* TreeMapCellSeriesComponent */],
-                __WEBPACK_IMPORTED_MODULE_4__tree_map_component__["a" /* TreeMapComponent */]
-            ],
-            exports: [
-                __WEBPACK_IMPORTED_MODULE_2__tree_map_cell_component__["a" /* TreeMapCellComponent */],
-                __WEBPACK_IMPORTED_MODULE_3__tree_map_cell_series_component__["a" /* TreeMapCellSeriesComponent */],
-                __WEBPACK_IMPORTED_MODULE_4__tree_map_component__["a" /* TreeMapComponent */]
-            ]
-        }), 
-        __metadata('design:paramtypes', [])
-    ], TreeMapModule);
-    return TreeMapModule;
 }());
 
 
@@ -15317,7 +9364,7 @@ var colorSets = [
 
 "use strict";
 /* unused harmony export hexToRgb */
-/* harmony export (immutable) */ __webpack_exports__["a"] = invertColor;
+/* unused harmony export invertColor */
 /* unused harmony export shadeRGBColor */
 /**
  * Converts a hex to RGB
@@ -15675,20 +9722,6 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_12__;
 /***/ (function(module, exports) {
 
 module.exports = __WEBPACK_EXTERNAL_MODULE_13__;
-
-/***/ }),
-
-/***/ 14:
-/***/ (function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE_14__;
-
-/***/ }),
-
-/***/ 15:
-/***/ (function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE_15__;
 
 /***/ }),
 

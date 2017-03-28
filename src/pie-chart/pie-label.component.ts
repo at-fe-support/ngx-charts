@@ -45,14 +45,14 @@ export class PieLabelComponent implements OnChanges {
   @Input() value;
   @Input() explodeSlices;
 
-  trimLabel: (label: string, max?: number) => string;
+  // trimLabel: (label: string, max?: number) => string;
   line: string;
 
   private readonly isIE = /(edge|msie|trident)/i.test(navigator.userAgent);
-  
-  constructor() {
-    this.trimLabel = trimLabel;
-  }
+
+  // constructor() {
+  //   this.trimLabel = trimLabel;
+  // }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
@@ -107,6 +107,10 @@ export class PieLabelComponent implements OnChanges {
 
   midAngle(d): number {
     return d.startAngle + (d.endAngle - d.startAngle) / 2;
+  }
+
+  trimLabel(label: string, max?: number): string {
+    return trimLabel(label, max);
   }
 
 }

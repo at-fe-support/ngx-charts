@@ -63,6 +63,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
 })
 export class AdvancedPieChartComponent extends BaseChartComponent {
 
+  @Input() labels;
   @Input() gradient: boolean;
   @Input() activeEntries: any[] = [];
   @Input() tooltipDisabled: boolean = false;
