@@ -3,6 +3,7 @@ import { ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 export declare class AdvancedPieChartComponent extends BaseChartComponent {
+    labels: any;
     gradient: boolean;
     activeEntries: any[];
     tooltipDisabled: boolean;
